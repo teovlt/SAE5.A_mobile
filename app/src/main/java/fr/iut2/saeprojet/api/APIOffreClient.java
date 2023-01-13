@@ -1,0 +1,32 @@
+package fr.iut2.saeprojet.api;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class APIOffreClient {
+
+
+    //https://square.github.io/retrofit/?utm_source=developer.android.com&utm_medium=referral
+    //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
+
+    //
+    private static final String BASE_URL = "http://192.168.43.111:8000/";
+
+    //
+    private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+    private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+    // Instance retrofit
+    private static Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            //.client(client)
+            .build();
+
+    public static APIOffreService getAPIService() {
+        return retrofit.create(APIOffreService.class);
+    }
+
+}
