@@ -1,13 +1,22 @@
 package fr.iut2.saeprojet.api;
 
 
+import fr.iut2.saeprojet.entity.Auth;
+import fr.iut2.saeprojet.entity.LoginResponse;
 import fr.iut2.saeprojet.entity.OffreList;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
 
 public interface APIOffreService {
+
+    @POST("api/auth")
+    Call<LoginResponse> login(@Body Auth auth);
+
     @GET("/api/offres")
-    Call<OffreList> doGetOffreList();
+    Call<OffreList> doGetOffres(@Header("Authorization") String token);
 
 //    @POST("/api/offres")
 //    Call<User> createUser(@Body User user);

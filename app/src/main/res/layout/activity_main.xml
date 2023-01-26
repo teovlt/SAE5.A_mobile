@@ -8,6 +8,20 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/onLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        />
+
+    <Button
+        android:id="@+id/onListOffres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List offres"
+        />
+
+    <Button
         android:id="@+id/onListRessources"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,11 +42,5 @@
         android:text="List users"
         />
 
-    <Button
-        android:id="@+id/onListOffres"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="List offres"
-        />
 
 </LinearLayout>

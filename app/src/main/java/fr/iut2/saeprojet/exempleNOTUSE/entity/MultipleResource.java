@@ -1,8 +1,7 @@
-package fr.iut2.saeprojet.exemple.entity;
+package fr.iut2.saeprojet.exempleNOTUSE.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleResource {

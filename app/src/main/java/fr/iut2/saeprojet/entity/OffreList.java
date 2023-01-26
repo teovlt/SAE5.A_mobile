@@ -8,13 +8,13 @@ import java.util.List;
 public class OffreList {
 
     @SerializedName("@context")
-    public String context;
+    public String _context;
     @SerializedName("@id")
-    public String id;
+    public String _id;
     @SerializedName("@type")
-    public String type;
+    public String _type;
     @SerializedName("hydra:totalItems")
-    public Integer totalItems;
+    public Integer _totalItems;
     @SerializedName("hydra:member")
     public List<Offre> offres = new ArrayList();
 }

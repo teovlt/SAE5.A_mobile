@@ -14,13 +14,14 @@ public class Offre {
     public long id;
     @SerializedName("intitule")
     public String intitule;
+    @SerializedName("dateDepot")
+    public String dateDepot;
+    @SerializedName("parcours")
+    public String parcours;
+    @SerializedName("motsCles")
+    public String motsCles;
     @SerializedName("urlPieceJointe")
     @Nullable
     public String urlPieceJointe;
-
-    public Offre(String intitule, String urlPieceJointe) {
-        this.intitule = intitule;
-        this.urlPieceJointe = urlPieceJointe;
-    }
 
 }

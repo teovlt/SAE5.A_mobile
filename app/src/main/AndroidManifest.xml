@@ -14,8 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaeProjet"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".ListOffresActivity"
             android:exported="false">
@@ -46,7 +50,7 @@
         </activity>
 
         <service
-            android:name=".exemple.api.APIUserService"
+            android:name=".exempleNOTUSE.api.APIUserService"
             android:enabled="true"
             android:exported="true" />
 

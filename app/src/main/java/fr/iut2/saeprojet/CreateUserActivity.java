@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import fr.iut2.saeprojet.exemple.api.APIUserClient;
-import fr.iut2.saeprojet.exemple.api.APIUserService;
-import fr.iut2.saeprojet.exemple.entity.User;
+import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserClient;
+import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserService;
+import fr.iut2.saeprojet.exempleNOTUSE.entity.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

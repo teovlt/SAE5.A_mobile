@@ -2,6 +2,8 @@ package fr.iut2.saeprojet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -39,10 +41,12 @@ public class ListOffresActivity extends AppCompatActivity {
 
     private void doGetOffreList(int pageNumber) {
 
-        /**
-         GET List Resources
-         **/
-        Call<OffreList> call = apiInterface.doGetOffreList();
+        //
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String token = sharedPref.getString(getString(R.string.token_key), "no token");
+
+        //
+        Call<OffreList> call = apiInterface.doGetOffres("Bearer " + token);
         call.enqueue(new Callback<OffreList>() {
             @Override
             public void onResponse(Call<OffreList> call, Response<OffreList> response) {

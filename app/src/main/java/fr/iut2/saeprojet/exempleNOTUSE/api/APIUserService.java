@@ -1,9 +1,9 @@
-package fr.iut2.saeprojet.exemple.api;
+package fr.iut2.saeprojet.exempleNOTUSE.api;
 
 
-import fr.iut2.saeprojet.exemple.entity.MultipleResource;
-import fr.iut2.saeprojet.exemple.entity.User;
-import fr.iut2.saeprojet.exemple.entity.UserList;
+import fr.iut2.saeprojet.exempleNOTUSE.entity.MultipleResource;
+import fr.iut2.saeprojet.exempleNOTUSE.entity.User;
+import fr.iut2.saeprojet.exempleNOTUSE.entity.UserList;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;

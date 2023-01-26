@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-import fr.iut2.saeprojet.exemple.api.APIUserClient;
-import fr.iut2.saeprojet.exemple.api.APIUserService;
-import fr.iut2.saeprojet.exemple.entity.UserList;
+import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserClient;
+import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserService;
+import fr.iut2.saeprojet.exempleNOTUSE.entity.UserList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button createUserView;
     private Button listUsersView;
     private Button listOffresView;
+    private Button loginView;
 
     private APIUserService apiInterface;
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         createUserView = findViewById(R.id.onCreateUser);
         listUsersView = findViewById(R.id.onListUsers);
         listOffresView = findViewById(R.id.onListOffres);
+        loginView = findViewById(R.id.onLogin);
 
         //
         listResourcesView.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ListOffresActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //
+        loginView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

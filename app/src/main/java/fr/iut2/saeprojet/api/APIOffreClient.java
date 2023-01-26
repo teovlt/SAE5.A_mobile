@@ -12,7 +12,7 @@ public class APIOffreClient {
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
     //
-    private static final String BASE_URL = "http://192.168.43.111:8000/";
+    private static final String BASE_URL = "http://192.168.200.153:8000/";
 
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);

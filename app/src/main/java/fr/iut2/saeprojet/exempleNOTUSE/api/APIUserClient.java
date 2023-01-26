@@ -1,4 +1,4 @@
-package fr.iut2.saeprojet.exemple.api;
+package fr.iut2.saeprojet.exempleNOTUSE.api;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import fr.iut2.saeprojet.exemple.api.APIUserClient;
-import fr.iut2.saeprojet.exemple.api.APIUserService;
-import fr.iut2.saeprojet.exemple.entity.UserList;
+import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserClient;
+import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserService;
+import fr.iut2.saeprojet.exempleNOTUSE.entity.UserList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
