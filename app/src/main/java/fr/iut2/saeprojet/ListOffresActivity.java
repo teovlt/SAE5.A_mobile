@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import fr.iut2.saeprojet.api.APIOffreClient;
-import fr.iut2.saeprojet.api.APIOffreService;
+import fr.iut2.saeprojet.api.APIClient;
+import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffreList;
 import retrofit2.Call;
@@ -19,7 +19,7 @@ import retrofit2.Response;
 public class ListOffresActivity extends AppCompatActivity {
 
     // API
-    private APIOffreService apiInterface;
+    private APIService apiInterface;
 
     // View
     private TextView listOffreText;
@@ -30,7 +30,7 @@ public class ListOffresActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_offres);
 
         // Chargement de l'API
-        apiInterface = APIOffreClient.getAPIService();
+        apiInterface = APIClient.getAPIService();
 
         // Init view
         listOffreText = findViewById(R.id.listOffreText);

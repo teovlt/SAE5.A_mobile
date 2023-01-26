@@ -5,14 +5,14 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class APIOffreClient {
+public class APIClient {
 
 
     //https://square.github.io/retrofit/?utm_source=developer.android.com&utm_medium=referral
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
     //
-    private static final String BASE_URL = "http://192.168.200.153:8000/";
+    private static final String BASE_URL = "http://192.168.43.111:8000/";
 
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -25,8 +25,8 @@ public class APIOffreClient {
             //.client(client)
             .build();
 
-    public static APIOffreService getAPIService() {
-        return retrofit.create(APIOffreService.class);
+    public static APIService getAPIService() {
+        return retrofit.create(APIService.class);
     }
 
 }

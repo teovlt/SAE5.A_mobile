@@ -10,20 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.datastore.preferences.core.MutablePreferences;
-import androidx.datastore.preferences.core.Preferences;
-import androidx.datastore.preferences.core.PreferencesKeys;
-import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder;
-import androidx.datastore.rxjava3.RxDataStore;
 
-import fr.iut2.saeprojet.api.APIOffreClient;
-import fr.iut2.saeprojet.api.APIOffreService;
+import fr.iut2.saeprojet.api.APIClient;
+import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.entity.Auth;
 import fr.iut2.saeprojet.entity.LoginResponse;
 import fr.iut2.saeprojet.entity.OffreList;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     //public static RxDataStore<Preferences> dataStore;
 
     // API
-    private APIOffreService apiInterface;
+    private APIService apiInterface;
 
     // View
     private EditText usernameView;
@@ -50,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Chargement de l'API
-        apiInterface = APIOffreClient.getAPIService();
+        apiInterface = APIClient.getAPIService();
 
         //
         //dataStore = new RxPreferenceDataStoreBuilder(this, /*name=*/ "settings").build();

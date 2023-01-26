@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-public interface APIOffreService {
+public interface APIService {
 
     @POST("api/auth")
     Call<LoginResponse> login(@Body Auth auth);
