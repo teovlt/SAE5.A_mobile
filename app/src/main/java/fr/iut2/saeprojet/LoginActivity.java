@@ -1,6 +1,7 @@
 package fr.iut2.saeprojet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         usernameView = findViewById(R.id.username);
         passwordView = findViewById(R.id.password);
         loginView = findViewById(R.id.login);
-        testView = findViewById(R.id.test);
 
         //
         loginView.setOnClickListener(new View.OnClickListener() {
@@ -60,15 +60,6 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
-
-        //
-        testView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                test();
-            }
-        });
-
     }
 
     private void login() {
@@ -84,54 +75,28 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, response.body().token, Toast.LENGTH_SHORT).show();
+                    String message = "JWT Token : " + response.body().token;
+                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     //
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(getString(R.string.token_key), response.body().token);
+                    editor.putString(getString(R.string.token_key), response.body().token);
+                    editor.putString(getString(R.string.login_key), login);
                     editor.apply();
 
+                    //
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+
                 } else {
-                    Toast.makeText(LoginActivity.this, "login not correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "non pas correquete", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-                call.cancel();
-                Log.e("TAG",t.getMessage());
-
-            }
-        });
-    }
-
-
-    private void test() {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_key), "no token");
-
-        //
-        Call<OffreList> call = apiInterface.doGetOffres("Bearer " + token);
-        call.enqueue(new Callback<OffreList>() {
-            @Override
-            public void onResponse(Call<OffreList> call, Response<OffreList> response) {
-
-                if (response.isSuccessful()) {
-                    String message = "nb offres = " + response.body().offres.size();
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(LoginActivity.this, "token not correct", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<OffreList> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 call.cancel();
                 Log.e("TAG",t.getMessage());
