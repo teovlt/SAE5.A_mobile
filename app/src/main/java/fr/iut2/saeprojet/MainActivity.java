@@ -17,6 +17,7 @@ import java.util.List;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.entity.CandidatureList;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffreList;
 import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserClient;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         //
         refreshLogin();
         refreshOffres();
+        refreshCandidatures();
     }
 
     private void refreshLogin() {
@@ -101,6 +103,33 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<OffreList> call, Throwable t) {
+                call.cancel();
+                Log.e("TAG",t.getMessage());
+
+            }
+        });
+    }
+
+    private void refreshCandidatures() {
+
+        //
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String token = sharedPref.getString(getString(R.string.token_key), "no token");
+
+        //
+        Call<CandidatureList> call = apiInterface.doGetCandidatures("Bearer " + token);
+        call.enqueue(new Callback<CandidatureList>() {
+            @Override
+            public void onResponse(Call<CandidatureList> call, Response<CandidatureList> response) {
+
+                //
+                TextView nbCandidaturesView = findViewById(R.id.textView12);
+                CandidatureList candidatures = response.body();
+                nbCandidaturesView.setText(String.valueOf(candidatures.candidatures.size()) + " " + nbCandidaturesView.getText().toString());
+            }
+
+            @Override
+            public void onFailure(Call<CandidatureList> call, Throwable t) {
                 call.cancel();
                 Log.e("TAG",t.getMessage());
 

@@ -2,6 +2,7 @@ package fr.iut2.saeprojet.api;
 
 
 import fr.iut2.saeprojet.entity.Auth;
+import fr.iut2.saeprojet.entity.CandidatureList;
 import fr.iut2.saeprojet.entity.LoginResponse;
 import fr.iut2.saeprojet.entity.OffreList;
 import retrofit2.Call;
@@ -17,6 +18,9 @@ public interface APIService {
 
     @GET("/api/offres")
     Call<OffreList> doGetOffres(@Header("Authorization") String token);
+
+    @GET("/api/candidatures")
+    Call<CandidatureList> doGetCandidatures(@Header("Authorization") String token);
 
 //    @POST("/api/offres")
 //    Call<User> createUser(@Body User user);
