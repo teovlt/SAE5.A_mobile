@@ -23,10 +23,6 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //
-    //public static final Preferences.Key<String> TOKEN_KEY = PreferencesKeys.stringKey("token_key");
-    //public static RxDataStore<Preferences> dataStore;
-
     // API
     private APIService apiInterface;
 
@@ -34,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameView;
     private EditText passwordView;
     private Button loginView;
-    private Button testView;
 
 
     @Override
