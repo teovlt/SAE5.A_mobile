@@ -40,9 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         // Chargement de l'API
         apiInterface = APIClient.getAPIService();
 
-        //
-        //dataStore = new RxPreferenceDataStoreBuilder(this, /*name=*/ "settings").build();
-
         // Init view
         usernameView = findViewById(R.id.username);
         passwordView = findViewById(R.id.password);
