@@ -86,7 +86,7 @@
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nouvelles offres" />
+                android:text="XX Nouvelles offres" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -135,7 +135,7 @@
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Candidatures refusées" />
+                android:text="XX Candidatures refusées" />
 
             <TextView
                 android:layout_width="match_parent"

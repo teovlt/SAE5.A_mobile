@@ -6,23 +6,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.entity.CandidatureList;
-import fr.iut2.saeprojet.entity.Offre;
+import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.OffreList;
-import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserClient;
-import fr.iut2.saeprojet.exempleNOTUSE.api.APIUserService;
-import fr.iut2.saeprojet.exempleNOTUSE.entity.UserList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         //
         refreshLogin();
-        refreshOffres();
+        refreshNBOffres();
         refreshCandidatures();
     }
 
@@ -81,9 +74,12 @@ public class MainActivity extends AppCompatActivity {
         //
         TextView loginView = findViewById(R.id.login);
         loginView.setText(login);
+
+        //
+        refreshMesInformations();
     }
 
-    private void refreshOffres() {
+    private void refreshNBOffres() {
 
         //
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -103,6 +99,40 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<OffreList> call, Throwable t) {
+                call.cancel();
+                Log.e("TAG",t.getMessage());
+
+            }
+        });
+    }
+
+    private void refreshMesInformations() {
+
+        //
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String token = sharedPref.getString(getString(R.string.token_key), "no token");
+        long id = sharedPref.getLong(getString(R.string.login_id_key), 0);
+
+        //
+        Call<CompteEtudiant> call = apiInterface.doGetCompteEtudiant("Bearer " + token, id);
+        call.enqueue(new Callback<CompteEtudiant>() {
+            @Override
+            public void onResponse(Call<CompteEtudiant> call, Response<CompteEtudiant> response) {
+
+                //
+                TextView mesOffresConsulteesView = findViewById(R.id.textView10);
+                TextView mesOffresRetenuesView = findViewById(R.id.textView11);
+                TextView mesCandidaturesView = findViewById(R.id.textView13);
+                TextView derniereConnexionView = findViewById(R.id.textView6);
+                CompteEtudiant compteEtudiant = response.body();
+                mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()) + " " + mesOffresConsulteesView.getText().toString());
+                mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()) + " " + mesOffresRetenuesView.getText().toString());
+                mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()) + " " + mesCandidaturesView.getText().toString());
+                derniereConnexionView.setText(compteEtudiant.derniereConnexion);
+            }
+
+            @Override
+            public void onFailure(Call<CompteEtudiant> call, Throwable t) {
                 call.cancel();
                 Log.e("TAG",t.getMessage());
 

@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.entity.Auth;
+import fr.iut2.saeprojet.entity.CompteEtudiant;
+import fr.iut2.saeprojet.entity.CompteEtudiantList;
+import fr.iut2.saeprojet.entity.Etudiant;
+import fr.iut2.saeprojet.entity.EtudiantList;
 import fr.iut2.saeprojet.entity.LoginResponse;
 import fr.iut2.saeprojet.entity.OffreList;
 import retrofit2.Call;
@@ -67,8 +71,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()) {
-                    String message = "JWT Token : " + response.body().token;
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    //String message = "JWT Token : " + response.body().token;
+                    //Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     //
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -77,6 +81,53 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString(getString(R.string.token_key), response.body().token);
                     editor.putString(getString(R.string.login_key), login);
                     editor.apply();
+
+                    //
+                    getInformationEtudiant(login);
+
+                } else {
+                    Toast.makeText(LoginActivity.this, "non pas correquete", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                call.cancel();
+                Log.e("TAG",t.getMessage());
+
+            }
+        });
+    }
+
+    private void getInformationEtudiant(String login) {
+
+        //
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String token = sharedPref.getString(getString(R.string.token_key), "no token");
+
+        //
+        Call<CompteEtudiantList> call = apiInterface.doGetCompteEtudiants("Bearer " + token);
+        call.enqueue(new Callback<CompteEtudiantList>() {
+            @Override
+            public void onResponse(Call<CompteEtudiantList> call, Response<CompteEtudiantList> response) {
+
+                if (response.isSuccessful()) {
+
+                    for (CompteEtudiant compteEtudiant : response.body().compteEtudiants) {
+
+                        if (compteEtudiant.login.equals(login)) {
+
+                            //
+                            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putLong(getString(R.string.login_id_key), compteEtudiant.id);
+                            editor.apply();
+
+                            //
+                            break;
+                        }
+                    }
 
                     //
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -88,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<CompteEtudiantList> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 call.cancel();
                 Log.e("TAG",t.getMessage());
