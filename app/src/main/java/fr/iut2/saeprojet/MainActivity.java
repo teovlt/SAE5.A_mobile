@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
-import fr.iut2.saeprojet.entity.CandidatureList;
+import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
-import fr.iut2.saeprojet.entity.OffreList;
+import fr.iut2.saeprojet.entity.OffresResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,19 +86,19 @@ public class MainActivity extends AppCompatActivity {
         String token = sharedPref.getString(getString(R.string.token_key), "no token");
 
         //
-        Call<OffreList> call = apiInterface.doGetOffres("Bearer " + token);
-        call.enqueue(new Callback<OffreList>() {
+        Call<OffresResponse> call = apiInterface.doGetOffres("Bearer " + token);
+        call.enqueue(new Callback<OffresResponse>() {
             @Override
-            public void onResponse(Call<OffreList> call, Response<OffreList> response) {
+            public void onResponse(Call<OffresResponse> call, Response<OffresResponse> response) {
 
                 //
                 TextView nbOffresView = findViewById(R.id.textView8);
-                OffreList offres = response.body();
+                OffresResponse offres = response.body();
                 nbOffresView.setText(String.valueOf(offres.offres.size()) + " " + nbOffresView.getText().toString());
             }
 
             @Override
-            public void onFailure(Call<OffreList> call, Throwable t) {
+            public void onFailure(Call<OffresResponse> call, Throwable t) {
                 call.cancel();
                 Log.e("TAG",t.getMessage());
 
@@ -147,19 +147,19 @@ public class MainActivity extends AppCompatActivity {
         String token = sharedPref.getString(getString(R.string.token_key), "no token");
 
         //
-        Call<CandidatureList> call = apiInterface.doGetCandidatures("Bearer " + token);
-        call.enqueue(new Callback<CandidatureList>() {
+        Call<CandidaturesResponse> call = apiInterface.doGetCandidatures("Bearer " + token);
+        call.enqueue(new Callback<CandidaturesResponse>() {
             @Override
-            public void onResponse(Call<CandidatureList> call, Response<CandidatureList> response) {
+            public void onResponse(Call<CandidaturesResponse> call, Response<CandidaturesResponse> response) {
 
                 //
                 TextView nbCandidaturesView = findViewById(R.id.textView12);
-                CandidatureList candidatures = response.body();
+                CandidaturesResponse candidatures = response.body();
                 nbCandidaturesView.setText(String.valueOf(candidatures.candidatures.size()) + " " + nbCandidaturesView.getText().toString());
             }
 
             @Override
-            public void onFailure(Call<CandidatureList> call, Throwable t) {
+            public void onFailure(Call<CandidaturesResponse> call, Throwable t) {
                 call.cancel();
                 Log.e("TAG",t.getMessage());
 

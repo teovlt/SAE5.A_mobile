@@ -11,7 +11,7 @@ import android.widget.TextView;
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.entity.Offre;
-import fr.iut2.saeprojet.entity.OffreList;
+import fr.iut2.saeprojet.entity.OffresResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,10 +46,10 @@ public class ListOffresActivity extends AppCompatActivity {
         String token = sharedPref.getString(getString(R.string.token_key), "no token");
 
         //
-        Call<OffreList> call = apiInterface.doGetOffres("Bearer " + token);
-        call.enqueue(new Callback<OffreList>() {
+        Call<OffresResponse> call = apiInterface.doGetOffres("Bearer " + token);
+        call.enqueue(new Callback<OffresResponse>() {
             @Override
-            public void onResponse(Call<OffreList> call, Response<OffreList> response) {
+            public void onResponse(Call<OffresResponse> call, Response<OffresResponse> response) {
 
 
                 Log.d("TAG",response.code()+"");
@@ -58,7 +58,7 @@ public class ListOffresActivity extends AppCompatActivity {
 
                 String displayResponse = "";
 
-                OffreList offres = response.body();
+                OffresResponse offres = response.body();
 
                 for (Offre offre : offres.offres) {
                     displayResponse += offre.id + " " + offre.intitule + "\n";
@@ -69,7 +69,7 @@ public class ListOffresActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<OffreList> call, Throwable t) {
+            public void onFailure(Call<OffresResponse> call, Throwable t) {
                 call.cancel();
                 Log.e("TAG",t.getMessage());
 

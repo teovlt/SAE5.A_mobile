@@ -16,11 +16,8 @@ import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.entity.Auth;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
-import fr.iut2.saeprojet.entity.CompteEtudiantList;
-import fr.iut2.saeprojet.entity.Etudiant;
-import fr.iut2.saeprojet.entity.EtudiantList;
+import fr.iut2.saeprojet.entity.CompteEtudiantResponse;
 import fr.iut2.saeprojet.entity.LoginResponse;
-import fr.iut2.saeprojet.entity.OffreList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -107,10 +104,10 @@ public class LoginActivity extends AppCompatActivity {
         String token = sharedPref.getString(getString(R.string.token_key), "no token");
 
         //
-        Call<CompteEtudiantList> call = apiInterface.doGetCompteEtudiants("Bearer " + token);
-        call.enqueue(new Callback<CompteEtudiantList>() {
+        Call<CompteEtudiantResponse> call = apiInterface.doGetCompteEtudiants("Bearer " + token);
+        call.enqueue(new Callback<CompteEtudiantResponse>() {
             @Override
-            public void onResponse(Call<CompteEtudiantList> call, Response<CompteEtudiantList> response) {
+            public void onResponse(Call<CompteEtudiantResponse> call, Response<CompteEtudiantResponse> response) {
 
                 if (response.isSuccessful()) {
 
@@ -139,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CompteEtudiantList> call, Throwable t) {
+            public void onFailure(Call<CompteEtudiantResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 call.cancel();
                 Log.e("TAG",t.getMessage());
