@@ -55,6 +55,18 @@ public class Candidature implements Parcelable {
         return Long.valueOf(offre.replace("/api/offres/", ""));
     }
 
+    public long getEtatCandidatureId() {
+        return Long.valueOf(etatCandidature.replace("/api/etat_candidatures/", ""));
+    }
+
+    public void setEtatCandidatureId(long candidatureId) {
+        etatCandidature = "/api/etat_candidatures/" + candidatureId;
+    }
+
+    public void setDateAction(String dateAction) {
+        this.dateAction = dateAction;
+    }
+
     @Override
     public int describeContents() {
         return 0;

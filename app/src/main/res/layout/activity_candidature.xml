@@ -38,4 +38,20 @@
         android:paddingTop="20dp"
         android:textSize="30sp"/>
 
+    <TextView
+        android:id="@+id/etat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="État"
+        android:paddingTop="10dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/dateAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="date"
+        android:paddingTop="10dp"
+        android:textSize="20sp"/>
+
 </LinearLayout>

@@ -2,6 +2,7 @@ package fr.iut2.saeprojet.api;
 
 
 import fr.iut2.saeprojet.entity.Auth;
+import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Etudiant;
@@ -12,10 +13,13 @@ import fr.iut2.saeprojet.entity.OffresResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiantResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIService {
 
@@ -42,6 +46,9 @@ public interface APIService {
 
     @GET("/api/candidatures")
     Call<CandidaturesResponse> doGetCandidatures(@Header("Authorization") String token);
+
+    @PUT("/api/candidatures/{id}")
+    Call<Candidature> doUpdateCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body Candidature candidature);
 
 //    @POST("/api/offres")
 //    Call<User> createUser(@Body User user);

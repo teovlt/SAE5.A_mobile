@@ -15,6 +15,7 @@ import android.widget.TextView;
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.entity.Candidature;
+import fr.iut2.saeprojet.entity.EtatsCandidatures;
 import fr.iut2.saeprojet.entity.Offre;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +35,8 @@ public class CandidatureActivity extends AppCompatActivity {
     // View
     private TextView retourCandidaturesView;
     private TextView intituleView;
+    private TextView etatView;
+    private TextView dateActionView;
     private Button mettreAJourView;
 
     @Override
@@ -50,6 +53,8 @@ public class CandidatureActivity extends AppCompatActivity {
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
         intituleView = findViewById(R.id.intitule);
+        etatView = findViewById(R.id.etat);
+        dateActionView = findViewById(R.id.dateAction);
         mettreAJourView = findViewById(R.id.mettreajour);
 
         //
@@ -75,6 +80,10 @@ public class CandidatureActivity extends AppCompatActivity {
     }
 
     private void refreshMesInformations(Candidature candidature, TextView intituleView) {
+
+        //
+        etatView.setText(EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId()));
+        dateActionView.setText("le " + candidature.dateAction);
 
         //
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
