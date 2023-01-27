@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         candidaturesView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ListOffresActivity.class);
+                Intent intent = new Intent(MainActivity.this, ListCandidaturesActivity.class);
                 startActivity(intent);
             }
         });

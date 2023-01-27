@@ -7,6 +7,7 @@ import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Etudiant;
 import fr.iut2.saeprojet.entity.EtudiantsResponse;
 import fr.iut2.saeprojet.entity.LoginResponse;
+import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiantResponse;
 import retrofit2.Call;
@@ -35,6 +36,9 @@ public interface APIService {
 
     @GET("/api/offres")
     Call<OffresResponse> doGetOffres(@Header("Authorization") String token);
+
+    @GET("/api/offres/{id}")
+    Call<Offre> doGetOffre(@Header("Authorization") String token, @Path("id") long i);
 
     @GET("/api/candidatures")
     Call<CandidaturesResponse> doGetCandidatures(@Header("Authorization") String token);

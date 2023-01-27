@@ -1,10 +1,15 @@
 package fr.iut2.saeprojet.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.jetbrains.annotations.Nullable;
 
-public class Candidature {
+public class Candidature implements Parcelable {
 
     @SerializedName("@id")
     public String _id;
@@ -23,4 +28,47 @@ public class Candidature {
     @SerializedName("etatCandidature")
     public String etatCandidature;
 
+    protected Candidature(Parcel in) {
+        _id = in.readString();
+        _type = in.readString();
+        id = in.readLong();
+        compteEtudiant = in.readString();
+        offre = in.readString();
+        typeAction = in.readString();
+        dateAction = in.readString();
+        etatCandidature = in.readString();
+    }
+
+    public static final Creator<Candidature> CREATOR = new Creator<Candidature>() {
+        @Override
+        public Candidature createFromParcel(Parcel in) {
+            return new Candidature(in);
+        }
+
+        @Override
+        public Candidature[] newArray(int size) {
+            return new Candidature[size];
+        }
+    };
+
+    public long getOffreId() {
+        return Long.valueOf(offre.replace("/api/offres/", ""));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(_id);
+        parcel.writeString(_type);
+        parcel.writeLong(id);
+        parcel.writeString(compteEtudiant);
+        parcel.writeString(offre);
+        parcel.writeString(typeAction);
+        parcel.writeString(dateAction);
+        parcel.writeString(etatCandidature);
+    }
 }

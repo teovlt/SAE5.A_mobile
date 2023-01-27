@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                android:text="Voir les détails >"
+                android:text="Voir les détails \u003E"
                 android:textColor="@android:color/holo_orange_dark"/>
 
         </LinearLayout>
@@ -141,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                android:text="Voir les détails >"
+                android:text="Voir les détails \u003E"
                 android:textColor="@android:color/holo_orange_dark"/>
 
         </LinearLayout>
