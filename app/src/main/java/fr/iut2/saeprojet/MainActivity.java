@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout offresView;
     private LinearLayout candidaturesView;
 
+    private LinearLayout offreView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +49,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ListOffresActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //
-        candidaturesView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ListCandidaturesActivity.class);
                 startActivity(intent);
             }
         });
@@ -135,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<CompteEtudiant> call, Throwable t) {
                 call.cancel();
                 Log.e("TAG",t.getMessage());
-
             }
         });
     }
@@ -162,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<CandidaturesResponse> call, Throwable t) {
                 call.cancel();
                 Log.e("TAG",t.getMessage());
-
             }
         });
     }

@@ -11,17 +11,18 @@
         android:id="@+id/retourCandidatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\u003C Candidatures"
-        android:textSize="20sp"
-        android:textColor="@android:color/holo_orange_dark"/>
+        android:text="\u003C Offre"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/intitule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intitulé candidature"
         android:paddingTop="20dp"
-        android:textSize="30sp"/>
+        android:text="Intitulé candidature"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/mettreajour"
@@ -34,24 +35,27 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="État"
         android:paddingTop="20dp"
-        android:textSize="30sp"/>
+        android:text="État"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/etat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="État"
         android:paddingTop="10dp"
-        android:textSize="20sp"/>
+        android:text="État"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/dateAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="date"
         android:paddingTop="10dp"
-        android:textSize="20sp"/>
+        android:text="date"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
 </LinearLayout>

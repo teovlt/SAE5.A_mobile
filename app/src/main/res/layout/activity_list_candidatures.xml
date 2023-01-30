@@ -32,11 +32,11 @@
         android:text="Candidatures refusées"
         android:paddingTop="10dp"
         android:textSize="20sp"/>
-    
+
     <ListView
         android:id="@+id/candidatures"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp"/>
+        android:paddingTop="10dp" />
 
 </LinearLayout>

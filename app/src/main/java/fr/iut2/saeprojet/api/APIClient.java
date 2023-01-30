@@ -12,7 +12,8 @@ public class APIClient {
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
     //
-    private static final String BASE_URL = "http://192.168.43.111:8000/";
+//    private static final String BASE_URL = "http://129.88.67.252:8000/";
+    private static final String BASE_URL = "http://193.55.51.151:8000/";
 
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);

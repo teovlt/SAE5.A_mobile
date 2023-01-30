@@ -41,18 +41,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Dernière connexion le "
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:layout_editor_absoluteX="34dp" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="3dp"
         android:text="ma date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
@@ -63,16 +63,18 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="1.0">
 
 
         <LinearLayout
             android:id="@+id/offres"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@drawable/bg_custom"
+            android:orientation="vertical"
             android:padding="10dp">
 
             <TextView
@@ -80,13 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Offres"
-                android:textSize="30sp"/>
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="XX Nouvelles offres" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -103,46 +99,48 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
                 android:text="Voir les détails \u003E"
-                android:textColor="@android:color/holo_orange_dark"/>
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/holo_orange_dark" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/candidatures"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_width="329dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:background="@drawable/bg_custom"
+            android:orientation="vertical"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/textView12"
-                android:layout_width="match_parent"
+                android:layout_width="263dp"
                 android:layout_height="wrap_content"
                 android:text="Candidatures"
-                android:textSize="30sp"/>
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Candidatures en cours" />
+                android:text="Candidatures en cours"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="XX Candidatures refusées" />
+                android:text="XX Candidatures refusées"
+                android:textAlignment="center" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
                 android:text="Voir les détails \u003E"
-                android:textColor="@android:color/holo_orange_dark"/>
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/holo_orange_dark" />
 
         </LinearLayout>
     </LinearLayout>

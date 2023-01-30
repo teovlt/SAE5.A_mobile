@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:orientation="vertical"
+    tools:context=".OffreActivity">
+
+  <TextView
+      android:id="@+id/backOffres"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="\u003C Offres"
+      android:textColor="@android:color/holo_orange_dark"
+      android:textSize="20sp" />
+
+  <TextView
+      android:id="@+id/titreOffre"
+      android:layout_width="match_parent"
+      android:layout_height="291dp"
+      android:text="Développeur X++"
+      android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+      android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/statutOffre"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Statut : disponibilité inconnue" />
+
+  <Button
+      android:id="@+id/buttonCandidature"
+      android:layout_width="133dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:text="Candidater" />
+
+  <TextView
+      android:id="@+id/textView16"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Entreprise"
+      android:textAppearance="@style/TextAppearance.AppCompat.Large"
+      android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/nomEntreprise"
+      android:layout_width="match_parent"
+      android:layout_height="42dp"
+      android:text="Non renseigné"
+      android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/textView18"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Ville"
+      android:textAppearance="@style/TextAppearance.AppCompat.Large"
+      android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/nomVille"
+      android:layout_width="match_parent"
+      android:layout_height="42dp"
+      android:text="Non renseigné"
+      android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/textView19"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="URI"
+      android:textAppearance="@style/TextAppearance.AppCompat.Large"
+      android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/offreUrl"
+      android:layout_width="match_parent"
+      android:layout_height="129dp"
+      android:autoLink="web"
+      android:text="@string/offre_url"
+      android:textColor="@color/black" />
+
+</LinearLayout>

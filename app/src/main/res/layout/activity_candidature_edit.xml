@@ -11,55 +11,47 @@
         android:id="@+id/retourCandidatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\u003C Candidatures"
-        android:textSize="20sp"
-        android:textColor="@android:color/holo_orange_dark"/>
+        android:text="\u003C Offre"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/intitule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intitulé candidature"
         android:paddingTop="20dp"
-        android:textSize="30sp"/>
+        android:text="Intitulé candidature"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/annuler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Annuler"
-            android:paddingTop="10dp"/>
-
-        <Button
-            android:id="@+id/valider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Valider"
-            android:paddingTop="10dp"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
+    <Button
+        android:id="@+id/abandonCandidature"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Abandonner" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="État"
         android:paddingTop="20dp"
-        android:textSize="30sp"/>
+        android:text="État"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <Spinner
         android:id="@+id/etatsCandidature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:entries="@array/etats_candidatures"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Relancer le"
         android:paddingTop="20dp"
-        android:textSize="30sp"/>
+        android:text="Relancer le"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/dateAction"
@@ -68,5 +60,28 @@
         android:hint="dd/mm/yyyy hh:mm"
         android:paddingTop="20dp"
         android:textSize="20sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:id="@+id/annuler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="10dp"
+            android:text="Annuler" />
+
+        <Button
+            android:id="@+id/valider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="10dp"
+            android:text="Modifier" />
+    </RelativeLayout>
 
 </LinearLayout>

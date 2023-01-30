@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class CompteEtudiant {
-
     @SerializedName("@id")
     public String _id;
     @SerializedName("@type")
@@ -39,5 +38,4 @@ public class CompteEtudiant {
     public String userIdentifier;
     @SerializedName("username")
     public String username;
-
 }

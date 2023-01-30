@@ -5,21 +5,25 @@ import fr.iut2.saeprojet.entity.Auth;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
+import fr.iut2.saeprojet.entity.EtatRecherche;
+import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.Etudiant;
 import fr.iut2.saeprojet.entity.EtudiantsResponse;
 import fr.iut2.saeprojet.entity.LoginResponse;
 import fr.iut2.saeprojet.entity.Offre;
+import fr.iut2.saeprojet.entity.OffreRetenue;
+import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
+import fr.iut2.saeprojet.entity.OffreConsultee;
+import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
 import fr.iut2.saeprojet.entity.OffresResponse;
-import fr.iut2.saeprojet.entity.CompteEtudiantResponse;
+import fr.iut2.saeprojet.entity.ComptesEtudiantsResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface APIService {
 
@@ -27,7 +31,7 @@ public interface APIService {
     Call<LoginResponse> login(@Body Auth auth);
 
     @GET("/api/compte_etudiants")
-    Call<CompteEtudiantResponse> doGetCompteEtudiants(@Header("Authorization") String token);
+    Call<ComptesEtudiantsResponse> doGetCompteEtudiants(@Header("Authorization") String token);
 
     @GET("/api/compte_etudiants/{id}")
     Call<CompteEtudiant> doGetCompteEtudiant(@Header("Authorization") String token, @Path("id") long id);
@@ -49,6 +53,22 @@ public interface APIService {
 
     @PUT("/api/candidatures/{id}")
     Call<Candidature> doUpdateCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body Candidature candidature);
+
+    @GET("/api/etat_recherches")
+    Call<EtatRecherchesResponse> doGetEtatRecherches(@Header("Authorization") String token);
+
+    @PUT("/api/etat_recherches/{id}")
+    Call<EtatRecherche> doUpdateEtatRecherche(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body EtatRecherche etatRecherche);
+    @GET("/api/offre_consultees")
+    Call<OffresConsulteesResponse> doGetOffresConsultees(@Header("Authorization") String token);
+
+    @PUT("/api/offre_consultees/{id}")
+    Call<OffreConsultee> doUpdateOffreConsultee(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreConsultee offreConsultee);
+    @GET("/api/offre_retenues")
+    Call<OffresRetenuesResponse> doGetOffresRetenues(@Header("Authorization") String token);
+
+    @PUT("/api/offre_retenues/{id}")
+    Call<OffreRetenue> doUpdateOffreRetenue(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreRetenue offreRetenue);
 
 //    @POST("/api/offres")
 //    Call<User> createUser(@Body User user);

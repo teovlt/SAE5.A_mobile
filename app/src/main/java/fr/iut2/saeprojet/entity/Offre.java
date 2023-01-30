@@ -1,8 +1,15 @@
 package fr.iut2.saeprojet.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Offre {
 
@@ -23,5 +30,14 @@ public class Offre {
     @SerializedName("urlPieceJointe")
     @Nullable
     public String urlPieceJointe;
-
+    @SerializedName("etatOffre")
+    public String etatOffre;
+    @SerializedName("entreprise")
+    public String entreprise;
+    @SerializedName("offreConsultees")
+    public List<String> offreConsultees;
+    @SerializedName("offreRetenues")
+    public List<String> offreRetenues;
+    @SerializedName("candidatures")
+    public List<String> candidatures;
 }
