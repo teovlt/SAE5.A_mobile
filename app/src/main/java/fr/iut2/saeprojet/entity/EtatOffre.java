@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EtatCandidature {
+public class EtatOffre {
     @SerializedName("@id")
     public String _id;
     @SerializedName("@type")
@@ -15,10 +15,10 @@ public class EtatCandidature {
     @SerializedName("id")
     public long id;
     @SerializedName("etat")
-    @Nullable
     public String etat;
     @SerializedName("descriptif")
+    @Nullable
     public String descriptif;
-    @SerializedName("candidatures")
-    public List<String> candidatures;
+    @SerializedName("offres")
+    public List<String> offres;
 }

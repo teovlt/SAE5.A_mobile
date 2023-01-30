@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EtatCandidaturesResponse {
+public class EntreprisesResponse {
     @SerializedName("@context")
     public String _context;
     @SerializedName("@id")
@@ -15,5 +15,6 @@ public class EtatCandidaturesResponse {
     @SerializedName("hydra:totalItems")
     public Integer _totalItems;
     @SerializedName("hydra:member")
-    public List<EtatCandidature> etatCandidatures = new ArrayList();
+    public List<Entreprise> entreprises = new ArrayList();
+
 }

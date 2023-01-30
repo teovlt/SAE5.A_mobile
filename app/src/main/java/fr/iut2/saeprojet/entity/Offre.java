@@ -21,11 +21,16 @@ public class Offre {
     public long id;
     @SerializedName("intitule")
     public String intitule;
+    @SerializedName("descriptif")
+    @Nullable
+    public String descriptif;
     @SerializedName("dateDepot")
     public String dateDepot;
     @SerializedName("parcours")
+    @Nullable
     public String parcours;
     @SerializedName("motsCles")
+    @Nullable
     public String motsCles;
     @SerializedName("urlPieceJointe")
     @Nullable
