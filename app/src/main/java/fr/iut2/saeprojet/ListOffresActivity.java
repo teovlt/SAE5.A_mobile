@@ -38,7 +38,6 @@ public class ListOffresActivity extends StageAppActivity {
         public void onClick(View view) {
             if (view.isEnabled() && (offre != null)) {
                 Intent intent = new Intent(ListOffresActivity.this, OffreActivity.class);
-//                intent.putExtra("offre", offre.id);
                 intent.putExtra("offre", offre);
                 startActivity(intent);
             }

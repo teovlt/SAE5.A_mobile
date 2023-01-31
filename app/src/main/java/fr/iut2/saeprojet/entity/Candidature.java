@@ -28,6 +28,8 @@ public class Candidature implements Parcelable {
     @SerializedName("etatCandidature")
     public String etatCandidature;
 
+    public Candidature() {
+    }
     protected Candidature(Parcel in) {
         _id = in.readString();
         _type = in.readString();

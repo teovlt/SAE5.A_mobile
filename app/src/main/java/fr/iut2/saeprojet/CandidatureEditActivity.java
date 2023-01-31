@@ -15,14 +15,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.EtatCandidatureEnum;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
+import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.EtatsCandidatures;
 import fr.iut2.saeprojet.entity.Offre;
 import retrofit2.Call;
@@ -36,13 +40,18 @@ public class CandidatureEditActivity extends StageAppActivity {
 
     // Data
     private Candidature candidature;
-    private ArrayAdapter<String> adapter;
+
+    private Offre offre;
+
+    private ArrayAdapter<EtatCandidatureEnum> adapter;
 
     // View
     private TextView retourCandidaturesView;
     private TextView intituleView;
     private Button annulerView;
     private Button validerView;
+
+    private Button abandonView;
     private Spinner etatsCandidatureView;
     private EditText dateActionView;
 
@@ -53,12 +62,14 @@ public class CandidatureEditActivity extends StageAppActivity {
 
         // Data
         candidature = getIntent().getParcelableExtra(CANDIDADURE_KEY);
+        offre = getIntent().getParcelableExtra("offre");
 
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
         intituleView = findViewById(R.id.intitule);
         annulerView = findViewById(R.id.annuler);
         validerView = findViewById(R.id.valider);
+        abandonView = findViewById(R.id.abandonCandidature);
         etatsCandidatureView = findViewById(R.id.etatsCandidature);
         dateActionView = findViewById(R.id.dateAction);
 
@@ -89,10 +100,21 @@ public class CandidatureEditActivity extends StageAppActivity {
             }
         });
 
+        abandonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //
+                deleteCandidature();
+
+            }
+        });
+
         // Create an ArrayAdapter using the string array and a default spinner layout
-        List<String> etats = new ArrayList<>(EtatsCandidatures.etatsCandidature.keySet());
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, etats);
+        List<EtatCandidatureEnum> etats = Arrays.asList(EtatCandidatureEnum.values());
+        adapter = new ArrayAdapter<EtatCandidatureEnum>(this, android.R.layout.simple_spinner_item, etats);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner
         etatsCandidatureView.setAdapter(adapter);
 
@@ -106,9 +128,13 @@ public class CandidatureEditActivity extends StageAppActivity {
             public void traiterResultat(Offre offre) {
                 String intitule = offre.intitule;
                 intituleView.setText(intitule);
-                String etat = EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId());
-                int spinnerPosition = adapter.getPosition(etat);
-                etatsCandidatureView.setSelection(spinnerPosition);
+                for(EtatCandidatureEnum e : EtatCandidatureEnum.values()) {
+                    if (e.get_id().equals(candidature.etatCandidature)) {
+                        etatsCandidatureView.setSelection(e.ordinal());
+                        break;
+                    }
+                }
+
                 dateActionView.setText(candidature.dateAction);
             }
 
@@ -121,30 +147,37 @@ public class CandidatureEditActivity extends StageAppActivity {
 
 
     private void updateCandidature() {
+        CandidatureRequest candidatureReq = new CandidatureRequest();
+        candidatureReq.compteEtudiant = getCompte_Id();
+        candidatureReq.offre = candidature.offre;
+        candidatureReq.dateAction = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", Calendar.getInstance().getTime());
+        candidatureReq.typeAction = "Candidature à confirmer par envoi CV+lettre";
+        candidatureReq.etatCandidature = ((EtatCandidatureEnum) etatsCandidatureView.getSelectedItem()).get_id();
 
-        //
-        String token = getToken();
-
-        String etat = etatsCandidatureView.getSelectedItem().toString();
-        long idEtat = EtatsCandidatures.etatsCandidature.get(etat);
-        candidature.setEtatCandidatureId(idEtat);
-        candidature.setDateAction(dateActionView.getText().toString());
-
-        //
-        Call<Candidature> call = apiInterface.doUpdateCandidature("Bearer " + token,"application/json", candidature.id, candidature);
-        call.enqueue(new Callback<Candidature>() {
+        APIClient.updateCandidature(this, APIClient.getCandidatureId(candidature._id), candidatureReq, new ResultatAppel<Candidature>() {
             @Override
-            public void onResponse(Call<Candidature> call, Response<Candidature> response) {
+            public void traiterResultat(Candidature response) {
+                // Rien à faire
+            }
 
-                //
-                Intent intent = new Intent(CandidatureEditActivity.this, ListCandidaturesActivity.class);
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+
+    private void deleteCandidature() {
+        APIClient.removeCandidature(this, APIClient.getCandidatureId(candidature._id), new ResultatAppel<Candidature>() {
+            @Override
+            public void traiterResultat(Candidature response) {
+                Intent intent = new Intent(CandidatureEditActivity.this, ListOffresActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
 
             @Override
-            public void onFailure(Call<Candidature> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
+            public void traiterErreur() {
 
             }
         });

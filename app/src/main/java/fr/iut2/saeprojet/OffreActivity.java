@@ -11,12 +11,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.EtatCandidatureEnum;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
+import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
@@ -34,7 +43,7 @@ public class OffreActivity extends StageAppActivity {
     private long offre_id = -1;
     private Offre offre = null;
     private Entreprise entreprise = null;
-    private String candidature_id = null;
+    private Candidature candidature = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +61,17 @@ public class OffreActivity extends StageAppActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             offre = getIntent().getParcelableExtra("offre");
-            candidature_id = extras.getString("candidature_id");
             refreshOffre();
         }
 
         candidater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                executerCandidatureActivity();
+                if (candidature != null) {
+                    executerCandidatureActivity();
+                } else {
+                    creerCandidature();
+                }
             }
         });
 
@@ -90,7 +102,7 @@ public class OffreActivity extends StageAppActivity {
         // Bouton candidature
         if (offre.etatOffre.equals("/api/etat_offres/1")) {
             if (offre.candidatures.size() > 0) {
-                refreshCandidature(offre.candidatures);
+                checkCandidature(offre.candidatures);
             }
         } else {
             candidater.setEnabled(false);
@@ -117,17 +129,54 @@ public class OffreActivity extends StageAppActivity {
         });
     }
 
-    private void refreshCandidature(List<String> candidatures) {
+    private void checkCandidature(List<String> candidatures) {
         APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
             @Override
             public void traiterResultat(CompteEtudiant compte) {
                 for(String id : compte.candidatures) {
                     if (candidatures.contains(id)) {
-                        candidater.setText("Voir Candidature");
-                        candidature_id = id;
+                        refreshCandidature(id);
                         break;
                     }
                 }
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+
+    private void refreshCandidature(String _id) {
+        APIClient.getCandidature(this, APIClient.getCandidatureId(_id), new ResultatAppel<Candidature>() {
+            @Override
+            public void traiterResultat(Candidature candid) {
+                candidature = candid;
+                if (candid != null) {
+                    candidater.setText("Voir la candidature");
+                }
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+
+    private void creerCandidature() {
+        CandidatureRequest candidatureReq = new CandidatureRequest();
+        candidatureReq.compteEtudiant = getCompte_Id();
+        candidatureReq.offre = offre._id;
+        candidatureReq.dateAction = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z",Calendar.getInstance().getTime());
+        candidatureReq.typeAction = "Candidature à confirmer par envoi CV+lettre";
+        candidatureReq.etatCandidature = EtatCandidatureEnum.OFFRE_RETENUE.get_id();
+        APIClient.createCandidature(this, candidatureReq, new ResultatAppel<Candidature>() {
+            @Override
+            public void traiterResultat(Candidature candid) {
+                candidature = candid;
+                executerCandidatureActivity();
             }
 
             @Override
@@ -141,11 +190,7 @@ public class OffreActivity extends StageAppActivity {
         Intent intent = new Intent(OffreActivity.this, CandidatureActivity.class);
 
         intent.putExtra("offre", offre);
-
-        if (candidature_id != null) {
-            intent.putExtra("candidature_id", candidature_id);
-        }
-
+        intent.putExtra("candidature_key", candidature);
         startActivity(intent);
     }
 }

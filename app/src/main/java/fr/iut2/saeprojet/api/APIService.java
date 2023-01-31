@@ -3,6 +3,7 @@ package fr.iut2.saeprojet.api;
 
 import fr.iut2.saeprojet.entity.Auth;
 import fr.iut2.saeprojet.entity.Candidature;
+import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Entreprise;
@@ -94,14 +95,13 @@ public interface APIService {
     @GET("/api/candidatures")
     Call<CandidaturesResponse> doGetCandidatures(@Header("Authorization") String token);
     @POST("/api/candidatures")
-//    Call<Candidature> doCreateCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Body Candidature candidature);
-    Call<Candidature> doCreateCandidature(@Header("Authorization") String token, @Body Candidature candidature);
+    Call<Candidature> doCreateCandidature(@Header("Authorization") String token, @Body CandidatureRequest candidature);
     @GET("/api/candidatures/{id}")
     Call<Candidature> doGetCandidature(@Header("Authorization") String token, @Path("id") long i);
     @PUT("/api/candidatures/{id}")
-    Call<Candidature> doUpdateCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body Candidature candidature);
+    Call<Candidature> doUpdateCandidature(@Header("Authorization") String token, @Path("id") long id, @Body CandidatureRequest candidature);
     @DELETE("/api/candidatures/{id}")
-    Call<Candidature> doRemoveCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id);
+    Call<Candidature> doRemoveCandidature(@Header("Authorization") String token, @Path("id") long id);
 
     // Etat candidatures
     @GET("/api/etat_candidatures")

@@ -29,6 +29,7 @@ public class CandidatureActivity extends StageAppActivity {
 
     // Data
     private Candidature candidature;
+    private Offre offre;
 
     // View
     private TextView retourCandidaturesView;
@@ -44,6 +45,7 @@ public class CandidatureActivity extends StageAppActivity {
 
         // Data
         candidature = getIntent().getParcelableExtra(CANDIDADURE_KEY);
+        offre = getIntent().getParcelableExtra("offre");
 
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
@@ -65,6 +67,7 @@ public class CandidatureActivity extends StageAppActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CandidatureActivity.this, CandidatureEditActivity.class);
+                intent.putExtra("offre", offre);
                 intent.putExtra(CandidatureEditActivity.CANDIDADURE_KEY, candidature);
                 startActivity(intent);
             }
@@ -75,7 +78,6 @@ public class CandidatureActivity extends StageAppActivity {
     }
 
     private void refreshMesInformations(Candidature candidature, TextView intituleView) {
-
         //
         etatView.setText(EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId()));
         dateActionView.setText("le " + candidature.dateAction);

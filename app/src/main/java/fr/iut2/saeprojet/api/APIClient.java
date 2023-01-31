@@ -7,6 +7,7 @@ import android.util.Log;
 import fr.iut2.saeprojet.R;
 import fr.iut2.saeprojet.StageAppActivity;
 import fr.iut2.saeprojet.entity.Candidature;
+import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Entreprise;
@@ -78,10 +79,24 @@ public class APIClient {
         APIClient.<Candidature>doCall(call, cllbck);
     }
 
-    public static void createCandidature(StageAppActivity activity, Candidature candidature, ResultatAppel<Candidature> cllbck) {
+    public static void createCandidature(StageAppActivity activity, CandidatureRequest candidature, ResultatAppel<Candidature> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Candidature> call = apiInterface.doCreateCandidature(getBearer(activity), candidature);
+        APIClient.<Candidature>doCall(call, cllbck);
+    }
+
+    public static void updateCandidature(StageAppActivity activity, long id, CandidatureRequest candidature, ResultatAppel<Candidature> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<Candidature> call = apiInterface.doUpdateCandidature(getBearer(activity), id, candidature);
+        APIClient.<Candidature>doCall(call, cllbck);
+    }
+
+    public static void removeCandidature(StageAppActivity activity, long id, ResultatAppel<Candidature> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<Candidature> call = apiInterface.doRemoveCandidature(getBearer(activity), id);
         APIClient.<Candidature>doCall(call, cllbck);
     }
 
@@ -113,10 +128,14 @@ public class APIClient {
         APIClient.<EtatCandidaturesResponse>doCall(call, cllbck);
     }
 
+    public static long getCandidatureId(String _id) {
+        return Long.valueOf(_id.replaceFirst("^/api/candidatures/", ""));
+    }
 
     private static String getBearer(StageAppActivity activity) {
         return "Bearer " + activity.getToken();
     }
+
     private static <T> void doCall(Call<T> call, ResultatAppel<T> callback) {
         call.enqueue(new Callback<T>() {
             @Override
