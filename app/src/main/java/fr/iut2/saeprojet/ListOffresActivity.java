@@ -15,13 +15,14 @@ import java.util.ArrayList;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListOffresActivity extends AppCompatActivity {
+public class ListOffresActivity extends StageAppActivity {
 
     private class ClickableEntry implements View.OnClickListener {
         public Offre offre;
@@ -37,16 +38,12 @@ public class ListOffresActivity extends AppCompatActivity {
         public void onClick(View view) {
             if (view.isEnabled() && (offre != null)) {
                 Intent intent = new Intent(ListOffresActivity.this, OffreActivity.class);
-                intent.putExtra("offre_id", offre.id);
-                intent.putExtra("offre_intitule", offre.intitule);
-                intent.putExtra("offre_url", offre.urlPieceJointe);
+//                intent.putExtra("offre", offre.id);
+                intent.putExtra("offre", offre);
                 startActivity(intent);
             }
         }
     }
-
-    // API
-    private APIService apiInterface;
 
     // View
     private TextView nb_offres;
@@ -65,9 +62,6 @@ public class ListOffresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_offres);
-
-        // Chargement de l'API
-        apiInterface = APIClient.getAPIService();
 
         // Init view
         nb_offres = findViewById(R.id.nb_offres);
@@ -149,19 +143,9 @@ public class ListOffresActivity extends AppCompatActivity {
     }
 
     private void doGetOffreList() {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_key), "no token");
-
-        //
-        Call<OffresResponse> call = apiInterface.doGetOffres("Bearer " + token);
-        call.enqueue(new Callback<OffresResponse>() {
+        APIClient.getOffres(this, new ResultatAppel<OffresResponse>() {
             @Override
-            public void onResponse(Call<OffresResponse> call, Response<OffresResponse> response) {
-                Log.d("TAG",response.code()+"");
-
-                OffresResponse offresResponse = response.body();
+            public void traiterResultat(OffresResponse offresResponse) {
                 for (Offre offre : offresResponse.offres) {
                     listeOffres.add(offre);
                 }
@@ -173,9 +157,8 @@ public class ListOffresActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<OffresResponse> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
+            public void traiterErreur() {
+
             }
         });
     }

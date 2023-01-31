@@ -11,6 +11,7 @@
     <string name="token_key">token key</string>
     <string name="login_key">login key</string>
     <string name="login_id_key">login id key</string>
+    <string name="login_id_path">login id path</string>
     <string name="offre_url">www.offre.net</string>
     <string name="country_prompt">Choose a country</string>
 

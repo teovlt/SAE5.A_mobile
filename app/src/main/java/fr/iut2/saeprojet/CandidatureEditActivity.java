@@ -21,6 +21,7 @@ import java.util.Map;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.EtatsCandidatures;
 import fr.iut2.saeprojet.entity.Offre;
@@ -28,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CandidatureEditActivity extends AppCompatActivity {
+public class CandidatureEditActivity extends StageAppActivity {
 
     //
     public static final String CANDIDADURE_KEY = "candidature_key";
@@ -36,9 +37,6 @@ public class CandidatureEditActivity extends AppCompatActivity {
     // Data
     private Candidature candidature;
     private ArrayAdapter<String> adapter;
-
-    // API
-    private APIService apiInterface;
 
     // View
     private TextView retourCandidaturesView;
@@ -55,10 +53,6 @@ public class CandidatureEditActivity extends AppCompatActivity {
 
         // Data
         candidature = getIntent().getParcelableExtra(CANDIDADURE_KEY);
-
-
-        // Chargement de l'API
-        apiInterface = APIClient.getAPIService();
 
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
@@ -107,17 +101,10 @@ public class CandidatureEditActivity extends AppCompatActivity {
     }
 
     private void refreshMesInformations(TextView intituleView) {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getApplicationContext().getString(R.string.token_key), "no token");
-
-        //
-        Call<Offre> call = apiInterface.doGetOffre("Bearer " + token, candidature.getOffreId());
-        call.enqueue(new Callback<Offre>() {
+        APIClient.getOffre(this, candidature.getOffreId(), new ResultatAppel<Offre>() {
             @Override
-            public void onResponse(Call<Offre> call, Response<Offre> response) {
-                String intitule = response.body().intitule;
+            public void traiterResultat(Offre offre) {
+                String intitule = offre.intitule;
                 intituleView.setText(intitule);
                 String etat = EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId());
                 int spinnerPosition = adapter.getPosition(etat);
@@ -126,20 +113,17 @@ public class CandidatureEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Offre> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
+            public void traiterErreur() {
 
             }
         });
-    }
+     }
 
 
     private void updateCandidature() {
 
         //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getApplicationContext().getString(R.string.token_key), "no token");
+        String token = getToken();
 
         String etat = etatsCandidatureView.getSelectedItem().toString();
         long idEtat = EtatsCandidatures.etatsCandidature.get(etat);

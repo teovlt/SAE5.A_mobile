@@ -12,34 +12,36 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Auth;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.ComptesEtudiantsResponse;
+import fr.iut2.saeprojet.entity.EtatCandidature;
+import fr.iut2.saeprojet.entity.EtatCandidaturesResponse;
+import fr.iut2.saeprojet.entity.EtatOffre;
+import fr.iut2.saeprojet.entity.EtatOffresResponse;
+import fr.iut2.saeprojet.entity.EtatRecherche;
+import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.LoginResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
-
-    // API
-    private APIService apiInterface;
+public class LoginActivity extends StageAppActivity {
 
     // View
     private EditText usernameView;
     private EditText passwordView;
     private Button loginView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        // Chargement de l'API
-        apiInterface = APIClient.getAPIService();
 
         // Init view
         usernameView = findViewById(R.id.username);
@@ -68,20 +70,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()) {
-                    //String message = "JWT Token : " + response.body().token;
-                    //Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-
-                    //
-                    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString(getString(R.string.token_key), response.body().token);
-                    editor.putString(getString(R.string.token_key), response.body().token);
-                    editor.putString(getString(R.string.login_key), login);
-                    editor.apply();
-
-                    //
+                    setAuthData(login, response.body().token);
                     getInformationEtudiant(login);
-
                 } else {
                     Toast.makeText(LoginActivity.this, "non pas correquete", Toast.LENGTH_SHORT).show();
                 }
@@ -92,16 +82,12 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 call.cancel();
                 Log.e("TAG",t.getMessage());
-
             }
         });
     }
 
     private void getInformationEtudiant(String login) {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_key), "no token");
+        String token = getToken();
 
         //
         Call<ComptesEtudiantsResponse> call = apiInterface.doGetCompteEtudiants("Bearer " + token);
@@ -114,14 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                     for (CompteEtudiant compteEtudiant : response.body().compteEtudiants) {
 
                         if (compteEtudiant.login.equals(login)) {
-
-                            //
-                            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putLong(getString(R.string.login_id_key), compteEtudiant.id);
-                            editor.apply();
-
-                            //
+                            setCompteId(compteEtudiant.id, compteEtudiant._id);
                             break;
                         }
                     }
@@ -140,6 +119,54 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 call.cancel();
                 Log.e("TAG",t.getMessage());
+
+            }
+        });
+
+        APIClient.getEtatRecherches(this, new ResultatAppel<EtatRecherchesResponse>() {
+            @Override
+            public void traiterResultat(EtatRecherchesResponse liste) {
+                HashMap<String, String> entries = new HashMap<>();
+                for(EtatRecherche etat : liste.etatRecherches) {
+                    entries.put(etat._id, etat.descriptif);
+                }
+                LoginActivity.this.setEnumValues(entries);
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+
+        APIClient.getEtatOffres(this, new ResultatAppel<EtatOffresResponse>() {
+            @Override
+            public void traiterResultat(EtatOffresResponse liste) {
+                HashMap<String, String> entries = new HashMap<>();
+                for(EtatOffre etat : liste.etatOffres) {
+                    entries.put(etat._id, etat.descriptif);
+                }
+                LoginActivity.this.setEnumValues(entries);
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+
+        APIClient.getEtatCandidatures(this, new ResultatAppel<EtatCandidaturesResponse>() {
+            @Override
+            public void traiterResultat(EtatCandidaturesResponse liste) {
+                HashMap<String, String> entries = new HashMap<>();
+                for(EtatCandidature etat : liste.etatCandidatures) {
+                    entries.put(etat._id, etat.descriptif);
+                }
+                LoginActivity.this.setEnumValues(entries);
+            }
+
+            @Override
+            public void traiterErreur() {
 
             }
         });

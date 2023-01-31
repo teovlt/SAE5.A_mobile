@@ -18,17 +18,14 @@ import java.util.ArrayList;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListCandidaturesActivity extends AppCompatActivity {
-
-    // API
-    private APIService apiInterface;
-
+public class ListCandidaturesActivity extends StageAppActivity {
     // View
     private TextView retourSyntheseView;
     private ListView candidaturesView;
@@ -40,9 +37,6 @@ public class ListCandidaturesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_candidatures);
-
-        // Chargement de l'API
-        apiInterface = APIClient.getAPIService();
 
         // Init view
         retourSyntheseView = findViewById(R.id.retourSynthese);
@@ -79,30 +73,19 @@ public class ListCandidaturesActivity extends AppCompatActivity {
     }
 
     private void refreshMesInformations() {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_key), "no token");
-        long id = sharedPref.getLong(getString(R.string.login_id_key), 0);
-
-        //
-        Call<CandidaturesResponse> call = apiInterface.doGetCandidatures("Bearer " + token);
-        call.enqueue(new Callback<CandidaturesResponse>() {
+        APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
-            public void onResponse(Call<CandidaturesResponse> call, Response<CandidaturesResponse> response) {
-
+            public void traiterResultat(CandidaturesResponse candidatures) {
                 // Mettre à jour l'adapter avec la liste de taches
                 adapter.clear();
-                adapter.addAll(response.body().candidatures);
+                adapter.addAll(candidatures.candidatures);
 
                 // Now, notify the adapter of the change in source
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<CandidaturesResponse> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
+            public void traiterErreur() {
 
             }
         });

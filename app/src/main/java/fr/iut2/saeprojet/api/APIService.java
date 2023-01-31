@@ -25,8 +25,10 @@ import fr.iut2.saeprojet.entity.OffresResponse;
 import fr.iut2.saeprojet.entity.ComptesEtudiantsResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -53,8 +55,6 @@ public interface APIService {
     Call<EtatRecherchesResponse> doGetEtatRecherches(@Header("Authorization") String token);
     @GET("/api/etat_recherches/{id}")
     Call<EtatRecherche> doGetEtatRecherche(@Header("Authorization") String token, @Path("id") long i);
-    @PUT("/api/etat_recherches/{id}")
-    Call<EtatRecherche> doUpdateEtatRecherche(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body EtatRecherche etatRecherche);
 
     // Offres
     @GET("/api/offres")
@@ -73,49 +73,39 @@ public interface APIService {
     Call<EntreprisesResponse> doGetEntreprises(@Header("Authorization") String token);
     @GET("/api/entreprises/{id}")
     Call<Entreprise> doGetEntreprise(@Header("Authorization") String token, @Path("id") long i);
-    @PUT("/api/entreprises/{id}")
-    Call<Entreprise> doUpdateEntreprise(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body Entreprise entreprise);
 
     // Offres consultees
     @GET("/api/offre_consultees")
     Call<OffresConsulteesResponse> doGetOffresConsultees(@Header("Authorization") String token);
     @GET("/api/offre_consultees/{id}")
     Call<OffreConsultee> doGetOffreConsultee(@Header("Authorization") String token, @Path("id") long i);
-    @PUT("/api/offre_consultees/{id}")
-    Call<OffreConsultee> doUpdateOffreConsultee(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreConsultee offreConsultee);
+//    @PATCH("/api/offre_consultees/{id}")
+//    Call<OffreConsultee> doUpdateOffreConsultee(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreConsultee offreConsultee);
 
     // Offres retenues
     @GET("/api/offre_retenues")
     Call<OffresRetenuesResponse> doGetOffresRetenues(@Header("Authorization") String token);
     @GET("/api/offre_retenues/{id}")
     Call<OffreRetenue> doGetOffreRetenue(@Header("Authorization") String token, @Path("id") long i);
-    @PUT("/api/offre_retenues/{id}")
-    Call<OffreRetenue> doUpdateOffreRetenue(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreRetenue offreRetenue);
+//    @PATCH("/api/offre_retenues/{id}")
+//    Call<OffreRetenue> doUpdateOffreRetenue(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreRetenue offreRetenue);
 
     // Candidatures
     @GET("/api/candidatures")
     Call<CandidaturesResponse> doGetCandidatures(@Header("Authorization") String token);
+    @POST("/api/candidatures")
+//    Call<Candidature> doCreateCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Body Candidature candidature);
+    Call<Candidature> doCreateCandidature(@Header("Authorization") String token, @Body Candidature candidature);
     @GET("/api/candidatures/{id}")
     Call<Candidature> doGetCandidature(@Header("Authorization") String token, @Path("id") long i);
     @PUT("/api/candidatures/{id}")
     Call<Candidature> doUpdateCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body Candidature candidature);
+    @DELETE("/api/candidatures/{id}")
+    Call<Candidature> doRemoveCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id);
 
     // Etat candidatures
     @GET("/api/etat_candidatures")
     Call<EtatCandidaturesResponse> doGetEtatCandidatures(@Header("Authorization") String token);
     @GET("/api/etat_candidatures/{id}")
     Call<EtatCandidature> doGetEtatCandidature(@Header("Authorization") String token, @Path("id") long i);
-    @PUT("/api/etat_candidatures/{id}")
-    Call<EtatCandidature> doUpdateEtatCandidature(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body EtatCandidature etatCandidature);
-
-
-//    @POST("/api/offres")
-//    Call<User> createUser(@Body User user);
-//
-//    @GET("/api/users?")
-//    Call<UserList> doGetUserList(@Query("page") int page);
-//
-//    @FormUrlEncoded
-//    @POST("/api/users?")
-//    Call<UserList> doCreateUserWithField(@Field("name") String name, @Field("job") String job);
 }

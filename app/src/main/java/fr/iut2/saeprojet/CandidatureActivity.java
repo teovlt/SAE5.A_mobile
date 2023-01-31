@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.EtatsCandidatures;
 import fr.iut2.saeprojet.entity.Offre;
@@ -21,16 +22,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CandidatureActivity extends AppCompatActivity {
+public class CandidatureActivity extends StageAppActivity {
 
     //
     public static final String CANDIDADURE_KEY = "candidature_key";
 
     // Data
     private Candidature candidature;
-
-    // API
-    private APIService apiInterface;
 
     // View
     private TextView retourCandidaturesView;
@@ -46,9 +44,6 @@ public class CandidatureActivity extends AppCompatActivity {
 
         // Data
         candidature = getIntent().getParcelableExtra(CANDIDADURE_KEY);
-
-        // Chargement de l'API
-        apiInterface = APIClient.getAPIService();
 
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
@@ -85,23 +80,15 @@ public class CandidatureActivity extends AppCompatActivity {
         etatView.setText(EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId()));
         dateActionView.setText("le " + candidature.dateAction);
 
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getApplicationContext().getString(R.string.token_key), "no token");
-
-        //
-        Call<Offre> call = apiInterface.doGetOffre("Bearer " + token, candidature.getOffreId());
-        call.enqueue(new Callback<Offre>() {
+        APIClient.getOffre(this, candidature.getOffreId(), new ResultatAppel<Offre>() {
             @Override
-            public void onResponse(Call<Offre> call, Response<Offre> response) {
-                String intitule = response.body().intitule;
+            public void traiterResultat(Offre offre) {
+                String intitule = offre.intitule;
                 intituleView.setText(intitule);
             }
 
             @Override
-            public void onFailure(Call<Offre> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
+            public void traiterErreur() {
 
             }
         });

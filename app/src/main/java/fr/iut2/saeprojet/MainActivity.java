@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
+import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.OffresResponse;
@@ -21,10 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
-
-    // API
-    private APIService apiInterface;
+public class MainActivity extends StageAppActivity {
 
     // View
     private LinearLayout offresView;
@@ -36,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Chargement de l'API
-        apiInterface = APIClient.getAPIService();
 
         // init View
         offresView = findViewById(R.id.offres);
@@ -60,65 +56,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshLogin() {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String login = sharedPref.getString(getString(R.string.login_key), "no login");
-
-        //
         TextView loginView = findViewById(R.id.login);
-        loginView.setText(login);
-
-        //
+        loginView.setText(getLogin());
         refreshMesInformations();
     }
 
     private void refreshNBOffres() {
+        APIClient.getOffres(this, new ResultatAppel<OffresResponse>() {
 
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_key), "no token");
-
-        //
-        Call<OffresResponse> call = apiInterface.doGetOffres("Bearer " + token);
-        call.enqueue(new Callback<OffresResponse>() {
             @Override
-            public void onResponse(Call<OffresResponse> call, Response<OffresResponse> response) {
-
-                //
+            public void traiterResultat(OffresResponse offres) {
                 TextView nbOffresView = findViewById(R.id.textView8);
-                OffresResponse offres = response.body();
                 nbOffresView.setText(String.valueOf(offres.offres.size()) + " " + nbOffresView.getText().toString());
             }
 
             @Override
-            public void onFailure(Call<OffresResponse> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
-
+            public void traiterErreur() {
             }
         });
     }
 
     private void refreshMesInformations() {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_key), "no token");
-        long id = sharedPref.getLong(getString(R.string.login_id_key), 0);
-
-        //
-        Call<CompteEtudiant> call = apiInterface.doGetCompteEtudiant("Bearer " + token, id);
-        call.enqueue(new Callback<CompteEtudiant>() {
+        APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
             @Override
-            public void onResponse(Call<CompteEtudiant> call, Response<CompteEtudiant> response) {
-
-                //
+            public void traiterResultat(CompteEtudiant compteEtudiant) {
                 TextView mesOffresConsulteesView = findViewById(R.id.textView10);
                 TextView mesOffresRetenuesView = findViewById(R.id.textView11);
-                TextView mesCandidaturesView = findViewById(R.id.textView13);
+                TextView mesCandidaturesView = findViewById(R.id.textView12);
                 TextView derniereConnexionView = findViewById(R.id.textView6);
-                CompteEtudiant compteEtudiant = response.body();
                 mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()) + " " + mesOffresConsulteesView.getText().toString());
                 mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()) + " " + mesOffresRetenuesView.getText().toString());
                 mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()) + " " + mesCandidaturesView.getText().toString());
@@ -126,35 +91,31 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CompteEtudiant> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
+            public void traiterErreur() {
             }
         });
     }
 
     private void refreshCandidatures() {
-
-        //
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_key), "no token");
-
-        //
-        Call<CandidaturesResponse> call = apiInterface.doGetCandidatures("Bearer " + token);
-        call.enqueue(new Callback<CandidaturesResponse>() {
+        APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
-            public void onResponse(Call<CandidaturesResponse> call, Response<CandidaturesResponse> response) {
+            public void traiterResultat(CandidaturesResponse candidatures) {
+                TextView nbCandidaturesView = findViewById(R.id.textView13);
+                TextView nbCandidaturesRefuseesView = findViewById(R.id.textView14);
 
-                //
-                TextView nbCandidaturesView = findViewById(R.id.textView12);
-                CandidaturesResponse candidatures = response.body();
-                nbCandidaturesView.setText(String.valueOf(candidatures.candidatures.size()) + " " + nbCandidaturesView.getText().toString());
+                int count = 0;
+                for(Candidature c : candidatures.candidatures) {
+                    if (c.etatCandidature.equals("/api/etat_candidature/3")) {
+                        count ++;
+                    }
+                }
+                nbCandidaturesRefuseesView.setText(String.valueOf(count) + " " + nbCandidaturesRefuseesView.getText().toString());
+                nbCandidaturesView.setText(String.valueOf(candidatures.candidatures.size() - count) + " " + nbCandidaturesView.getText().toString());
             }
 
             @Override
-            public void onFailure(Call<CandidaturesResponse> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
+            public void traiterErreur() {
+
             }
         });
     }
