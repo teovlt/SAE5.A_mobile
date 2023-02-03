@@ -40,7 +40,6 @@ public class APIClient {
     private static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            //.client(client)
             .build();
     public static APIService getAPIService() {
         return retrofit.create(APIService.class);

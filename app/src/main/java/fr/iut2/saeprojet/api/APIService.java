@@ -80,16 +80,12 @@ public interface APIService {
     Call<OffresConsulteesResponse> doGetOffresConsultees(@Header("Authorization") String token);
     @GET("/api/offre_consultees/{id}")
     Call<OffreConsultee> doGetOffreConsultee(@Header("Authorization") String token, @Path("id") long i);
-//    @PATCH("/api/offre_consultees/{id}")
-//    Call<OffreConsultee> doUpdateOffreConsultee(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreConsultee offreConsultee);
 
     // Offres retenues
     @GET("/api/offre_retenues")
     Call<OffresRetenuesResponse> doGetOffresRetenues(@Header("Authorization") String token);
     @GET("/api/offre_retenues/{id}")
     Call<OffreRetenue> doGetOffreRetenue(@Header("Authorization") String token, @Path("id") long i);
-//    @PATCH("/api/offre_retenues/{id}")
-//    Call<OffreRetenue> doUpdateOffreRetenue(@Header("Authorization") String token, @Header("Content-Type") String contentType, @Path("id") long id, @Body OffreRetenue offreRetenue);
 
     // Candidatures
     @GET("/api/candidatures")
