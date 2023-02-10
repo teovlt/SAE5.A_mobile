@@ -73,13 +73,13 @@ public class LoginActivity extends StageAppActivity {
                     setAuthData(login, response.body().token);
                     getInformationEtudiant(login);
                 } else {
-                    Toast.makeText(LoginActivity.this, "non pas correquete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Nom incorrect", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Impossible de se connecter au serveur", Toast.LENGTH_SHORT).show();
                 call.cancel();
                 Log.e("TAG",t.getMessage());
             }
@@ -110,13 +110,13 @@ public class LoginActivity extends StageAppActivity {
                     startActivity(intent);
 
                 } else {
-                    Toast.makeText(LoginActivity.this, "non pas correquete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Nom incorrect", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ComptesEtudiantsResponse> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Impossible de se connecter au serveur", Toast.LENGTH_SHORT).show();
                 call.cancel();
                 Log.e("TAG",t.getMessage());
 

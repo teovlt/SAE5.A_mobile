@@ -30,7 +30,6 @@ public class MainActivity extends StageAppActivity {
     private LinearLayout candidaturesView;
 
     private LinearLayout offreView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,11 +82,11 @@ public class MainActivity extends StageAppActivity {
                 TextView mesOffresConsulteesView = findViewById(R.id.textView10);
                 TextView mesOffresRetenuesView = findViewById(R.id.textView11);
                 TextView mesCandidaturesView = findViewById(R.id.textView12);
-                TextView derniereConnexionView = findViewById(R.id.textView6);
+                TextView derniereConnexionView = findViewById(R.id.derniere_connexion_view);
                 mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()) + " " + mesOffresConsulteesView.getText().toString());
                 mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()) + " " + mesOffresRetenuesView.getText().toString());
                 mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()) + " " + mesCandidaturesView.getText().toString());
-                derniereConnexionView.setText(compteEtudiant.derniereConnexion);
+                derniereConnexionView.setText(String.valueOf(compteEtudiant.derniereConnexion));
             }
 
             @Override
@@ -101,7 +100,7 @@ public class MainActivity extends StageAppActivity {
             @Override
             public void traiterResultat(CandidaturesResponse candidatures) {
                 TextView nbCandidaturesView = findViewById(R.id.textView13);
-                TextView nbCandidaturesRefuseesView = findViewById(R.id.textView14);
+                TextView nbCandidaturesRefuseesView = findViewById(R.id.candidatures_refusees);
 
                 int count = 0;
                 for(Candidature c : candidatures.candidatures) {

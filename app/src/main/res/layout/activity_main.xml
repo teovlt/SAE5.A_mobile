@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -19,7 +20,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="151dp"
-        android:text="Mon login"
+        android:text="@string/mon_login"
         android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="71dp"
         android:layout_marginTop="98dp"
-        android:text="Synthèse"
+        android:text="@string/synthese"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,17 +41,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Dernière connexion le "
+        android:text="@string/derniere_connexion"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:layout_editor_absoluteX="34dp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/derniere_connexion_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="3dp"
-        android:text="ma date"
+        android:text="@string/date_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toEndOf="@+id/textView5"
@@ -81,25 +82,25 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Offres"
+                android:text="@string/offres"
                 android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Offres consultées" />
+                android:text="@string/offres_consultees" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Offres retenues" />
+                android:text="@string/offres_retenues" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Voir les détails \u003E"
+                android:text="@string/details"
                 android:textAlignment="textEnd"
                 android:textColor="@android:color/holo_orange_dark" />
 
@@ -118,21 +119,21 @@
                 android:id="@+id/textView12"
                 android:layout_width="263dp"
                 android:layout_height="wrap_content"
-                android:text="Candidatures"
+                android:text="@string/candidatures"
                 android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Candidatures en cours"
+                android:text="@string/candidatures_en_cours"
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/candidatures_refusees"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Candidatures refusées"
+                android:text="@string/candidatures_refusees"
                 android:textAlignment="center" />
 
         </LinearLayout>
