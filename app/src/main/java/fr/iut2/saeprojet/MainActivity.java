@@ -25,30 +25,29 @@ import retrofit2.Response;
 
 public class MainActivity extends StageAppActivity {
 
-    // View
-    private LinearLayout offresView;
-    private LinearLayout candidaturesView;
-
-    private LinearLayout offreView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // init View
-        offresView = findViewById(R.id.offres);
-        candidaturesView = findViewById(R.id.candidatures);
-
-        //
-        offresView.setOnClickListener(new View.OnClickListener() {
+        //View init
+        Button details_offres = findViewById(R.id.details_offres);
+        Button details_candidatures = findViewById(R.id.details_candidatures);
+        //Rend le bouton voir en details des offres cliquable et redirige l'utilisateur sur la liste des offres
+        details_offres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ListOffresActivity.class);
                 startActivity(intent);
             }
         });
-
-        //
+        //Rend le bouton voir en details des candidatures cliquable et redirige l'utilisateur sur la liste de ses candidatures
+        details_candidatures.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListCandidaturesActivity.class);
+                startActivity(intent);
+            }
+        });
         refreshLogin();
         refreshNBOffres();
         refreshCandidatures();
@@ -65,7 +64,7 @@ public class MainActivity extends StageAppActivity {
 
             @Override
             public void traiterResultat(OffresResponse offres) {
-                TextView nbOffresView = findViewById(R.id.textView8);
+                TextView nbOffresView = findViewById(R.id.offres_titre);
                 nbOffresView.setText(String.valueOf(offres.offres.size()) + " " + nbOffresView.getText().toString());
             }
 
@@ -79,14 +78,15 @@ public class MainActivity extends StageAppActivity {
         APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
             @Override
             public void traiterResultat(CompteEtudiant compteEtudiant) {
-                TextView mesOffresConsulteesView = findViewById(R.id.textView10);
-                TextView mesOffresRetenuesView = findViewById(R.id.textView11);
-                TextView mesCandidaturesView = findViewById(R.id.textView12);
+                TextView mesOffresConsulteesView = findViewById(R.id.offres_consultees);
+                TextView mesOffresRetenuesView = findViewById(R.id.offres_retenues);
+                TextView mesCandidaturesView = findViewById(R.id.candidatures_titre);
                 TextView derniereConnexionView = findViewById(R.id.derniere_connexion_view);
+                derniereConnexionView.setText(String.valueOf(compteEtudiant.derniereConnexion));
                 mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()) + " " + mesOffresConsulteesView.getText().toString());
                 mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()) + " " + mesOffresRetenuesView.getText().toString());
                 mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()) + " " + mesCandidaturesView.getText().toString());
-                derniereConnexionView.setText(String.valueOf(compteEtudiant.derniereConnexion));
+
             }
 
             @Override

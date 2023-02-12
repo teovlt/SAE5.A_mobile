@@ -18,14 +18,15 @@
     <string name="candidatures_refusees">Candidatures refusées</string>
     <string name="candidatures_en_cours">Candidatures en cours</string>
     <string name="candidatures">Candidatures</string>
-    <string name="details"><![CDATA[Voir les détails >]]></string>
+    <string name="details">Voir en détails</string>
     <string name="offres_retenues">Offres retenues</string>
     <string name="offres_consultees">Offres consultées</string>
     <string name="offres">Offres</string>
-    <string name="derniere_connexion">Dernière connexion le</string>
-    <string name="mon_login">Mon login</string>
+    <string name="derniere_connexion">Dernière connexion le </string>
+    <string name="login">login_placeholder</string>
     <string name="synthese">Synthèse</string>
     <string name="date_placeholder">date_placeholder</string>
+    <string name="main_titre">Tableau de bord</string>
 
     <string-array name="etats_candidatures">
         <item>Candidature à envoyer</item>
