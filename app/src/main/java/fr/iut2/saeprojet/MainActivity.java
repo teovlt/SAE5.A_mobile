@@ -24,10 +24,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends StageAppActivity {
-
+private TextView mesCandidaturesView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle(R.string.title_activity_main);
         setContentView(R.layout.activity_main);
         //View init
         Button details_offres = findViewById(R.id.details_offres);
@@ -65,7 +66,7 @@ public class MainActivity extends StageAppActivity {
             @Override
             public void traiterResultat(OffresResponse offres) {
                 TextView nbOffresView = findViewById(R.id.offres_titre);
-                nbOffresView.setText(String.valueOf(offres.offres.size()) + " " + nbOffresView.getText().toString());
+                nbOffresView.setText(String.valueOf(offres.offres.size()));
             }
 
             @Override
@@ -80,12 +81,12 @@ public class MainActivity extends StageAppActivity {
             public void traiterResultat(CompteEtudiant compteEtudiant) {
                 TextView mesOffresConsulteesView = findViewById(R.id.offres_consultees);
                 TextView mesOffresRetenuesView = findViewById(R.id.offres_retenues);
-                TextView mesCandidaturesView = findViewById(R.id.candidatures_titre);
+                mesCandidaturesView = findViewById(R.id.candidatures_titre);
                 TextView derniereConnexionView = findViewById(R.id.derniere_connexion_view);
                 derniereConnexionView.setText(String.valueOf(compteEtudiant.derniereConnexion));
-                mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()) + " " + mesOffresConsulteesView.getText().toString());
-                mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()) + " " + mesOffresRetenuesView.getText().toString());
-                mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()) + " " + mesCandidaturesView.getText().toString());
+                mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()));
+                mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()));
+                mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()));
 
             }
 
@@ -99,17 +100,17 @@ public class MainActivity extends StageAppActivity {
         APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
             public void traiterResultat(CandidaturesResponse candidatures) {
-                TextView nbCandidaturesView = findViewById(R.id.textView13);
                 TextView nbCandidaturesRefuseesView = findViewById(R.id.candidatures_refusees);
-
+                TextView nbCandidaturesEnCoursView = findViewById(R.id.candidatures_en_cours);
                 int count = 0;
                 for(Candidature c : candidatures.candidatures) {
-                    if (c.etatCandidature.equals("/api/etat_candidature/3")) {
+                    System.out.println(c.etatCandidature);
+                    if (c.etatCandidature.equals("/api/etat_candidatures/3")) {
                         count ++;
                     }
                 }
-                nbCandidaturesRefuseesView.setText(String.valueOf(count) + " " + nbCandidaturesRefuseesView.getText().toString());
-                nbCandidaturesView.setText(String.valueOf(candidatures.candidatures.size() - count) + " " + nbCandidaturesView.getText().toString());
+                nbCandidaturesRefuseesView.setText(String.valueOf(count));
+               nbCandidaturesEnCoursView.setText(String.valueOf(Integer.parseInt((String) mesCandidaturesView.getText()) - count));
             }
 
             @Override

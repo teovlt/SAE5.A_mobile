@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class ListCandidaturesActivity extends StageAppActivity {
     // View
-    private TextView retourSyntheseView;
+    private TextView retour;
     private ListView candidaturesView;
 
     // data
@@ -39,7 +39,7 @@ public class ListCandidaturesActivity extends StageAppActivity {
         setContentView(R.layout.activity_list_candidatures);
 
         // Init view
-        retourSyntheseView = findViewById(R.id.retourSynthese);
+        retour = findViewById(R.id.retourSynthese);
         candidaturesView = findViewById(R.id.candidatures);
 
         // Lier l'adapter au listView
@@ -47,10 +47,12 @@ public class ListCandidaturesActivity extends StageAppActivity {
         candidaturesView.setAdapter(adapter);
 
         //
-        retourSyntheseView.setOnClickListener(new View.OnClickListener() {
+        retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ListCandidaturesActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 
