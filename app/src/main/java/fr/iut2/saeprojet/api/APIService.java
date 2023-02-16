@@ -6,6 +6,7 @@ import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
+import fr.iut2.saeprojet.entity.CompteEtudiantRequest;
 import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.EtatCandidature;
@@ -44,8 +45,8 @@ public interface APIService {
     Call<ComptesEtudiantsResponse> doGetCompteEtudiants(@Header("Authorization") String token);
     @GET("/api/compte_etudiants/{id}")
     Call<CompteEtudiant> doGetCompteEtudiant(@Header("Authorization") String token, @Path("id") long id);
-
-    // Etudiants
+    @PUT("/api/compte_etudiants/{id}")
+    Call<CompteEtudiant> doUpdateCompteEtudiant(@Header("Authorization") String token, @Path("id") long id, @Body CompteEtudiantRequest compteEtudiantRequest);
     @GET("/api/etudiants")
     Call<EtudiantsResponse> doGetEtudiants(@Header("Authorization") String token);
     @GET("/api/etudiants/{id}")

@@ -1,38 +1,55 @@
 package fr.iut2.saeprojet;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Objects;
 
 import fr.iut2.saeprojet.api.APIClient;
-import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
+import fr.iut2.saeprojet.entity.Etudiant;
 import fr.iut2.saeprojet.entity.OffresResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends StageAppActivity {
+private TextView loginView;
+private TextView derniereConnexionView;
+
+//OFFRES VIEWS
+private Button details_offres;
+private TextView nbOffresView;
+private TextView mesOffresConsulteesView;
+private TextView mesOffresRetenuesView;
+//CANDIDATURES VIEWS
+private Button details_candidatures;
 private TextView mesCandidaturesView;
+private TextView nbCandidaturesRefuseesView;
+private TextView nbCandidaturesEnCoursView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTitle(R.string.title_activity_main);
         setContentView(R.layout.activity_main);
-        //View init
-        Button details_offres = findViewById(R.id.details_offres);
-        Button details_candidatures = findViewById(R.id.details_candidatures);
+        //Views init
+        details_offres = findViewById(R.id.details_offres);
+        details_candidatures = findViewById(R.id.details_candidatures);
+        loginView = findViewById(R.id.login);
+        nbOffresView = findViewById(R.id.offres_titre);
+        derniereConnexionView = findViewById(R.id.derniere_connexion_view);
+        mesOffresConsulteesView = findViewById(R.id.offres_consultees);
+        mesOffresRetenuesView = findViewById(R.id.offres_retenues);
+        mesCandidaturesView = findViewById(R.id.candidatures_titre);
+        nbCandidaturesRefuseesView = findViewById(R.id.candidatures_refusees);
+        nbCandidaturesEnCoursView = findViewById(R.id.candidatures_en_cours);
+
         //Rend le bouton voir en details des offres cliquable et redirige l'utilisateur sur la liste des offres
         details_offres.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,23 +66,64 @@ private TextView mesCandidaturesView;
                 startActivity(intent);
             }
         });
-        refreshLogin();
-        refreshNBOffres();
+        refreshInformations();
+    }
+
+
+
+    private void refreshInformations() {
+        APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
+            @Override
+            public void traiterResultat(CompteEtudiant compteEtudiant) {
+                mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()));
+                mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()));
+                mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()));
+                refreshDerniereConnexion(compteEtudiant);
+                refreshPrenom(compteEtudiant);
+            }
+
+            @Override
+            public void traiterErreur() {
+            }
+        });
+        refreshOffres();
         refreshCandidatures();
     }
-
-    private void refreshLogin() {
-        TextView loginView = findViewById(R.id.login);
-        loginView.setText(getLogin());
-        refreshMesInformations();
+private void refreshDerniereConnexion(CompteEtudiant compteEtudiant){
+    Bundle extras = getIntent().getExtras();
+    //Si l'utilisateur vient de la page login on récupère la derniere connexion de là bas
+    if (extras != null ) {
+        String extraDerniereConnexion =getIntent().getStringExtra("derniere_connexion");
+        //si c'est la premiere connexion mettre la date à now
+        if(extraDerniereConnexion.equals("")){
+            extraDerniereConnexion = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Calendar.getInstance().getTime());
+        }
+        setCompteDerniereConnexion(extraDerniereConnexion,2, compteEtudiant._id);
+        derniereConnexionView.setText(extraDerniereConnexion);
+    }else {
+        //Sinon l'utilisateur vient des activités suivantes, on récupère la derniere connexion dans un shared preferences
+        derniereConnexionView.setText(getDerniereConnexion(2, compteEtudiant._id));
     }
+}
+private void refreshPrenom(CompteEtudiant compteEtudiant){
+    APIClient.getEtudiant(this, Long.parseLong(compteEtudiant.etudiant.substring(compteEtudiant.etudiant.length() - 1)), new ResultatAppel<Etudiant>() {
+        @Override
+        public void traiterResultat(Etudiant response) {
+            loginView.setText(response.prenom);
+        }
 
-    private void refreshNBOffres() {
+        @Override
+        public void traiterErreur() {
+
+        }
+    });
+
+}
+    private void refreshOffres() {
         APIClient.getOffres(this, new ResultatAppel<OffresResponse>() {
 
             @Override
             public void traiterResultat(OffresResponse offres) {
-                TextView nbOffresView = findViewById(R.id.offres_titre);
                 nbOffresView.setText(String.valueOf(offres.offres.size()));
             }
 
@@ -74,43 +132,18 @@ private TextView mesCandidaturesView;
             }
         });
     }
-
-    private void refreshMesInformations() {
-        APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
-            @Override
-            public void traiterResultat(CompteEtudiant compteEtudiant) {
-                TextView mesOffresConsulteesView = findViewById(R.id.offres_consultees);
-                TextView mesOffresRetenuesView = findViewById(R.id.offres_retenues);
-                mesCandidaturesView = findViewById(R.id.candidatures_titre);
-                TextView derniereConnexionView = findViewById(R.id.derniere_connexion_view);
-                derniereConnexionView.setText(String.valueOf(compteEtudiant.derniereConnexion));
-                mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()));
-                mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()));
-                mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()));
-
-            }
-
-            @Override
-            public void traiterErreur() {
-            }
-        });
-    }
-
     private void refreshCandidatures() {
         APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
             public void traiterResultat(CandidaturesResponse candidatures) {
-                TextView nbCandidaturesRefuseesView = findViewById(R.id.candidatures_refusees);
-                TextView nbCandidaturesEnCoursView = findViewById(R.id.candidatures_en_cours);
                 int count = 0;
                 for(Candidature c : candidatures.candidatures) {
-                    System.out.println(c.etatCandidature);
                     if (c.etatCandidature.equals("/api/etat_candidatures/3")) {
                         count ++;
                     }
                 }
                 nbCandidaturesRefuseesView.setText(String.valueOf(count));
-               nbCandidaturesEnCoursView.setText(String.valueOf(Integer.parseInt((String) mesCandidaturesView.getText()) - count));
+                nbCandidaturesEnCoursView.setText(String.valueOf(Integer.parseInt((String) mesCandidaturesView.getText()) - count));
             }
 
             @Override

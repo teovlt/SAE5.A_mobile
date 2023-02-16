@@ -1,21 +1,18 @@
 package fr.iut2.saeprojet.api;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import fr.iut2.saeprojet.R;
 import fr.iut2.saeprojet.StageAppActivity;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
-import fr.iut2.saeprojet.entity.Entreprise;
+import fr.iut2.saeprojet.entity.CompteEtudiantRequest;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.EtatCandidaturesResponse;
 import fr.iut2.saeprojet.entity.EtatOffresResponse;
-import fr.iut2.saeprojet.entity.EtatRecherche;
 import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
+import fr.iut2.saeprojet.entity.Etudiant;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
 import okhttp3.OkHttpClient;
@@ -30,7 +27,7 @@ public class APIClient {
     //https://square.github.io/retrofit/?utm_source=developer.android.com&utm_medium=referral
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
-    private static final String BASE_URL = "http://192.168.3.41:8000/";
+    private static final String BASE_URL = "http://192.168.9.41:8000/";
 
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -51,7 +48,18 @@ public class APIClient {
         Call<CompteEtudiant> call = apiInterface.doGetCompteEtudiant(getBearer(activity), id);
         APIClient.<CompteEtudiant>doCall(call, cllbck);
     }
+    public static void getEtudiant(StageAppActivity activity, long id, ResultatAppel<Etudiant> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
 
+        Call<Etudiant> call = apiInterface.doGetEtudiant(getBearer(activity), id);
+        APIClient.<Etudiant>doCall(call, cllbck);
+    }
+    public static void updateCompteEtudiant(StageAppActivity activity, long id, CompteEtudiantRequest compteEtudiantRequest, ResultatAppel<CompteEtudiant> cllbck){
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<CompteEtudiant> call = apiInterface.doUpdateCompteEtudiant(getBearer(activity),id, compteEtudiantRequest);
+        APIClient.<CompteEtudiant>doCall(call, cllbck);
+    }
     public static void getOffres(StageAppActivity activity, ResultatAppel<OffresResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
@@ -154,4 +162,7 @@ public class APIClient {
             }
         });
     }
+
+
+
 }

@@ -52,6 +52,14 @@ public class StageAppActivity extends AppCompatActivity {
         editor.putString(getString(R.string.login_id_path), _id);
         editor.apply();
     }
+    protected void setCompteDerniereConnexion(String derniereConnexion, int nb, String _id) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("derniere_connexion"+nb+_id, derniereConnexion);
+        editor.apply();
+    }
+    public String getDerniereConnexion(int nb, String _id){
+        return getSharedPreferences().getString("derniere_connexion"+nb+_id,"");
+    }
     protected void setAuthData(String login, String token) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString(getString(R.string.token_key), token);

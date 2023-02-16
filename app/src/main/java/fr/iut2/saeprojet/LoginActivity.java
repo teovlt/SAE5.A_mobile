@@ -8,10 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import fr.iut2.saeprojet.api.APIClient;
@@ -19,6 +23,7 @@ import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Auth;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
+import fr.iut2.saeprojet.entity.CompteEtudiantRequest;
 import fr.iut2.saeprojet.entity.ComptesEtudiantsResponse;
 import fr.iut2.saeprojet.entity.EtatCandidature;
 import fr.iut2.saeprojet.entity.EtatCandidaturesResponse;
@@ -85,7 +90,36 @@ public class LoginActivity extends StageAppActivity {
             }
         });
     }
+    private void refreshDateConnexion(CompteEtudiant compteEtudiant){
+        CompteEtudiantRequest req = new CompteEtudiantRequest();
+        Date date = Calendar.getInstance().getTime();
+        String dateFormatee = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(date);
 
+        req.derniereConnexion =String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", date);
+        req.login = compteEtudiant.login;
+        req.roles =compteEtudiant.roles;
+        req.password = compteEtudiant.password;
+        req.parcours = compteEtudiant.parcours;
+        req.etatRecherche = compteEtudiant.etatRecherche;
+        req.etudiant = compteEtudiant.etudiant;
+        req.offreConsultees = compteEtudiant.offreConsultees;
+        req.offreRetenues = compteEtudiant.offreRetenues;
+        req.candidatures = compteEtudiant.candidatures;
+        req.userIdentifier = compteEtudiant.userIdentifier;
+        req.username = compteEtudiant.username;
+        APIClient.updateCompteEtudiant(this,compteEtudiant.id, req, new ResultatAppel<CompteEtudiant>(){
+
+            @Override
+            public void traiterResultat(CompteEtudiant compteEtudiant1) {
+                setCompteDerniereConnexion(dateFormatee,1,compteEtudiant._id);
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
     private void getInformationEtudiant(String login) {
         String token = getToken();
 
@@ -101,13 +135,17 @@ public class LoginActivity extends StageAppActivity {
 
                         if (compteEtudiant.login.equals(login)) {
                             setCompteId(compteEtudiant.id, compteEtudiant._id);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("derniere_connexion",getDerniereConnexion(1,compteEtudiant
+                                    ._id));
+                            refreshDateConnexion(compteEtudiant);
+                            startActivity(intent);
                             break;
                         }
                     }
 
-                    //
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+
+
 
                 } else {
                     Toast.makeText(LoginActivity.this, "Nom incorrect", Toast.LENGTH_SHORT).show();
