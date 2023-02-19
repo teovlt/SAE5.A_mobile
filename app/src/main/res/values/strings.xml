@@ -23,7 +23,7 @@
     <string name="offres_consultees">offre.s consultée.s</string>
     <string name="offres">Offres</string>
     <string name="derniere_connexion">Dernière connexion le </string>
-    <string name="login">login_placeholder</string>
+    <string name="prenom">prenom_placeholder</string>
     <string name="synthese">Synthèse</string>
     <string name="date_placeholder">date_placeholder</string>
     <string name="main_titre">Bienvenue </string>
