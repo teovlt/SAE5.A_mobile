@@ -19,19 +19,19 @@ import fr.iut2.saeprojet.entity.Etudiant;
 import fr.iut2.saeprojet.entity.OffresResponse;
 
 public class MainActivity extends StageAppActivity {
-private TextView loginView;
+private TextView prenomView;
 private TextView derniereConnexionView;
 
 //OFFRES VIEWS
 private Button details_offres;
-private TextView nbOffresView;
-private TextView mesOffresConsulteesView;
-private TextView mesOffresRetenuesView;
+private TextView offresView;
+private TextView offresConsulteesView;
+private TextView offresRetenuesView;
 //CANDIDATURES VIEWS
 private Button details_candidatures;
-private TextView mesCandidaturesView;
-private TextView nbCandidaturesRefuseesView;
-private TextView nbCandidaturesEnCoursView;
+private TextView candidaturesView;
+private TextView candidaturesRefuseesView;
+private TextView candidaturesEnCoursView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +39,22 @@ private TextView nbCandidaturesEnCoursView;
         this.setTitle(R.string.title_activity_main);
         setContentView(R.layout.activity_main);
         //Views init
+        prenomView = findViewById(R.id.prenom);
+        derniereConnexionView = findViewById(R.id.derniere_connexion);
+        //Offres views
+        offresView = findViewById(R.id.offres);
+        offresConsulteesView = findViewById(R.id.offres_consultees);
+        offresRetenuesView = findViewById(R.id.offres_retenues);
         details_offres = findViewById(R.id.details_offres);
+        //Candidatures views
+        candidaturesView = findViewById(R.id.candidatures);
+        candidaturesRefuseesView = findViewById(R.id.candidatures_refusees);
+        candidaturesEnCoursView = findViewById(R.id.candidatures_en_cours);
         details_candidatures = findViewById(R.id.details_candidatures);
-        loginView = findViewById(R.id.login);
-        nbOffresView = findViewById(R.id.offres_titre);
-        derniereConnexionView = findViewById(R.id.derniere_connexion_view);
-        mesOffresConsulteesView = findViewById(R.id.offres_consultees);
-        mesOffresRetenuesView = findViewById(R.id.offres_retenues);
-        mesCandidaturesView = findViewById(R.id.candidatures_titre);
-        nbCandidaturesRefuseesView = findViewById(R.id.candidatures_refusees);
-        nbCandidaturesEnCoursView = findViewById(R.id.candidatures_en_cours);
+
+
+        //Insère les informations nécessaires dans la page via divers appels API
+        refreshInformations();
 
         //Rend le bouton voir en details des offres cliquable et redirige l'utilisateur sur la liste des offres
         details_offres.setOnClickListener(new View.OnClickListener() {
@@ -66,18 +72,15 @@ private TextView nbCandidaturesEnCoursView;
                 startActivity(intent);
             }
         });
-        refreshInformations();
     }
-
-
 
     private void refreshInformations() {
         APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
             @Override
             public void traiterResultat(CompteEtudiant compteEtudiant) {
-                mesOffresConsulteesView.setText(String.valueOf(compteEtudiant.offreConsultees.size()));
-                mesOffresRetenuesView.setText(String.valueOf(compteEtudiant.offreRetenues.size()));
-                mesCandidaturesView.setText(String.valueOf(compteEtudiant.candidatures.size()));
+                offresConsulteesView.setText(getResources().getString(R.string.offres_consultees,compteEtudiant.offreConsultees.size()));
+                offresRetenuesView.setText(getResources().getString(R.string.offres_retenues,compteEtudiant.offreRetenues.size()));
+                candidaturesView.setText(getResources().getString(R.string.candidatures,compteEtudiant.candidatures.size()));
                 refreshDerniereConnexion(compteEtudiant);
                 refreshPrenom(compteEtudiant);
             }
@@ -99,17 +102,17 @@ private void refreshDerniereConnexion(CompteEtudiant compteEtudiant){
             extraDerniereConnexion = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Calendar.getInstance().getTime());
         }
         setCompteDerniereConnexion(extraDerniereConnexion,2, compteEtudiant._id);
-        derniereConnexionView.setText(extraDerniereConnexion);
+        derniereConnexionView.setText(getResources().getString(R.string.derniere_connexion,extraDerniereConnexion));
     }else {
         //Sinon l'utilisateur vient des activités suivantes, on récupère la derniere connexion dans un shared preferences
-        derniereConnexionView.setText(getDerniereConnexion(2, compteEtudiant._id));
+        derniereConnexionView.setText(getResources().getString(R.string.derniere_connexion,getDerniereConnexion(2, compteEtudiant._id)));
     }
 }
 private void refreshPrenom(CompteEtudiant compteEtudiant){
     APIClient.getEtudiant(this, Long.parseLong(compteEtudiant.etudiant.substring(compteEtudiant.etudiant.length() - 1)), new ResultatAppel<Etudiant>() {
         @Override
         public void traiterResultat(Etudiant response) {
-            loginView.setText(response.prenom);
+            prenomView.setText(getResources().getString(R.string.prenom,response.prenom));
         }
 
         @Override
@@ -124,7 +127,7 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
 
             @Override
             public void traiterResultat(OffresResponse offres) {
-                nbOffresView.setText(String.valueOf(offres.offres.size()));
+                offresView.setText(getResources().getString(R.string.offres,offres.offres.size()));
             }
 
             @Override
@@ -142,8 +145,8 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
                         count ++;
                     }
                 }
-                nbCandidaturesRefuseesView.setText(String.valueOf(count));
-                nbCandidaturesEnCoursView.setText(String.valueOf(Integer.parseInt((String) mesCandidaturesView.getText()) - count));
+                candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees,count));
+                candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours,Integer.parseInt((String) candidaturesView.getText().subSequence(0,1)) - count));
             }
 
             @Override
