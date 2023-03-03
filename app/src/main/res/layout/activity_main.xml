@@ -13,55 +13,28 @@
     android:background="@color/bgcolor"
     tools:context=".MainActivity"
     >
-    <LinearLayout
-        android:id="@+id/derniere_connexion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal">
         <TextView
+            android:id="@+id/derniere_connexion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/derniere_connexion" />
-        <TextView
-            android:id="@+id/derniere_connexion_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="@string/date_placeholder" />
-    </LinearLayout>
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_below="@+id/derniere_connexion"
-       android:id="@+id/main_titre"
-       android:layout_marginTop="40dp"
-       android:layout_marginBottom="20dp"
-
-       android:layout_centerHorizontal="true">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/main_titre"
-    android:layout_marginEnd="4dp"
-    android:textSize="@dimen/textSize_title"
-    android:textColor="@color/darkgray"/>
     <TextView
-        android:id="@+id/login"
+        android:id="@+id/prenom"
+        android:layout_below="@+id/derniere_connexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/prenom"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
         android:textSize="@dimen/textSize_title"
         android:textColor="@color/darkgray"/>
-   </LinearLayout>
+
 
          <LinearLayout
-             android:id="@+id/linearLayout"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_below="@+id/main_titre"
+             android:layout_below="@+id/prenom"
              android:layout_marginTop="40dp"
              android:orientation="vertical">
 
@@ -73,62 +46,32 @@
                  android:orientation="vertical"
                  android:padding="10dp">
 
-                 <LinearLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal">
-                     <TextView
-                         android:id="@+id/offres_titre"
-                         android:layout_width="40dp"
-                         android:layout_height="match_parent"
-                         android:textSize="@dimen/textSize_title"
-                         android:textAlignment="viewEnd"
-                         android:layout_marginEnd="10dp"
-                         android:text="@string/_0"/>
+
                  <TextView
+                     android:id="@+id/offres"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:text="@string/offres"
                      android:textSize="@dimen/textSize_title" />
-                 </LinearLayout>
-                 <LinearLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_marginStart="20dp"
-                     android:orientation="horizontal">
+
+
                  <TextView
                      android:id="@+id/offres_consultees"
-                     android:layout_width="25dp"
-                     android:layout_height="match_parent"
-                     android:textSize="@dimen/textSize_normal"
-                     android:textAlignment="viewEnd"
-                     android:layout_marginEnd="10dp"
-                     android:text="@string/_0"/>
-                 <TextView
                      android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:textSize="@dimen/textSize_normal"
-                     android:text="@string/offres_consultees" />
-                 </LinearLayout>
-                 <LinearLayout
-                     android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:layout_marginStart="20dp"
-                     android:orientation="horizontal">
-                     <TextView
-                         android:id="@+id/offres_retenues"
-                         android:layout_width="25dp"
-                         android:layout_height="match_parent"
-                         android:textSize="@dimen/textSize_normal"
-                         android:textAlignment="viewEnd"
-                         android:layout_marginEnd="10dp"
-                         android:text="@string/_0"/>
+                     android:textSize="@dimen/textSize_normal"
+                     android:text="@string/offres_consultees" />
+
+
                  <TextView
+                     android:id="@+id/offres_retenues"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
+                     android:layout_marginStart="20dp"
                      android:textSize="@dimen/textSize_normal"
                      android:text="@string/offres_retenues" />
-</LinearLayout>
+
                  <Button
                      android:id="@+id/details_offres"
                      android:layout_width="wrap_content"
@@ -137,11 +80,9 @@
                      android:textColor="@color/almost_white"
                      android:text="@string/details" />
 
-
          </LinearLayout>
 <!--CANDIDATURES-->
                 <LinearLayout
-                    android:id="@+id/candidatures"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="30dp"
@@ -149,64 +90,31 @@
                     android:orientation="vertical"
                     android:padding="10dp">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+
                         <TextView
-                            android:id="@+id/candidatures_titre"
-                            android:layout_width="40dp"
-                            android:layout_height="match_parent"
-                            android:textSize="@dimen/textSize_title"
-                            android:textAlignment="viewEnd"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/_0"/>
-                        <TextView
+                            android:id="@+id/candidatures"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/candidatures"
                             android:textSize="@dimen/textSize_title" />
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:orientation="horizontal">
                         <TextView
                             android:id="@+id/candidatures_en_cours"
-                            android:layout_width="25dp"
-                            android:layout_height="match_parent"
-                            android:textSize="@dimen/textSize_normal"
-                            android:textAlignment="viewEnd"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/_0"/>
-                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
                             android:textSize="@dimen/textSize_normal"
                             android:text="@string/candidatures_en_cours" />
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:orientation="horizontal">
+
                         <TextView
                             android:id="@+id/candidatures_refusees"
-                            android:layout_width="25dp"
-                            android:layout_height="match_parent"
-                            android:textSize="@dimen/textSize_normal"
-                            android:textAlignment="viewEnd"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/_0"/>
-                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/textSize_normal"
+                            android:layout_marginStart="20dp"
                             android:text="@string/candidatures_refusees" />
-                    </LinearLayout>
+
                     <Button
                         android:id="@+id/details_candidatures"
                         android:layout_width="wrap_content"
