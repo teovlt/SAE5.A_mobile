@@ -25,7 +25,7 @@
     <string name="derniere_connexion">Dernière connexion le %1s</string>
     <string name="synthese">Synthèse</string>
     <string name="date_placeholder">date_placeholder</string>
-    <string name="prenom">Bienvenue %1s</string>
+    <string name="prenom">Bienvenue\n%1s</string>
     <string name="title_activity_main">Tableau de bord</string>
     <string name="title_activity_liste_offres">Offres</string>
     <string name="offres_disponibles">%1d Offres disponibles</string>
