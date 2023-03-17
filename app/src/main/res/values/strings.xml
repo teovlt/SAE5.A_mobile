@@ -26,11 +26,12 @@
     <string name="synthese">Synthèse</string>
     <string name="date_placeholder">date_placeholder</string>
     <string name="prenom">Bienvenue %1s</string>
-    <string name="_0">0</string>
     <string name="title_activity_main">Tableau de bord</string>
     <string name="title_activity_liste_offres">Offres</string>
     <string name="offres_disponibles">%1d Offres disponibles</string>
     <string name="bouton_retour">bouton retour</string>
+    <string name="signInString">Already have a account ? Sign in !</string>
+    <string name="signUpString">First time here ? Register yourself !</string>
 
     <string-array name="etats_candidatures">
         <item>Candidature à envoyer</item>

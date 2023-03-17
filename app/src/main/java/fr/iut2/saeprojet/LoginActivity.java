@@ -32,6 +32,7 @@ import fr.iut2.saeprojet.entity.EtatOffresResponse;
 import fr.iut2.saeprojet.entity.EtatRecherche;
 import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.LoginResponse;
+import fr.iut2.saeprojet.CreateUserActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +44,8 @@ public class LoginActivity extends StageAppActivity {
     private EditText passwordView;
     private Button loginView;
 
+    private TextView createAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,7 @@ public class LoginActivity extends StageAppActivity {
         usernameView = findViewById(R.id.username);
         passwordView = findViewById(R.id.password);
         loginView = findViewById(R.id.login);
+        createAccount = findViewById(R.id.createAccount);
 
         //
         loginView.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +64,17 @@ public class LoginActivity extends StageAppActivity {
                 login();
             }
         });
+
+
+
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this, CreateUserActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     private void login() {
