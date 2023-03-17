@@ -146,6 +146,7 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
                     }
                 }
                 candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees,count));
+                //TODO changer la ligne ci dessous par un vrai appel API qui renvoie le nb de candidatures en cours
                 candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours,Integer.parseInt((String) candidaturesView.getText().subSequence(0,1)) - count));
             }
 

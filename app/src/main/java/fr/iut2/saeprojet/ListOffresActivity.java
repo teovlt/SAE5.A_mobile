@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class ListOffresActivity extends StageAppActivity {
     }
 
     // View
-    private TextView nb_offres;
     private TextView [] offres = new TextView[5];
     private ClickableEntry [] entries = new ClickableEntry[5];
 
@@ -56,14 +56,16 @@ public class ListOffresActivity extends StageAppActivity {
 
     private Button suivant;
 
-    private TextView retour;
+    private TextView offres_disponibles;
+    private ImageButton retour;
+    private TextView indic_page;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_offres);
+        this.setTitle(R.string.title_activity_liste_offres);
 
         // Init view
-        nb_offres = findViewById(R.id.nb_offres);
         offres[0] = findViewById(R.id.offre1);
         offres[1] = findViewById(R.id.offre2);
         offres[2] = findViewById(R.id.offre3);
@@ -71,8 +73,11 @@ public class ListOffresActivity extends StageAppActivity {
         offres[4] = findViewById(R.id.offre5);
         precedent = findViewById(R.id.buttonPrec);
         suivant = findViewById(R.id.buttonNext);
-        retour = findViewById(R.id.backSynthese);
         precedent.setEnabled(false);
+        offres_disponibles = findViewById(R.id.offres_disponibles);
+        retour = findViewById(R.id.retourDeListeOffresAMain);
+        indic_page = findViewById(R.id.indic_page);
+        //Bouton retour page principale
 
         for(int i = 0; i < 5; i++) {
             entries[i] = new ClickableEntry(offres[i], i);
@@ -91,10 +96,10 @@ public class ListOffresActivity extends StageAppActivity {
             public void onClick(View view) {
                 if (no_page < nb_pages) {
                     no_page += 1;
-                    suivant.setEnabled(no_page < nb_pages);
+                    suivant.setEnabled(no_page < nb_pages-1);
                     precedent.setEnabled((no_page > 0) && (nb_pages > 0));
-
                     setIntituleOffres(no_page);
+                    indic_page.setText(getResources().getString(R.string.NumpageSurnbPage,no_page+1,nb_pages));
                 }
             }
         });
@@ -106,8 +111,8 @@ public class ListOffresActivity extends StageAppActivity {
                     no_page -= 1;
                     suivant.setEnabled(no_page < nb_pages);
                     precedent.setEnabled((no_page > 0) && (nb_pages > 0));
-
                     setIntituleOffres(no_page);
+                    indic_page.setText(getResources().getString(R.string.NumpageSurnbPage,no_page+1,nb_pages));
                 }
             }
         });
@@ -143,14 +148,13 @@ public class ListOffresActivity extends StageAppActivity {
         APIClient.getOffres(this, new ResultatAppel<OffresResponse>() {
             @Override
             public void traiterResultat(OffresResponse offresResponse) {
-                for (Offre offre : offresResponse.offres) {
-                    listeOffres.add(offre);
-                }
-
-                nb_offres.setText(listeOffres.size() + " Offres");
-                nb_pages = nb_offres.length() / 5 + ((nb_offres.length() % 5) > 0 ? 1 : 0);
-                suivant.setEnabled(nb_offres.length() > 5);
+                listeOffres.addAll(offresResponse.offres);
+                offres_disponibles.setText(getResources().getString(R.string.offres_disponibles,listeOffres.size()));
+                nb_pages = listeOffres.size() / 5 + ((listeOffres.size() % 5) > 0 ? 1 : 0);
+                suivant.setEnabled(listeOffres.size() > 5);
                 setIntituleOffres(0);
+                indic_page.setText(getResources().getString(R.string.NumpageSurnbPage,1,nb_pages));
+
             }
 
             @Override

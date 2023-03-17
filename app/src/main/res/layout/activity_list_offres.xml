@@ -7,30 +7,35 @@
     tools:context=".ListOffresActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/backSynthese"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="\u003C Synthèse"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="20sp" />
+    <LinearLayout
+        android:id="@+id/layout_titre"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Offres"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-    <TextView
-        android:id="@+id/nb_offres"
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:text="XXX Offres"
-        android:textColor="#FF5722" />
+        <ImageButton
+            android:id="@+id/retourDeListeOffresAMain"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/retour"
+            android:scaleType="fitCenter"
+            android:background="#00000000"
+            android:contentDescription="@string/bouton_retour" />
+        <TextView
+            android:id="@+id/offres_disponibles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/offres_disponibles"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp"
+            android:textSize="@dimen/textSize_title"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -46,17 +51,17 @@
                 android:layout_weight="1"
                 android:text="Offre 1"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
 
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=">"
+                android:text="@string/chevron"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
 
         </LinearLayout>
 
@@ -72,17 +77,17 @@
                 android:layout_weight="1"
                 android:text="Offre 2"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
 
             <TextView
                 android:id="@+id/textView25"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=">"
+                android:text="@string/chevron"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
         </LinearLayout>
 
         <LinearLayout
@@ -97,17 +102,17 @@
                 android:layout_weight="1"
                 android:text="Offre 3"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
 
             <TextView
                 android:id="@+id/textView27"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=">"
+                android:text="@string/chevron"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
         </LinearLayout>
 
         <LinearLayout
@@ -122,17 +127,17 @@
                 android:layout_weight="1"
                 android:text="Offre 4"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
 
             <TextView
                 android:id="@+id/textView29"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=">"
+                android:text="@string/chevron"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
         </LinearLayout>
 
         <LinearLayout
@@ -147,43 +152,47 @@
                 android:layout_weight="1"
                 android:text="Offre 5"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
 
             <TextView
                 android:id="@+id/textView31"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=">"
+                android:text="@string/chevron"
                 android:textAlignment="textEnd"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="@dimen/textSize_mid" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/buttonPrec"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="@string/precedent" />
+
+            <TextView
+                android:id="@+id/indic_page"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="\u003C Précédent" />
-
-            <LinearLayout
-                android:layout_width="84dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"></LinearLayout>
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="@string/NumpageSurnbPage"
+                android:layout_marginEnd="20dp"/>
 
             <Button
                 android:id="@+id/buttonNext"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Suivant \u003E" />
+                android:text="@string/suivant" />
 
         </LinearLayout>
 
