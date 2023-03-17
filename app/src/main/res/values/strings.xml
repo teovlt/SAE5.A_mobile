@@ -3,7 +3,7 @@
     <string name="title_activity_login">Login</string>
     <string name="prompt_login">Login</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">S\'authentifier</string>
+    <string name="action_sign_in1">Suivant</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -30,8 +30,21 @@
     <string name="title_activity_liste_offres">Offres</string>
     <string name="offres_disponibles">%1d Offres disponibles</string>
     <string name="bouton_retour">bouton retour</string>
-    <string name="signInString">Already have a account ? Sign in !</string>
-    <string name="signUpString">First time here ? Register yourself !</string>
+    <string name="signInString">Vous posséder déja un compte ?</string>
+    <string name="firstTimeText">Première fois ici ? </string>
+    <string name="signUpString">Créez votre propre compte</string>
+    <string name="signUpString2">Créez votre compte</string>
+    <string name="stringConnect">Connectez vous !</string>
+    <string name="stringSignIn">Connexion</string>
+    <string name="hint_prenom">Prénom</string>
+    <string name="hint_nom">Nom</string>
+    <string name="hint_userName">Nom d\'utilisateur</string>
+    <string name="hint_mdp">Mot de passe</string>
+    <string name="hint_mdpConfirm">Confirmer votre mot de passe</string>
+    <string name="create2_Cmon">Allez courage, vous y êtes presque !</string>
+    <string name="hint_email">E-mail universitaire</string>
+    <string name="hint_INE">Numéro INE</string>
+    <string name="hint_parcours">Selectionnez votre parcours :</string>
 
     <string-array name="etats_candidatures">
         <item>Candidature à envoyer</item>

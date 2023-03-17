@@ -23,6 +23,9 @@
             android:name=".OffreActivity"
             android:exported="false" />
         <activity
+            android:name=".CreateUserActivity2"
+            android:exported="false" />
+        <activity
             android:name=".CandidatureEditActivity"
             android:exported="false" >
             <meta-data

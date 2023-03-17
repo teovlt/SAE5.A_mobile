@@ -1,39 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateUserActivity"
     android:orientation="vertical"
-    android:layout_margin="100px">
+    android:layout_margin="45dp">
 
-    <EditText
-        android:id="@+id/editNom"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Nom"/>
 
-    <EditText
-        android:id="@+id/editJob"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Job"/>
-
-    <Button
-        android:id="@+id/createUser"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Créer un utilisateur"/>
+        android:text="1/2"
+        android:gravity="right"
+        android:textSize="15sp"
+        />
+
+    <EditText
+        android:id="@+id/createPrenom"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/hint_prenom"
+        android:layout_marginBottom="25dp"/>
+
+        <EditText
+            android:id="@+id/createNom"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/hint_nom"
+            android:layout_marginBottom="25dp"/>
+
+
+
+
+    <EditText
+        android:id="@+id/createUserName"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/hint_userName"
+        android:layout_marginBottom="25dp"/>
+
+    <EditText
+        android:id="@+id/createMdp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/hint_mdp"
+        android:layout_marginBottom="25dp"
+        android:inputType="textPassword"/>
+
+
+    <EditText
+        android:id="@+id/createConfirmMdp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/hint_mdpConfirm"
+        android:layout_marginBottom="25dp"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/suivant1"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="64dp"
+        android:text="@string/action_sign_in1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signInString"
+        android:layout_gravity="center"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:layout_marginBottom="5dp"
+        />
 
 
     <TextView
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signInString"
+        android:text="@string/stringConnect"
         android:layout_gravity="center"
         android:textStyle="normal"
-        android:textSize="20dp"/>
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        />
+
 
 
 
