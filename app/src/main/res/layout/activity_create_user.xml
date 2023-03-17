@@ -22,14 +22,14 @@
         android:id="@+id/createPrenom"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Prénom"
+        android:hint="@string/hint_prenom"
         android:layout_marginBottom="25dp"/>
 
         <EditText
             android:id="@+id/createNom"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Nom"
+            android:hint="@string/hint_nom"
             android:layout_marginBottom="25dp"/>
 
 
@@ -39,23 +39,25 @@
         android:id="@+id/createUserName"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Nom d'utilisateur"
+        android:hint="@string/hint_userName"
         android:layout_marginBottom="25dp"/>
 
     <EditText
         android:id="@+id/createMdp"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Mot de passe"
-        android:layout_marginBottom="25dp"/>
+        android:hint="@string/hint_mdp"
+        android:layout_marginBottom="25dp"
+        android:inputType="textPassword"/>
 
 
     <EditText
         android:id="@+id/createConfirmMdp"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Confirmer votre mot de passe"
-        android:layout_marginBottom="25dp"/>
+        android:hint="@string/hint_mdpConfirm"
+        android:layout_marginBottom="25dp"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/suivant1"

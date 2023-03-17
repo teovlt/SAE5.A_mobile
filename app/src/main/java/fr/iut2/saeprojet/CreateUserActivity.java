@@ -1,5 +1,6 @@
 package fr.iut2.saeprojet;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -23,10 +24,10 @@ public class CreateUserActivity extends StageAppActivity{
 
 
 
-    EditText nom;
-    EditText prenom;
-    EditText userName;
-    EditText mdp;
+    EditText nomView;
+    EditText prenomView;
+    EditText userNameView;
+    EditText mdpView;
     EditText mdpConfirm;
     TextView signIn;
     Button suivant;
@@ -37,11 +38,11 @@ public class CreateUserActivity extends StageAppActivity{
         setContentView(R.layout.activity_create_user);
 
         suivant = findViewById(R.id.suivant1);
-        nom = findViewById(R.id.createNom);
-        prenom = findViewById(R.id.createPrenom);
+        nomView = findViewById(R.id.createNom);
+        prenomView = findViewById(R.id.createPrenom);
         signIn = findViewById(R.id.signIn);
-        userName = findViewById(R.id.createUserName);
-        mdp = findViewById(R.id.createMdp);
+        userNameView = findViewById(R.id.createUserName);
+        mdpView = findViewById(R.id.createMdp);
         mdpConfirm = findViewById(R.id.createConfirmMdp);
 
 
@@ -50,27 +51,31 @@ public class CreateUserActivity extends StageAppActivity{
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (prenom.getText().toString().isEmpty() || nom.getText().toString().isEmpty() || userName.getText().toString().isEmpty()
-                        || mdp.getText().toString().isEmpty() || mdpConfirm.getText().toString().isEmpty() ){
+                if (prenomView.getText().toString().isEmpty() || nomView.getText().toString().isEmpty() || userNameView.getText().toString().isEmpty()
+                        || mdpView.getText().toString().isEmpty() || mdpConfirm.getText().toString().isEmpty() ){
 
 
                         Toast.makeText(CreateUserActivity.this, "Vous devez complétez tous les champs", Toast.LENGTH_SHORT).show();
                 }else {
 
 
-                    System.out.println(mdp.getText().toString());
+                    System.out.println(mdpView.getText().toString());
                     System.out.println(mdpConfirm.getText().toString());
-                    if (!mdp.getText().toString().equals(mdpConfirm.getText().toString())) {
-                        Toast.makeText(CreateUserActivity.this, "Votre mot de passe n'est pas le même dans les deux champs", Toast.LENGTH_SHORT).show();
+                    if (!mdpView.getText().toString().equals(mdpConfirm.getText().toString())) {
+                        Toast.makeText(CreateUserActivity.this, "Vos mots de passe ne correspondent pas", Toast.LENGTH_SHORT).show();
 
                     } else {
+                        String prenom = prenomView.getText().toString();
+                        String nom = nomView.getText().toString();
+                        String userName = userNameView.getText().toString();
+                        String mdp = mdpView.getText().toString();
 
                         Intent a = new Intent(CreateUserActivity.this, CreateUserActivity2.class);
-                        a.putExtra("prenom",prenom.getText());
-                        a.putExtra("nom",nom.getText());
-                        a.putExtra("userName",userName.getText());
-                        a.putExtra("mdp",mdp.getText());
-                        a.putExtra("mdpConfirm",mdpConfirm.getText());
+                        a.putExtra(CreateUserActivity2.PRENOM_KEY,prenom);
+                        a.putExtra(CreateUserActivity2.NOM_KEY,nom);
+                        a.putExtra(CreateUserActivity2.USERNAME_KEY,userName);
+                        a.putExtra(CreateUserActivity2.MDP_KEY,mdp);
+
                         startActivity(a);
                 }
 

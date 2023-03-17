@@ -33,6 +33,15 @@
     <string name="signUpString2">Créez votre compte</string>
     <string name="stringConnect">Connectez vous !</string>
     <string name="stringSignIn">Connexion</string>
+    <string name="hint_prenom">Prénom</string>
+    <string name="hint_nom">Nom</string>
+    <string name="hint_userName">Nom d\'utilisateur</string>
+    <string name="hint_mdp">Mot de passe</string>
+    <string name="hint_mdpConfirm">Confirmer votre mot de passe</string>
+    <string name="create2_Cmon">Allez courage, vous y êtes presque !</string>
+    <string name="hint_email">E-mail universitaire</string>
+    <string name="hint_INE">Numéro INE</string>
+    <string name="hint_parcours">Selectionnez votre parcours :</string>
 
     <string-array name="etats_candidatures">
         <item>Candidature à envoyer</item>

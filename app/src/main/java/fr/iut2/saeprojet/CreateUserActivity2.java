@@ -15,11 +15,19 @@ import java.util.ArrayList;
 
 public class CreateUserActivity2 extends StageAppActivity{
 
+    public static final String
+            PRENOM_KEY = "prenom_key";
+
+
+
+
+    public static final String NOM_KEY = "nom_key" ;
+    public static String USERNAME_KEY = "userName_key" ;
+   public static String MDP_KEY = "mdp_key" ;
 
 
     EditText email;
     EditText numINE;
-
 
 
     Spinner parcours;
@@ -43,6 +51,16 @@ public class CreateUserActivity2 extends StageAppActivity{
         createAcc = findViewById(R.id.createAccount);
         email =  findViewById(R.id.createEmail);
         numINE =  findViewById(R.id.createNumINE);
+       // String nom = getIntent().getStringExtra(NOM_KEY);
+       // String userName = getIntent().getStringExtra(USERNAME_KEY);
+        //String mdp = getIntent().getStringExtra(MDP_KEY);
+        String prenom = getIntent().getStringExtra(PRENOM_KEY);
+        String nom = getIntent().getStringExtra(NOM_KEY);
+        String userName = getIntent().getStringExtra(USERNAME_KEY);
+        String mdp = getIntent().getStringExtra(MDP_KEY);
+
+
+
 
 
 
@@ -54,53 +72,32 @@ public class CreateUserActivity2 extends StageAppActivity{
 
 
         createAcc.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View view) {
                 if (email.getText().toString().isEmpty() || numINE.getText().toString().isEmpty() ){
                     Toast.makeText(CreateUserActivity2.this, "Vous devez complétez tous les champs", Toast.LENGTH_SHORT).show();
                 }else{
-                    //creation de compte mon gars
+                    //createAccount();
+                    // Toast.makeText(CreateUserActivity2.this, "Nom complet :  "+ prenom + " "+nom , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CreateUserActivity2.this, "Nom d'utilisateur : "+userName , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CreateUserActivity2.this, "Mot de passe :  "+ mdp, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CreateUserActivity2.this, "Adresse email :  "+ email.getText().toString() , Toast.LENGTH_SHORT).show();
+
                 }
             }
+
+
+
         });
-
-
-          /*
-
-        private void createAccount() {
-
-            String login = usernameView.getText().toString();
-            String password = passwordView.getText().toString();
-
-            Auth auth = new Auth(login, password);
-
-            Call<LoginResponse> call = apiInterface.login(auth);
-            call.enqueue(new Callback<LoginResponse>() {
-                @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
-                    if (response.isSuccessful()) {
-                        setAuthData(login, response.body().token);
-                        getInformationEtudiant(login);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Nom incorrect", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, "Impossible de se connecter au serveur", Toast.LENGTH_SHORT).show();
-                    call.cancel();
-                    Log.e("TAG",t.getMessage());
-                }
-            });
-        }
-
-
-        */
-
 
 
 
     }
+
+
+
+
 }
