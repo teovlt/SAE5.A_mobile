@@ -27,7 +27,7 @@ public class APIClient {
     //https://square.github.io/retrofit/?utm_source=developer.android.com&utm_medium=referral
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
-    private static final String BASE_URL = "http://192.168.141.210:8000/";
+    private static final String BASE_URL = "http://192.168.141.113:8000/";
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -59,18 +59,17 @@ public class APIClient {
         Call<CompteEtudiant> call = apiInterface.doUpdateCompteEtudiant(getBearer(activity),id, compteEtudiantRequest);
         APIClient.<CompteEtudiant>doCall(call, cllbck);
     }
-    public static void getOffres(StageAppActivity activity, ResultatAppel<OffresResponse> cllbck) {
-        APIService apiInterface = activity.getApiInterface();
-
-        Call<OffresResponse> call = apiInterface.doGetOffres(getBearer(activity));
-        APIClient.<OffresResponse>doCall(call, cllbck);
-    }
-
     public static void getOffre(StageAppActivity activity, long id, ResultatAppel<Offre> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Offre> call = apiInterface.doGetOffre(getBearer(activity), id);
         APIClient.<Offre>doCall(call, cllbck);
+    }
+    public static void getOffres(StageAppActivity activity, ResultatAppel<OffresResponse> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<OffresResponse> call = apiInterface.doGetOffres(getBearer(activity));
+        APIClient.<OffresResponse>doCall(call, cllbck);
     }
     public static void getCandidatures(StageAppActivity activity, ResultatAppel<CandidaturesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
@@ -161,7 +160,4 @@ public class APIClient {
             }
         });
     }
-
-
-
 }
