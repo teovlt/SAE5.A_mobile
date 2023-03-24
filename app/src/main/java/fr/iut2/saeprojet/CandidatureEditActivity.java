@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,7 +54,7 @@ public class CandidatureEditActivity extends StageAppActivity {
 
     private Button abandonView;
     private Spinner etatsCandidatureView;
-    private EditText dateActionView;
+    private DatePicker dateActionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class CandidatureEditActivity extends StageAppActivity {
         validerView = findViewById(R.id.valider);
         abandonView = findViewById(R.id.abandonCandidature);
         etatsCandidatureView = findViewById(R.id.etatsCandidature);
-        dateActionView = findViewById(R.id.dateAction);
+        dateActionView = findViewById(R.id.datePicker);
 
         //
         retourCandidaturesView.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +136,7 @@ public class CandidatureEditActivity extends StageAppActivity {
                     }
                 }
 
-                dateActionView.setText(candidature.dateAction);
+                //dateActionView.setText(candidature.dateAction);
             }
 
             @Override

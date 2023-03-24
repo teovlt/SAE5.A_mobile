@@ -51,7 +51,7 @@ public class CandidatureActivity extends StageAppActivity {
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
         intituleView = findViewById(R.id.intitule);
         etatView = findViewById(R.id.etat);
-        dateActionView = findViewById(R.id.datePicker);
+        dateActionView = findViewById(R.id.dateAction);
         mettreAJourView = findViewById(R.id.mettreajour);
 
         //
