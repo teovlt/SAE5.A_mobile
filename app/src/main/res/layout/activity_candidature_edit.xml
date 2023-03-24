@@ -53,13 +53,13 @@
         android:textColor="@color/black"
         android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/dateAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="dd/mm/yyyy hh:mm"
-        android:paddingTop="20dp"
-        android:textSize="20sp"/>
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="136dp"
+        android:layout_gravity="center"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
 
     <RelativeLayout
         android:layout_width="match_parent"
