@@ -5,7 +5,8 @@
     tools:context=".CreateUserActivity2"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="45dp">
+    android:layout_margin="45dp"
+    >
 
 
     <TextView

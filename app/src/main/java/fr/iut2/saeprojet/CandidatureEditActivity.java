@@ -145,7 +145,6 @@ public class CandidatureEditActivity extends StageAppActivity {
         });
      }
 
-
     private void updateCandidature() {
         CandidatureRequest candidatureReq = new CandidatureRequest();
         candidatureReq.compteEtudiant = getCompte_Id();
