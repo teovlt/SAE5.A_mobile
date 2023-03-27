@@ -28,7 +28,7 @@ public class APIClient {
     //https://square.github.io/retrofit/?utm_source=developer.android.com&utm_medium=referral
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
-    private static final String BASE_URL = "http://192.168.141.204:8000/";
+    private static final String BASE_URL = "http://192.168.39.41:8000/";
 
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -55,23 +55,11 @@ public class APIClient {
         Call<Etudiant> call = apiInterface.doGetEtudiant(getBearer(activity), id);
         APIClient.<Etudiant>doCall(call, cllbck);
     }
-    public static void createCompteEtudiant(StageAppActivity activity, CompteEtudiantRequest req, ResultatAppel<CompteEtudiant> cllbck) {
-        APIService apiInterface = activity.getApiInterface();
-        Call<CompteEtudiant> call = apiInterface.doCreateCompteEtudiant(getBearer(activity), req);
-        APIClient.<CompteEtudiant>doCall(call, cllbck);
-    }
     public static void updateCompteEtudiant(StageAppActivity activity, long id, CompteEtudiantRequest compteEtudiantRequest, ResultatAppel<CompteEtudiant> cllbck){
         APIService apiInterface = activity.getApiInterface();
 
         Call<CompteEtudiant> call = apiInterface.doUpdateCompteEtudiant(getBearer(activity),id, compteEtudiantRequest);
         APIClient.<CompteEtudiant>doCall(call, cllbck);
-    }
-
-    public static void createEtudiant(StageAppActivity activity, EtudiantRequest etudiantRequest, ResultatAppel<Etudiant> cllbck){
-        APIService apiInterface = activity.getApiInterface();
-
-        Call<Etudiant> call = apiInterface.doCreateEtudiant(getBearer(activity), etudiantRequest);
-        APIClient.<Etudiant>doCall(call, cllbck);
     }
 
     public static void getOffre(StageAppActivity activity, long id, ResultatAppel<Offre> cllbck) {

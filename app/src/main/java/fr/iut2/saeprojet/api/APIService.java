@@ -48,15 +48,11 @@ public interface APIService {
     Call<CompteEtudiant> doGetCompteEtudiant(@Header("Authorization") String token, @Path("id") long id);
     @PUT("/api/compte_etudiants/{id}")
     Call<CompteEtudiant> doUpdateCompteEtudiant(@Header("Authorization") String token, @Path("id") long id, @Body CompteEtudiantRequest compteEtudiantRequest);
-    @POST("/api/compte_etudiants")
-    Call<CompteEtudiant> doCreateCompteEtudiant(@Header("Authorization") String token, @Body CompteEtudiantRequest compteEtudiantRequest);
     //Etudiants
     @GET("/api/etudiants")
     Call<EtudiantsResponse> doGetEtudiants(@Header("Authorization") String token);
     @GET("/api/etudiants/{id}")
     Call<Etudiant> doGetEtudiant(@Header("Authorization") String token, @Path("id") long id);
-    @POST("/api/etudiants")
-    Call<Etudiant> doCreateEtudiant(@Header("Authorization") String token, @Body EtudiantRequest etudiantRequest);
     // Etat des recherches
     @GET("/api/etat_recherches")
     Call<EtatRecherchesResponse> doGetEtatRecherches(@Header("Authorization") String token);

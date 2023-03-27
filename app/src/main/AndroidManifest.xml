@@ -17,13 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
-            android:name=".CreateUserActivity"
-            android:exported="false" />
-        <activity
             android:name=".OffreActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateUserActivity2"
             android:exported="false" />
         <activity
             android:name=".CandidatureEditActivity"
