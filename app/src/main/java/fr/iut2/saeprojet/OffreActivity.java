@@ -32,6 +32,7 @@ import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.Offre;
 
 public class OffreActivity extends StageAppActivity {
+    public static final String OFFRE_KEY = "offre_key";
     private TextView retour;
     private Button candidater;
     private TextView intituleOffre;
@@ -60,7 +61,7 @@ public class OffreActivity extends StageAppActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            offre = getIntent().getParcelableExtra("offre");
+            offre = getIntent().getParcelableExtra(OFFRE_KEY);
             refreshOffre();
         }
 

@@ -154,7 +154,6 @@ public class CreateUserActivity2 extends StageAppActivity{
 
             @Override
             public void traiterErreur() {
-
             }
         });
 
