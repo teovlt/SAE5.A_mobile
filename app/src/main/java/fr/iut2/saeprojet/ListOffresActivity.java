@@ -20,6 +20,7 @@ import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
+import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
 import retrofit2.Call;
@@ -128,4 +129,5 @@ public class ListOffresActivity extends StageAppActivity {
             }
         });
     }
+
 }

@@ -14,6 +14,8 @@ import java.util.List;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
+import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.Offre;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,12 +55,13 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
 
         // Récupération des objets graphiques dans le template
         TextView intituleView = (TextView) rowView.findViewById(R.id.intitule);
-        refreshMesInformations(offre, intituleView);
+        TextView entrepriseView = (TextView) rowView.findViewById(R.id.entreprise);
+        refreshMesInformations(offre, intituleView,entrepriseView);
 
         return rowView;
     }
 
-    private void refreshMesInformations(Offre offre, TextView intituleView) {
+    private void refreshMesInformations(Offre offre, TextView intituleView,TextView entrepriseView) {
 
         //
         SharedPreferences sharedPref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -69,14 +72,24 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
         call.enqueue(new Callback<Offre>() {
             @Override
             public void onResponse(Call<Offre> call, Response<Offre> response) {
-                String intitule = response.body().intitule;
-
-                if (intitule.length() >= 45) {
-                    intitule = intitule.substring(0, 42) + " ...";
+                Offre offre = response.body();
+                String intitule = offre.intitule;
+                if (intitule.length() >= 38) {
+                    intitule = intitule.substring(0, 35) + " ...";
 
                 }
-
                 intituleView.setText(intitule);
+                APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
+                    @Override
+                    public void traiterResultat(Entreprise response) {
+                        entrepriseView.setText(response.raisonSociale);
+                    }
+
+                    @Override
+                    public void traiterErreur() {
+
+                    }
+                });
             }
 
             @Override

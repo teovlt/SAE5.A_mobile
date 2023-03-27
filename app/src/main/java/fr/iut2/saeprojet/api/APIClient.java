@@ -8,12 +8,12 @@ import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.CompteEtudiantRequest;
+import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.EtatCandidaturesResponse;
 import fr.iut2.saeprojet.entity.EtatOffresResponse;
 import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.Etudiant;
-import fr.iut2.saeprojet.entity.EtudiantRequest;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
 import okhttp3.OkHttpClient;
@@ -107,7 +107,12 @@ public class APIClient {
         Call<Candidature> call = apiInterface.doRemoveCandidature(getBearer(activity), id);
         APIClient.<Candidature>doCall(call, cllbck);
     }
+    public static void getEntreprise(StageAppActivity activity, long id, ResultatAppel<Entreprise> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
 
+        Call<Entreprise> call = apiInterface.doGetEntreprise(getBearer(activity),id);
+        APIClient.<Entreprise>doCall(call, cllbck);
+    }
     public static void getEntreprises(StageAppActivity activity, ResultatAppel<EntreprisesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
@@ -137,9 +142,11 @@ public class APIClient {
     }
 
     public static long getCandidatureId(String _id) {
-        return Long.valueOf(_id.replaceFirst("^/api/candidatures/", ""));
+        return Long.parseLong(_id.replaceFirst("^/api/candidatures/", ""));
     }
-
+    public static long getEntrepriseId(String _id) {
+        return Long.parseLong(_id.replaceFirst("^/api/entreprises/", ""));
+    }
     private static String getBearer(StageAppActivity activity) {
         return "Bearer " + activity.getToken();
     }
