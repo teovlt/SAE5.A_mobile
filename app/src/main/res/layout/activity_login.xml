@@ -64,28 +64,5 @@
         />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/firstTimeText"
-        android:layout_gravity="center"
-        android:textStyle="normal"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:layout_marginBottom="5dp"
-        android:textColor="@color/black"
-        />
-
-    <TextView
-        android:id="@+id/createAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signUpString"
-        android:layout_gravity="center"
-        android:textStyle="normal"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-/>
     </LinearLayout>
 </LinearLayout>

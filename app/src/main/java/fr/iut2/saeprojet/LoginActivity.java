@@ -1,8 +1,6 @@
 package fr.iut2.saeprojet;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,15 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
 import fr.iut2.saeprojet.api.APIClient;
-import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Auth;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
@@ -32,7 +27,6 @@ import fr.iut2.saeprojet.entity.EtatOffresResponse;
 import fr.iut2.saeprojet.entity.EtatRecherche;
 import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.LoginResponse;
-import fr.iut2.saeprojet.CreateUserActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +38,6 @@ public class LoginActivity extends StageAppActivity {
     private EditText passwordView;
     private Button loginView;
 
-    private TextView createAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +48,12 @@ public class LoginActivity extends StageAppActivity {
         usernameView = findViewById(R.id.username);
         passwordView = findViewById(R.id.password);
         loginView = findViewById(R.id.login);
-        createAccount = findViewById(R.id.createAccount);
 
         //
         loginView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 login();
-            }
-        });
-
-
-
-        createAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, CreateUserActivity.class);
-                startActivity(i);
             }
         });
 
