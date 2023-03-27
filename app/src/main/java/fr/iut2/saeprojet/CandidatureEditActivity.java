@@ -1,8 +1,10 @@
 package fr.iut2.saeprojet;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,12 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,19 +54,29 @@ public class CandidatureEditActivity extends StageAppActivity {
     private ArrayAdapter<EtatCandidatureEnum> adapter;
 
     // View
-    private TextView retourCandidaturesView;
+    private ImageButton retourCandidaturesView;
     private TextView intituleView;
-    private Button annulerView;
     private Button validerView;
 
-    private Button abandonView;
+
     private Spinner etatsCandidatureView;
     private DatePicker dateActionView;
+
+
+    Calendar calendar = Calendar.getInstance();
+    int year = calendar.get(Calendar.YEAR);
+    int month = calendar.get(Calendar.MONTH);
+    int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+    private int currentYear, currentMonth, currentDay;
+    private String initialSpinnerValue, currentSpinnerValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_candidature_edit);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
 
         // Data
         candidature = getIntent().getParcelableExtra(CANDIDADURE_KEY);
@@ -68,27 +85,66 @@ public class CandidatureEditActivity extends StageAppActivity {
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
         intituleView = findViewById(R.id.intitule);
-        annulerView = findViewById(R.id.annuler);
         validerView = findViewById(R.id.valider);
-        abandonView = findViewById(R.id.abandonCandidature);
         etatsCandidatureView = findViewById(R.id.etatsCandidature);
         dateActionView = findViewById(R.id.datePicker);
+        dateActionView.setMinDate(calendar.getTimeInMillis());
+        dateActionView.init(year, month, dayOfMonth, null);
+        alertDialogBuilder.setTitle("Retour à la candidature");
+        alertDialogBuilder.setMessage("Voulez vous sauvegarder vos changements ?");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                updateCandidature();
+                Toast.makeText(CandidatureEditActivity.this,"Changements enregistrés",Toast.LENGTH_SHORT).show();
+                finish();
+
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(CandidatureEditActivity.this,"Changements non enregistrés",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        alertDialogBuilder.setNeutralButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
         //
         retourCandidaturesView.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
-                finish();
+
+                currentYear = dateActionView.getYear();
+                currentMonth = dateActionView.getMonth();
+                currentDay = dateActionView.getDayOfMonth();
+                currentSpinnerValue = etatsCandidatureView.getSelectedItem().toString();
+
+                if (year == currentYear && month == currentMonth && dayOfMonth == currentDay && initialSpinnerValue.equals(currentSpinnerValue)) {
+                    finish();
+                } else {
+                    alertDialog.show();
+                }
+
             }
         });
 
         //
-        annulerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
 
         //
         validerView.setOnClickListener(new View.OnClickListener() {
@@ -97,30 +153,21 @@ public class CandidatureEditActivity extends StageAppActivity {
 
                 //
                 updateCandidature();
-
+                finish();
             }
         });
 
-        abandonView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                //
-                deleteCandidature();
-
-            }
-        });
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         List<EtatCandidatureEnum> etats = Arrays.asList(EtatCandidatureEnum.values());
-        adapter = new ArrayAdapter<EtatCandidatureEnum>(this, android.R.layout.simple_spinner_item, etats);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, etats);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner
         etatsCandidatureView.setAdapter(adapter);
-
-        //
         refreshMesInformations(intituleView);
+        initialSpinnerValue = etatsCandidatureView.getSelectedItem().toString();
     }
 
     private void refreshMesInformations(TextView intituleView) {
@@ -136,7 +183,6 @@ public class CandidatureEditActivity extends StageAppActivity {
                     }
                 }
 
-                //dateActionView.setText(candidature.dateAction);
             }
 
             @Override
@@ -158,6 +204,7 @@ public class CandidatureEditActivity extends StageAppActivity {
             @Override
             public void traiterResultat(Candidature response) {
                 // Rien à faire
+
             }
 
             @Override
@@ -167,19 +214,8 @@ public class CandidatureEditActivity extends StageAppActivity {
         });
     }
 
-    private void deleteCandidature() {
-        APIClient.removeCandidature(this, APIClient.getCandidatureId(candidature._id), new ResultatAppel<Candidature>() {
-            @Override
-            public void traiterResultat(Candidature response) {
-                Intent intent = new Intent(CandidatureEditActivity.this, ListOffresActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
 
-            @Override
-            public void traiterErreur() {
 
-            }
-        });
-    }
+
+
 }

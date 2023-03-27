@@ -32,6 +32,7 @@ public class CandidatureActivity extends StageAppActivity {
     private Offre offre;
 
     // View
+    private Button abandonView;
     private TextView retourCandidaturesView;
     private TextView intituleView;
     private TextView etatView;
@@ -53,6 +54,8 @@ public class CandidatureActivity extends StageAppActivity {
         etatView = findViewById(R.id.etat);
         dateActionView = findViewById(R.id.dateAction);
         mettreAJourView = findViewById(R.id.mettreajour);
+        abandonView = findViewById(R.id.abandonCandidature);
+
 
         //
         retourCandidaturesView.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +78,19 @@ public class CandidatureActivity extends StageAppActivity {
 
         //
         refreshMesInformations(candidature, intituleView);
+
+
+        abandonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteCandidature();
+            }
+        });
     }
+
+
+
+
 
     private void refreshMesInformations(Candidature candidature, TextView intituleView) {
         //
@@ -95,4 +110,23 @@ public class CandidatureActivity extends StageAppActivity {
             }
         });
     }
+
+
+    private void deleteCandidature() {
+        APIClient.removeCandidature(this, APIClient.getCandidatureId(candidature._id), new ResultatAppel<Candidature>() {
+            @Override
+            public void traiterResultat(Candidature response) {
+                Intent intent = new Intent(CandidatureActivity.this, ListOffresActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+
+
 }
