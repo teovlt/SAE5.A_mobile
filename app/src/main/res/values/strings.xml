@@ -150,6 +150,7 @@
     <string name="precedent"><![CDATA[< Précédent]]></string>
     <string name="chevron"><![CDATA[>]]></string>
     <string name="NumpageSurnbPage">%1d / %2d</string>
+    <string name="liste_offres">Offres</string>
     <string name="save_update_offer">Sauvegarder</string>
     <string name="cancel_update_offer">Annuler</string>
 

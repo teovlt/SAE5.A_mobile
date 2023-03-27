@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.time.Instant;
@@ -33,7 +34,7 @@ import fr.iut2.saeprojet.entity.Offre;
 
 public class OffreActivity extends StageAppActivity {
     public static final String OFFRE_KEY = "offre_key";
-    private TextView retour;
+    private ImageButton retour;
     private Button candidater;
     private TextView intituleOffre;
     private TextView statutOffre;
@@ -51,7 +52,7 @@ public class OffreActivity extends StageAppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offre);
 
-        retour = findViewById(R.id.backOffres);
+        retour = findViewById(R.id.retourDeOffresAListeOffre);
         candidater = findViewById(R.id.buttonCandidature);
         intituleOffre = findViewById(R.id.titreOffre);
         statutOffre = findViewById(R.id.statutOffre);

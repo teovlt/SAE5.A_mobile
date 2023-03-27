@@ -8,12 +8,12 @@ import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.CompteEtudiantRequest;
-import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.EtatCandidaturesResponse;
 import fr.iut2.saeprojet.entity.EtatOffresResponse;
 import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.Etudiant;
+import fr.iut2.saeprojet.entity.EtudiantRequest;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
 import okhttp3.OkHttpClient;
@@ -28,7 +28,7 @@ public class APIClient {
     //https://square.github.io/retrofit/?utm_source=developer.android.com&utm_medium=referral
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
-    private static final String BASE_URL = "http://192.168.39.41:8000/";
+    private static final String BASE_URL = "http://192.168.141.202:8000/";
 
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);

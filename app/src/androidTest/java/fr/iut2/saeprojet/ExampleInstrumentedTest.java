@@ -23,4 +23,6 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("fr.iut2.saeprojet", appContext.getPackageName());
     }
+
+    
 }
