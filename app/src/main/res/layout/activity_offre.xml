@@ -40,32 +40,24 @@
         android:textColor="@color/white"/>
   </LinearLayout>
 
-  <!--<TextView
-      android:id="@+id/titreOffressss"
-      android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:text="Développeur X++"
-      android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-      android:textColor="@color/white" />-->
-
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_marginStart="10dp"
-      android:layout_marginTop="50dp"
+      android:layout_marginTop="70dp"
       android:layout_marginEnd="10dp"
       android:layout_height="wrap_content"
       android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bg_item_list"
+        android:background="@drawable/bg_item"
         >
 
       <TextView
           android:id="@+id/titreOffre"
-          android:layout_width="510dp"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:paddingStart="5dp"
@@ -74,32 +66,29 @@
           android:textColor="@color/black"
           android:textSize="@dimen/textSize_mid" />
 
-    </LinearLayout>
+      <ImageButton
+          android:id="@+id/developArrow"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:scaleType="fitCenter"
+          android:background="#00000000"
+          android:layout_gravity="top"
+          android:contentDescription="@string/bouton_retour" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+
+    </LinearLayout>
 
         <TextView
             android:id="@+id/statutOffre"
-            android:layout_width="510dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:text="Statut : "
             android:textColor="@color/black"
-            android:textSize="@dimen/textSize_normal"/>
+            android:textSize="@dimen/textSize_normal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
 
-      <Button
-          android:id="@+id/buttonCandidature"
-          android:layout_width="133dp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:text="Candidater" />
-    </LinearLayout>
+            />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -119,7 +108,7 @@
       <TextView
           android:id="@+id/nomEntreprise"
           android:layout_width="match_parent"
-          android:layout_height="42dp"
+          android:layout_height="match_parent"
           android:text="Non renseigné"
           android:textColor="@color/black"
           android:textSize="@dimen/textSize_mid"
@@ -146,7 +135,7 @@
       <TextView
           android:id="@+id/nomVille"
           android:layout_width="match_parent"
-          android:layout_height="42dp"
+          android:layout_height="match_parent"
           android:text="Non renseigné"
           android:textColor="@color/black"
           android:textSize="@dimen/textSize_mid"/>
@@ -155,7 +144,7 @@
 
     <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="50dp"
+      android:layout_height="42dp"
       android:orientation="horizontal"
       android:layout_marginTop="10dp">
 
@@ -171,13 +160,22 @@
       <TextView
           android:id="@+id/offreUrl"
           android:layout_width="match_parent"
-          android:layout_height="129dp"
+          android:layout_height="match_parent"
           android:autoLink="web"
           android:text="@string/offre_url"
-          android:textColor="@color/black"
+          android:textColor="?attr/colorPrimary"
           android:textSize="@dimen/textSize_mid"/>
 
     </LinearLayout>
+
+
+      <Button
+          android:id="@+id/buttonCandidature"
+          android:layout_width="150dp"
+          android:layout_height="wrap_content"
+          android:text="Candidater"
+          android:layout_gravity="center"
+          android:layout_marginTop="80dp"/>
 
 <!--
 

@@ -1,10 +1,14 @@
 package fr.iut2.saeprojet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +41,8 @@ public class OffreActivity extends StageAppActivity {
     private ImageButton retour;
     private Button candidater;
     private TextView intituleOffre;
+
+    private ImageButton developArrow;
     private TextView statutOffre;
     private TextView nomEntreprise;
     private TextView nomVille;
@@ -46,6 +52,8 @@ public class OffreActivity extends StageAppActivity {
     private Offre offre = null;
     private Entreprise entreprise = null;
     private Candidature candidature = null;
+
+    private int tailleTitre = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +67,41 @@ public class OffreActivity extends StageAppActivity {
         nomEntreprise = findViewById(R.id.nomEntreprise);
         nomVille = findViewById(R.id.nomVille);
         url = findViewById(R.id.offreUrl);
+        developArrow = findViewById(R.id.developArrow);
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             offre = getIntent().getParcelableExtra(OFFRE_KEY);
             refreshOffre();
         }
+
+        intituleOffre.setText(offre.intitule);
+        if (intituleOffre.length() >= 50) {
+            developArrow.setImageResource(R.drawable.arrow_down_24);
+            intituleOffre.setText(intituleOffre.getText().toString().substring(0, 50) + " ...");
+
+            View.OnClickListener onClick = new View.OnClickListener() {
+                boolean estDeveloppe = false;
+
+                @Override
+                public void onClick(View view) {
+                    if (!estDeveloppe){
+                        intituleOffre.setText(offre.intitule);
+                        estDeveloppe = true;
+                        developArrow.setImageResource(R.drawable.arrow_up_24);
+                    } else {
+                        intituleOffre.setText(intituleOffre.getText().toString().substring(0, 50) + " ...");
+                        estDeveloppe = false;
+                        developArrow.setImageResource(R.drawable.arrow_down_24);
+                    }
+                }
+            };
+
+            intituleOffre.setOnClickListener(onClick);
+            developArrow.setOnClickListener(onClick);
+        }
+
 
         candidater.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +127,20 @@ public class OffreActivity extends StageAppActivity {
     private void refreshOffre() {
         intituleOffre.setText(offre.intitule);
         if (offre.urlPieceJointe != null) {
-            url.setText(offre.urlPieceJointe);
+            url.setText("Lien vers l'offre");
+            //url.setText(offre.urlPieceJointe);
         } else {
             url.setText("Pas de descriptif");
         }
+
+        url.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(offre.urlPieceJointe));
+                PackageManager packageManager = getPackageManager();
+                startActivity(intent);
+            }
+        });
 
         // Statut de l'offre
         statutOffre.setText(statutOffre.getText() + getEnumValue(offre.etatOffre));
