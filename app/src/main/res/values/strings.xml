@@ -2,7 +2,7 @@
     <string name="app_name">SaeProjet</string>
     <string name="title_activity_login">Login</string>
     <string name="prompt_login">Login</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in1">Suivant</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
@@ -32,7 +32,7 @@
     <string name="bouton_retour">bouton retour</string>
     <string name="signInString">Vous posséder déja un compte ?</string>
     <string name="firstTimeText">Première fois ici ? </string>
-    <string name="signUpString">Créez votre propre compte</string>
+    <string name="signUpString">Créez votre compte</string>
     <string name="signUpString2">Créez votre compte</string>
     <string name="stringConnect">Connectez vous !</string>
     <string name="stringSignIn">Connexion</string>

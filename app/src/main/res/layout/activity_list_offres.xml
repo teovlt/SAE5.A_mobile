@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/layout_titre"
         android:layout_width="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="20dp"
         android:paddingStart="5dp"
         android:layout_height="wrap_content"
@@ -39,168 +39,16 @@
             android:textColor="@color/white"/>
     </LinearLayout>
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/offres_list"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_item_list">
-
-            <TextView
-                android:id="@+id/offre1"
-                android:layout_width="510dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="Offre 1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textSize_mid" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="0dp"
-                android:paddingEnd="5dp"
-                android:text="@string/chevron"
-                android:textAlignment="textEnd"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textSize_mid" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_item_list"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/offre2"
-                android:layout_width="510dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="Offre 2"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textSize_mid" />
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="0dp"
-                android:paddingEnd="5dp"
-                android:text="@string/chevron"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="@dimen/textSize_mid" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_item_list"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/offre3"
-                android:layout_width="510dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="Offre 3"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textSize_mid" />
-
-            <TextView
-                android:id="@+id/textView27"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="0dp"
-                android:paddingEnd="5dp"
-                android:text="@string/chevron"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="@dimen/textSize_mid" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_item_list"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/offre4"
-                android:layout_width="510dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="Offre 4"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textSize_mid" />
-
-            <TextView
-                android:id="@+id/textView29"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="0dp"
-                android:paddingEnd="5dp"
-                android:text="@string/chevron"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="@dimen/textSize_mid" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_item_list"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/offre5"
-                android:layout_width="510dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="Offre 5"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textSize_mid" />
-
-            <TextView
-                android:id="@+id/textView31"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="0dp"
-                android:paddingEnd="5dp"
-                android:text="@string/chevron"
-                android:textAlignment="textEnd"
-                android:textColor="#000000"
-                android:textSize="@dimen/textSize_mid" />
-        </LinearLayout>
+        android:orientation="vertical"
+        android:divider="@null"
+        android:dividerHeight="15dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -233,5 +81,5 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+
 </LinearLayout>
