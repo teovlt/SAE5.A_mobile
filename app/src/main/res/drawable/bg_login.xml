@@ -4,6 +4,8 @@
     android:viewportWidth="1440"
     android:viewportHeight="3120">
   <path
+      android:pathData="M0,0h1440v3120h-1440z" />
+  <path
       android:pathData="M0,0h1440v3120h-1440z"
       android:fillColor="#FFFFFF"
       android:fillType="nonZero" />
@@ -12,32 +14,27 @@
       android:fillColor="#8A58FF"
       android:fillType="nonZero" />
   <path
-      android:pathData="M1081.7,673.4m-264.1,0a224,262.1 90,1 1,524.3 0a224,262.1 90,1 1,-524.3 0"
+      android:pathData="M1065.1,655.2m-265,0a224,265 90,1 1,539.9 0a224,265 90,1 1,-529.9 0"
       android:fillColor="#8A58FF"
-      android:fillType="nonZero"
-/>
+      android:fillType="nonZero" />
   <path
       android:pathData="M-37.9,-84.4l1642.2,0l0,851.2l-1642.2,0z"
       android:fillColor="#7033FF"
-      android:fillType="nonZero"
-/>
+      android:fillType="nonZero" />
   <path
-      android:pathData="M581.8,823.4m-263.6,0a263.6,155.4 0,1 1,527.1 0a263.6,155.4 0,1 1,-527.1 0"
+      android:pathData="M583.4,823.4m-267.4,0a155.4,267.4 90,1 1,534.8 0a155.4,267.4 90,1 1,-534.8 0"
       android:fillColor="#FFFFFF"
-      android:fillType="nonZero"
-/>
+      android:fillType="nonZero" />
   <path
-      android:pathData="M1559.2,838.8m-265.6,0a171.5,265.6 90,1 1,531.3 0a171.5,265.6 90,1 1,-531.3 0"
+      android:pathData="M86.8,720m-260.4,0a259.4,155.8 0,1 1,518.7 0a259.4,155.8 0,1 1,-518.7 0"
+      android:fillColor="#7033FF"
+      android:fillType="nonZero" />
+  <path
+      android:pathData="M1072.8,697.7m-267.4,0a155.8,267.4 90,1 1,534.8 0a155.8,267.4 90,1 1,-534.8 0"
+      android:fillColor="#7033FF"
+      android:fillType="nonZero" />
+  <path
+      android:pathData="M1552.6,845.3m-275.8,0a171.5,275.8 90,1 1,551.6 0a171.5,275.8 90,1 1,-551.6 0"
       android:fillColor="#FFFFFF"
-      android:fillType="nonZero"
-/>
-  <path
-      android:pathData="M86.8,715m-259.4,0a259.4,155.8 0,1 1,518.7 0a259.4,155.8 0,1 1,-518.7 0"
-      android:fillColor="#7033FF"
-      android:fillType="nonZero"
-/>
-  <path
-      android:pathData="M1072.1,699m-266.4,0a153.3,266.4 90,1 1,532.7 0a153.3,266.4 90,1 1,-532.7 0"
-      android:fillColor="#7033FF"
       android:fillType="nonZero" />
 </vector>
