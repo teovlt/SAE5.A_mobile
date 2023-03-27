@@ -63,7 +63,6 @@ public class ListOffresActivity extends StageAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_offres);
-        this.setTitle(R.string.title_activity_liste_offres);
 
         // Init view
         offres[0] = findViewById(R.id.offre1);

@@ -120,8 +120,7 @@ public class LoginActivity extends StageAppActivity {
         req.offreConsultees = compteEtudiant.offreConsultees;
         req.offreRetenues = compteEtudiant.offreRetenues;
         req.candidatures = compteEtudiant.candidatures;
-        req.userIdentifier = compteEtudiant.userIdentifier;
-        req.username = compteEtudiant.username;
+
         APIClient.updateCompteEtudiant(this,compteEtudiant.id, req, new ResultatAppel<CompteEtudiant>(){
 
             @Override

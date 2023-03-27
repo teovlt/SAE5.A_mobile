@@ -97,8 +97,4 @@ public class CompteEtudiant implements Parcelable {
         parcel.writeString(userIdentifier);
         parcel.writeString(username);
     }
-
-    public void setDerniereConnexion(@Nullable String derniereConnexion) {
-        this.derniereConnexion = derniereConnexion;
-    }
 }

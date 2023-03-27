@@ -27,8 +27,5 @@ public class CompteEtudiantRequest {
     public List<String> offreRetenues;
     @SerializedName("candidatures")
     public List<String> candidatures;
-    @SerializedName("userIdentifier")
-    public String userIdentifier;
-    @SerializedName("username")
-    public String username;
+
 }

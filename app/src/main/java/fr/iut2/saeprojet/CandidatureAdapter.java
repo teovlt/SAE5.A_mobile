@@ -77,8 +77,10 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
             @Override
             public void onResponse(Call<Offre> call, Response<Offre> response) {
                 String intitule = response.body().intitule;
-                if (intitule.length() > 10) {
-                    intitule = response.body().intitule.substring(0, 9) + "...";
+
+                if (intitule.length() >= 32) {
+                    intitule = intitule.substring(0, 28) + " ...";
+
                 }
 
                 intituleView.setText(intitule);

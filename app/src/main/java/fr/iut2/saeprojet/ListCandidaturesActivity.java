@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,11 +28,13 @@ import retrofit2.Response;
 
 public class ListCandidaturesActivity extends StageAppActivity {
     // View
-    private TextView retour;
-    private ListView candidaturesView;
-
+    private ImageButton retour;
+    private ListView candidaturesRefuseesView;
+    private ListView candidaturesEnCoursView;
+    private TextView nbcandidatures;
     // data
-    private CandidatureAdapter adapter;
+    private CandidatureAdapter adapterCandidatureRefusees;
+    private CandidatureAdapter adapterCandidatureEnCours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,17 @@ public class ListCandidaturesActivity extends StageAppActivity {
         setContentView(R.layout.activity_list_candidatures);
 
         // Init view
-        retour = findViewById(R.id.retourSynthese);
-        candidaturesView = findViewById(R.id.candidatures);
-
-        // Lier l'adapter au listView
-        adapter = new CandidatureAdapter(this, new ArrayList<Candidature>());
-        candidaturesView.setAdapter(adapter);
-
+        retour = findViewById(R.id.retourDeListeCandidaturesAMain);
+        candidaturesRefuseesView = findViewById(R.id.candidatures_refusees_list);
+        candidaturesEnCoursView = findViewById(R.id.candidatures_en_cours_list);
+        nbcandidatures = findViewById(R.id.nbcandidatures_list);
+        // Lier les adapter aux listView
+        //Candidatures refusées
+        adapterCandidatureRefusees = new CandidatureAdapter(this, new ArrayList<Candidature>());
+        candidaturesRefuseesView.setAdapter(adapterCandidatureRefusees);
+        //Candidatures en cours
+        adapterCandidatureEnCours = new CandidatureAdapter(this, new ArrayList<Candidature>());
+        candidaturesEnCoursView.setAdapter(adapterCandidatureEnCours);
         //
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +61,12 @@ public class ListCandidaturesActivity extends StageAppActivity {
             }
         });
 
-        candidaturesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        candidaturesRefuseesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // Récupération de la tâche cliquée à l'aide de l'adapter
-                Candidature candidature = adapter.getItem(position);
+                Candidature candidature = adapterCandidatureRefusees.getItem(position);
 
                 //
                 Intent intent = new Intent(ListCandidaturesActivity.this, CandidatureActivity.class);
@@ -67,7 +74,19 @@ public class ListCandidaturesActivity extends StageAppActivity {
                 startActivity(intent);
             }
         });
+        candidaturesEnCoursView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                // Récupération de la tâche cliquée à l'aide de l'adapter
+                Candidature candidature = adapterCandidatureEnCours.getItem(position);
+
+                //
+                Intent intent = new Intent(ListCandidaturesActivity.this, CandidatureActivity.class);
+                intent.putExtra(CandidatureActivity.CANDIDADURE_KEY, candidature);
+                startActivity(intent);
+            }
+        });
         //
         refreshMesInformations();
     }
@@ -76,12 +95,25 @@ public class ListCandidaturesActivity extends StageAppActivity {
         APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
             public void traiterResultat(CandidaturesResponse candidatures) {
-                // Mettre à jour l'adapter avec la liste de taches
-                adapter.clear();
-                adapter.addAll(candidatures.candidatures);
+                // Mettre à jour les adapter avec la liste des candidatures
+                nbcandidatures.setText(getResources().getString(R.string.candidatures,candidatures.candidatures.size()));
 
-                // Now, notify the adapter of the change in source
-                adapter.notifyDataSetChanged();
+                adapterCandidatureRefusees.clear();
+                adapterCandidatureEnCours.clear();
+
+                for (Candidature c:
+                candidatures.candidatures) {
+                    if(c.etatCandidature.equals("/api/etat_candidatures/3")){
+                        adapterCandidatureRefusees.add(c);
+
+                    }else{
+                        adapterCandidatureEnCours.add(c);
+
+                    }
+                }
+                adapterCandidatureRefusees.notifyDataSetChanged();
+                adapterCandidatureEnCours.notifyDataSetChanged();
+
             }
 
             @Override
