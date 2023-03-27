@@ -71,8 +71,8 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
             public void onResponse(Call<Offre> call, Response<Offre> response) {
                 String intitule = response.body().intitule;
 
-                if (intitule.length() >= 32) {
-                    intitule = intitule.substring(0, 28) + " ...";
+                if (intitule.length() >= 45) {
+                    intitule = intitule.substring(0, 42) + " ...";
 
                 }
 

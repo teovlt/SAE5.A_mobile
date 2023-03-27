@@ -21,13 +21,14 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:layout_marginTop="20sp"
         />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:layout_marginBottom="25dp"
         android:hint="@string/prompt_login"
         android:inputType="text"

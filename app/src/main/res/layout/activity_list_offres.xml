@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/layout_titre"
         android:layout_width="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="20dp"
         android:paddingStart="5dp"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
         android:divider="@null"
-        android:dividerHeight="15dp"/>
+        android:dividerHeight="15dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
