@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_list_offres">
     <LinearLayout
         android:id="@+id/layout_titre"
         android:layout_width="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/retourDeListeCandidaturesAMain"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/retour"
+            android:src="@drawable/left_arrow"
             android:scaleType="fitCenter"
             android:background="#00000000"
             android:contentDescription="@string/bouton_retour" />
@@ -25,7 +26,9 @@
             android:text="@string/candidatures"
             android:layout_marginTop="4dp"
             android:layout_marginStart="10dp"
-            android:textSize="@dimen/textSize_title"/>
+            android:textSize="@dimen/textSize_title"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 
@@ -33,13 +36,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Candidatures en cours"
-        android:paddingTop="10dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:textColor="@color/white"/>
     <ListView
         android:id="@+id/candidatures_en_cours_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:divider="@null"
+        android:dividerHeight="15dp"
+        android:layout_marginTop="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,6 +57,8 @@
         android:id="@+id/candidatures_refusees_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:divider="@null"
+        android:dividerHeight="15dp"/>
 
 </LinearLayout>

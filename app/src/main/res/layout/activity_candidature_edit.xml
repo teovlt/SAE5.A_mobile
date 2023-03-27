@@ -20,7 +20,7 @@
             android:background="#00000000"
             android:contentDescription="@string/bouton_retour"
             android:scaleType="fitCenter"
-            android:src="@drawable/arrow_left"
+            android:src="@drawable/left_arrow"
             android:layout_marginRight="68dp"
            />
 
