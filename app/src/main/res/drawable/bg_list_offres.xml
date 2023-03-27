@@ -13,17 +13,15 @@
     <aapt:attr name="android:fillColor">
       <gradient
           android:endX="100"
-          android:endY="10"
-          android:startX="320"
-          android:startY="480"
-          android:gradientRadius="100"
-          android:type="linear"
-          android:shape="oval">
+          android:endY="0"
+          android:startX="300"
+          android:startY="500"
+          android:type="linear">
         <item
             android:color="#7033FF"
             android:offset="0.0" />
         <item
-            android:color="#8A58FF"
+            android:color="#AB89FA"
             android:offset="1.0" />
       </gradient>
     </aapt:attr>
@@ -37,16 +35,14 @@
       <gradient
           android:endX="100"
           android:endY="10"
-          android:startX="320"
-          android:startY="480"
-          android:gradientRadius="100"
-          android:type="linear"
-          android:shape="oval">
+          android:startX="300"
+          android:startY="500"
+          android:type="linear">
         <item
             android:color="#7033FF"
             android:offset="0.0" />
         <item
-            android:color="#8A58FF"
+            android:color="#AB89FA"
             android:offset="1.0" />
       </gradient>
     </aapt:attr>
@@ -58,16 +54,14 @@
       <gradient
           android:endX="100"
           android:endY="10"
-          android:startX="320"
-          android:startY="480"
-          android:gradientRadius="100"
-          android:type="linear"
-          android:shape="oval">
+          android:startX="300"
+          android:startY="500"
+          android:type="linear">
         <item
             android:color="#7033FF"
             android:offset="0.0" />
         <item
-            android:color="#8A58FF"
+            android:color="#AB89FA"
             android:offset="1.0" />
       </gradient>
     </aapt:attr>

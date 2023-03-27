@@ -55,6 +55,7 @@ public class APIClient {
         Call<Etudiant> call = apiInterface.doGetEtudiant(getBearer(activity), id);
         APIClient.<Etudiant>doCall(call, cllbck);
     }
+
     public static void updateCompteEtudiant(StageAppActivity activity, long id, CompteEtudiantRequest compteEtudiantRequest, ResultatAppel<CompteEtudiant> cllbck){
         APIService apiInterface = activity.getApiInterface();
 

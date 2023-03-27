@@ -76,29 +76,28 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
                 String intitule = offre.intitule;
                 if (intitule.length() >= 38) {
                     intitule = intitule.substring(0, 35) + " ...";
-
                 }
                 intituleView.setText(intitule);
-                APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
-                    @Override
-                    public void traiterResultat(Entreprise response) {
-                        entrepriseView.setText(response.raisonSociale);
-                    }
+                    APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
+                        @Override
+                        public void traiterResultat(Entreprise response) {
+                            entrepriseView.setText(response.raisonSociale);
+                        }
 
-                    @Override
-                    public void traiterErreur() {
+                        @Override
+                        public void traiterErreur() {
 
-                    }
-                });
-            }
+                        }
+                    });
+                }
 
             @Override
             public void onFailure(Call<Offre> call, Throwable t) {
-                call.cancel();
-                Log.e("TAG",t.getMessage());
 
-            }
+            };
         });
+
+
     }
 
 }
