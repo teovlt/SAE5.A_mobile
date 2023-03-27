@@ -32,7 +32,7 @@
     <string name="bouton_retour">bouton retour</string>
     <string name="signInString">Vous posséder déja un compte ?</string>
     <string name="firstTimeText">Première fois ici ? </string>
-    <string name="signUpString">Créez votre propre compte</string>
+    <string name="signUpString">Créez votre compte</string>
     <string name="signUpString2">Créez votre compte</string>
     <string name="stringConnect">Connectez vous !</string>
     <string name="stringSignIn">Connexion</string>
