@@ -26,10 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/prenom"
+        android:textAlignment="center"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/textSize_title"
-        android:textColor="@color/white"/>
+        android:textSize="@dimen/textSize_bigTitle"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
 
          <LinearLayout
@@ -43,9 +45,10 @@
              <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:background="@drawable/box_bg"
+                 android:background="@drawable/bg_box"
                  android:orientation="vertical"
                  android:padding="10dp"
+                 android:textColor="@color/black"
                  >
 
 
@@ -55,6 +58,7 @@
                      android:layout_height="wrap_content"
                      android:layout_marginStart="10dp"
                      android:text="@string/offres"
+                     android:textColor="@color/black"
                      android:textSize="@dimen/textSize_title" />
 
 
@@ -64,6 +68,7 @@
                      android:layout_height="wrap_content"
                      android:layout_marginStart="20dp"
                      android:textSize="@dimen/textSize_normal"
+                     android:textColor="@color/black"
                      android:text="@string/offres_consultees" />
 
 
@@ -73,6 +78,7 @@
                      android:layout_height="wrap_content"
                      android:layout_marginStart="20dp"
                      android:textSize="@dimen/textSize_normal"
+                     android:textColor="@color/black"
                      android:text="@string/offres_retenues" />
 
                  <Button
@@ -80,6 +86,7 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:layout_gravity="center"
+                     app:cornerRadius="10dp"
                      android:textColor="@color/almost_white"
                      android:layout_marginTop="10dp"
                      android:text="@string/details" />
@@ -90,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="50dp"
-                    android:background="@drawable/box_bg"
+                    android:background="@drawable/bg_box"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -101,6 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:text="@string/candidatures"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/textSize_title" />
 
                         <TextView
@@ -109,6 +117,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:textSize="@dimen/textSize_normal"
+                            android:textColor="@color/black"
                             android:text="@string/candidatures_en_cours" />
 
 
@@ -118,6 +127,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/textSize_normal"
                             android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
                             android:text="@string/candidatures_refusees" />
 
                     <Button
@@ -125,6 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        app:cornerRadius="10dp"
                         android:textColor="@color/almost_white"
                         android:layout_marginTop="10dp"
                         android:text="@string/details" />

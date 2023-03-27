@@ -29,6 +29,7 @@ public class APIClient {
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
     private static final String BASE_URL = "http://192.168.39.41:8000/";
+
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -65,17 +66,12 @@ public class APIClient {
         Call<CompteEtudiant> call = apiInterface.doUpdateCompteEtudiant(getBearer(activity),id, compteEtudiantRequest);
         APIClient.<CompteEtudiant>doCall(call, cllbck);
     }
+
     public static void createEtudiant(StageAppActivity activity, EtudiantRequest etudiantRequest, ResultatAppel<Etudiant> cllbck){
         APIService apiInterface = activity.getApiInterface();
 
         Call<Etudiant> call = apiInterface.doCreateEtudiant(getBearer(activity), etudiantRequest);
         APIClient.<Etudiant>doCall(call, cllbck);
-    }
-    public static void getOffres(StageAppActivity activity, ResultatAppel<OffresResponse> cllbck) {
-        APIService apiInterface = activity.getApiInterface();
-
-        Call<OffresResponse> call = apiInterface.doGetOffres(getBearer(activity));
-        APIClient.<OffresResponse>doCall(call, cllbck);
     }
 
     public static void getOffre(StageAppActivity activity, long id, ResultatAppel<Offre> cllbck) {
@@ -83,6 +79,12 @@ public class APIClient {
 
         Call<Offre> call = apiInterface.doGetOffre(getBearer(activity), id);
         APIClient.<Offre>doCall(call, cllbck);
+    }
+    public static void getOffres(StageAppActivity activity, ResultatAppel<OffresResponse> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<OffresResponse> call = apiInterface.doGetOffres(getBearer(activity));
+        APIClient.<OffresResponse>doCall(call, cllbck);
     }
     public static void getCandidatures(StageAppActivity activity, ResultatAppel<CandidaturesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
@@ -173,7 +175,4 @@ public class APIClient {
             }
         });
     }
-
-
-
 }

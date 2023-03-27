@@ -5,25 +5,18 @@
     android:viewportHeight="1920">
   <path
       android:pathData="M0,0h1080v1920h-1080z"
-      />
-  <path
-      android:pathData="M0,0h1080v1920h-1080z"
-      android:fillColor="#FFFFFF"
-      android:fillType="nonZero"
+      android:fillColor="@color/white"
       />
   <path
       android:pathData="M809.6,193.5m-356,0a285.6,356 90,1 1,711.9 0a285.6,356 90,1 1,-712 0"
-      android:fillColor="#7033ff"
-      android:fillType="nonZero"
+      android:fillColor="@color/purple"
       />
   <path
       android:pathData="M266.3,168.1m-359.8,0a311.2,359.8 90,1 1,719.6 0a311.2,359.8 90,1 1,-719.6 0"
-      android:fillColor="#7033ff"
-      android:fillType="nonZero"
+      android:fillColor="@color/purple"
       />
   <path
       android:pathData="M270.2,111.9l539.6,0l0,367.2l-539.6,0z"
-      android:fillColor="#7033ff"
-      android:fillType="nonZero"
+      android:fillColor="@color/purple"
       />
 </vector>
