@@ -146,7 +146,7 @@ public class ListOffresActivity extends StageAppActivity {
                         listeOffres.add(offre);
                     }
                 }
-                System.out.println(listeOffres.size());
+                //System.out.println(listeOffres.size());
                 offres_disponibles.setText(getResources().getString(R.string.offres_disponibles,listeOffres.size()));
                 nb_pages = listeOffres.size() / 5 + ((listeOffres.size() % 5) > 0 ? 1 : 0);
                 suivant.setEnabled(listeOffres.size() > 5);

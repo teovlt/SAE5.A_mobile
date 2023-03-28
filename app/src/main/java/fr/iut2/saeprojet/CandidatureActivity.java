@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class CandidatureActivity extends StageAppActivity {
 
     //
-    public static final String CANDIDADURE_KEY = "candidature_key";
+    public static final String CANDIDATURE_KEY = "candidature_key";
 
     // Data
     private Candidature candidature;
@@ -45,8 +45,7 @@ public class CandidatureActivity extends StageAppActivity {
         setContentView(R.layout.activity_candidature);
 
         // Data
-        candidature = getIntent().getParcelableExtra(CANDIDADURE_KEY);
-        offre = getIntent().getParcelableExtra("offre");
+        candidature = getIntent().getParcelableExtra(CANDIDATURE_KEY);
 
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
@@ -99,9 +98,9 @@ public class CandidatureActivity extends StageAppActivity {
 
         APIClient.getOffre(this, candidature.getOffreId(), new ResultatAppel<Offre>() {
             @Override
-            public void traiterResultat(Offre offre) {
-                String intitule = offre.intitule;
-                intituleView.setText(intitule);
+            public void traiterResultat(Offre resoffre) {
+                offre = resoffre;
+                intituleView.setText(offre.intitule);
             }
 
             @Override

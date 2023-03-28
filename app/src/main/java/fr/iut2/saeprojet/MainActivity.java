@@ -84,14 +84,16 @@ private int nbCandidatures;
                 candidaturesView.setText(getResources().getString(R.string.candidatures,nbCandidatures));
                 refreshDerniereConnexion(compteEtudiant);
                 refreshPrenom(compteEtudiant);
+                refreshCandidatures();
             }
 
             @Override
             public void traiterErreur() {
             }
         });
-        refreshOffres();
-        refreshCandidatures();
+
+
+
     }
 private void refreshDerniereConnexion(CompteEtudiant compteEtudiant){
     Bundle extras = getIntent().getExtras();
@@ -128,7 +130,6 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
 
             @Override
             public void traiterResultat(OffresResponse offres) {
-
                 offresView.setText(getResources().getString(R.string.offres,offres.offres.size()-nbCandidatures));
             }
 
@@ -148,7 +149,9 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
                     }
                 }
                 candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees,count));
-                candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours,Integer.parseInt((String) candidaturesView.getText().subSequence(0,1)) - count));
+                candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours,candidatures.candidatures.size() - count));
+                refreshOffres();
+
             }
 
             @Override

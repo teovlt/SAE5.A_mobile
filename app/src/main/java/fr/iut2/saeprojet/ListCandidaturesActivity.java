@@ -70,7 +70,7 @@ public class ListCandidaturesActivity extends StageAppActivity {
 
                 //
                 Intent intent = new Intent(ListCandidaturesActivity.this, CandidatureActivity.class);
-                intent.putExtra(CandidatureActivity.CANDIDADURE_KEY, candidature);
+                intent.putExtra(CandidatureActivity.CANDIDATURE_KEY, candidature);
                 startActivity(intent);
             }
         });
@@ -83,7 +83,7 @@ public class ListCandidaturesActivity extends StageAppActivity {
 
                 //
                 Intent intent = new Intent(ListCandidaturesActivity.this, CandidatureActivity.class);
-                intent.putExtra(CandidatureActivity.CANDIDADURE_KEY, candidature);
+                intent.putExtra(CandidatureActivity.CANDIDATURE_KEY, candidature);
                 startActivity(intent);
             }
         });
