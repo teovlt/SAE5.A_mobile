@@ -31,6 +31,7 @@ public class APIClient {
 
     private static final String BASE_URL = "http://192.168.39.41:8000/";
 
+
     //
     private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();

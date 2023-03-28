@@ -78,8 +78,8 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
             public void onResponse(Call<Offre> call, Response<Offre> response) {
                 String intitule = response.body().intitule;
 
-                if (intitule.length() >= 40) {
-                    intitule = intitule.substring(0, 36) + " ...";
+                if (intitule.length() >= 34) {
+                    intitule = intitule.substring(0, 34) + " ...";
 
                 }
 
