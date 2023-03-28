@@ -109,6 +109,44 @@ public class CandidatureEditActivity extends StageAppActivity {
             }
         });
 
+        alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(CandidatureEditActivity.this,"Changements non enregistrés",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        alertDialogBuilder.setNeutralButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        //
+        retourCandidaturesView.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+
+                currentYear = dateActionView.getYear();
+                currentMonth = dateActionView.getMonth();
+                currentDay = dateActionView.getDayOfMonth();
+                currentSpinnerValue = etatsCandidatureView.getSelectedItem().toString();
+
+                if (year == currentYear && month == currentMonth && dayOfMonth == currentDay && initialSpinnerValue.equals(currentSpinnerValue)) {
+                    finish();
+                } else {
+                    alertDialog.show();
+                }
+
+            }
+        });
+
+        //
         intituleOffre.setText(offre.intitule);
         if (intituleOffre.length() >= 50) {
             String text = intituleOffre.getText().toString().substring(0, 50) + " ...";
@@ -135,49 +173,6 @@ public class CandidatureEditActivity extends StageAppActivity {
             intituleOffre.setOnClickListener(onClick);
             developArrow.setOnClickListener(onClick);
         }
-
-        alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(CandidatureEditActivity.this,"Changements non enregistrés",Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-
-        alertDialogBuilder.setNeutralButton("Annuler", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        //
-        retourCandidaturesView.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-
-                currentYear = dateActionView.getYear();
-                currentMonth = dateActionView.getMonth();
-                currentDay = dateActionView.getDayOfMonth();
-                currentSpinnerValue = etatsCandidatureView.getSelectedItem().toString();
-
-                if (year == currentYear && month == currentMonth && dayOfMonth == currentDay && initialSpinnerValue.equals(currentSpinnerValue)) {
-                    finish();
-                } else {
-                    alertDialog.show();
-                }
-
-            }
-        });
-
-        //
-
-
         //
         validerView.setOnClickListener(new View.OnClickListener() {
             @Override

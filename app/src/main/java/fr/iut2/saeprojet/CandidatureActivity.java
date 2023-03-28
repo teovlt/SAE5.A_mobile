@@ -1,8 +1,10 @@
 package fr.iut2.saeprojet;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
@@ -46,6 +49,7 @@ public class CandidatureActivity extends StageAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_candidature);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         // Data
         candidature = getIntent().getParcelableExtra(CANDIDATURE_KEY);
@@ -59,6 +63,29 @@ public class CandidatureActivity extends StageAppActivity {
         mettreAJourView = findViewById(R.id.mettreajour);
         abandonView = findViewById(R.id.abandonCandidature);
 
+        alertDialogBuilder.setTitle("Supprimer candidature");
+        alertDialogBuilder.setMessage("Voulez vous supprimer cette candidature ?");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                deleteCandidature();
+                Toast.makeText(CandidatureActivity.this,"Candidature supprimée",Toast.LENGTH_SHORT).show();
+                finish();
+
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(CandidatureActivity.this,"Candidature non supprimée",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
         //
         retourCandidaturesView.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +113,7 @@ public class CandidatureActivity extends StageAppActivity {
         abandonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteCandidature();
+                alertDialog.show();
             }
         });
     }
