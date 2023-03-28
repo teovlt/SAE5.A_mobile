@@ -153,5 +153,8 @@
     <string name="liste_offres">Offres</string>
     <string name="save_update_offer">Sauvegarder</string>
     <string name="cancel_update_offer">Annuler</string>
+    <string name="mettre_jour">Mettre à jour</string>
+    <string name="abandonner_la_candidature">Abandonner la candidature</string>
+    <string name="etat_de_la_candidature">État de la candidature</string>
 
 </resources>

@@ -8,13 +8,12 @@
         android:id="@+id/layout_titre"
         android:layout_width="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/retourDeListeCandidaturesAMain"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/left_arrow"
             android:scaleType="fitCenter"
             android:background="#00000000"
@@ -24,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/candidatures"
-            android:layout_marginTop="4dp"
+
             android:layout_marginStart="10dp"
             android:textSize="@dimen/textSize_title"
             android:textColor="@color/white"
@@ -45,7 +44,9 @@
         android:paddingTop="10dp"
         android:divider="@null"
         android:dividerHeight="15dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +60,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:divider="@null"
-        android:dividerHeight="15dp"/>
+        android:dividerHeight="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
 
 </LinearLayout>

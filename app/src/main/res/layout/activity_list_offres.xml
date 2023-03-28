@@ -13,14 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="20dp"
-        android:paddingStart="5dp"
         android:layout_height="wrap_content"
         >
 
         <ImageButton
             android:id="@+id/retourDeListeOffresAMain"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/left_arrow"
             android:scaleType="fitCenter"
             android:background="#00000000"
@@ -31,12 +30,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/offres_disponibles"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="5dp"
             android:textSize="@dimen/textSize_title"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="400dp">
