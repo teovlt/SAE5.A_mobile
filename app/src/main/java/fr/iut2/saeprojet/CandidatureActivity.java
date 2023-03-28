@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,8 +34,10 @@ public class CandidatureActivity extends StageAppActivity {
 
     // View
     private Button abandonView;
-    private TextView retourCandidaturesView;
+    private ImageView retourCandidaturesView;
     private TextView intituleView;
+
+    private ImageView developArrow;
     private TextView etatView;
     private TextView dateActionView;
     private Button mettreAJourView;
@@ -50,6 +53,7 @@ public class CandidatureActivity extends StageAppActivity {
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
         intituleView = findViewById(R.id.intitule);
+        developArrow = findViewById(R.id.developArrow);
         etatView = findViewById(R.id.etat);
         dateActionView = findViewById(R.id.dateAction);
         mettreAJourView = findViewById(R.id.mettreajour);
@@ -94,13 +98,39 @@ public class CandidatureActivity extends StageAppActivity {
     private void refreshMesInformations(Candidature candidature, TextView intituleView) {
         //
         etatView.setText(EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId()));
-        dateActionView.setText("le " + candidature.dateAction);
+        dateActionView.setText(candidature.dateAction);
 
         APIClient.getOffre(this, candidature.getOffreId(), new ResultatAppel<Offre>() {
             @Override
             public void traiterResultat(Offre resoffre) {
                 offre = resoffre;
                 intituleView.setText(offre.intitule);
+
+                intituleView.setText(offre.intitule);
+                if (intituleView.length() >= 50) {
+                    developArrow.setImageResource(R.drawable.arrow_down_24);
+                    intituleView.setText(intituleView.getText().toString().substring(0, 50) + " ...");
+
+                    View.OnClickListener onClick = new View.OnClickListener() {
+                        boolean estDeveloppe = false;
+
+                        @Override
+                        public void onClick(View view) {
+                            if (!estDeveloppe){
+                                intituleView.setText(offre.intitule);
+                                estDeveloppe = true;
+                                developArrow.setImageResource(R.drawable.arrow_up_24);
+                            } else {
+                                intituleView.setText(intituleView.getText().toString().substring(0, 50) + " ...");
+                                estDeveloppe = false;
+                                developArrow.setImageResource(R.drawable.arrow_down_24);
+                            }
+                        }
+                    };
+
+                    intituleView.setOnClickListener(onClick);
+                    developArrow.setOnClickListener(onClick);
+                }
             }
 
             @Override
