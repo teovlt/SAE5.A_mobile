@@ -1,5 +1,7 @@
 package fr.iut2.saeprojet;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +38,6 @@ private int nbCandidatures;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setTitle(R.string.title_activity_main);
         setContentView(R.layout.activity_main);
         //Views init
         prenomView = findViewById(R.id.prenom);

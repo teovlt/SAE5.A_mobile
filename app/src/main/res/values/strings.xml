@@ -156,5 +156,6 @@
     <string name="mettre_jour">Mettre à jour</string>
     <string name="abandonner_la_candidature">Abandonner la candidature</string>
     <string name="etat_de_la_candidature">État de la candidature</string>
+    <string name="candidaturestitre">Candidatures</string>
 
 </resources>
