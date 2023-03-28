@@ -36,13 +36,16 @@
         android:layout_height="wrap_content"
         android:text="Candidatures en cours"
         android:textSize="20sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_marginStart="10dp"
+        />
+
     <ListView
         android:id="@+id/candidatures_en_cours_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
         android:divider="@null"
+        android:paddingTop="10dp"
         android:dividerHeight="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
@@ -52,16 +55,20 @@
         android:layout_height="wrap_content"
         android:text="Candidatures refusées"
         android:paddingTop="10dp"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"
+        />
 
     <ListView
         android:id="@+id/candidatures_refusees_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
         android:divider="@null"
+        android:paddingTop="10dp"
         android:dividerHeight="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        />
 
 </LinearLayout>

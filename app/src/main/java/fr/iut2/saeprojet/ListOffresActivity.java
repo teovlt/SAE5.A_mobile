@@ -20,6 +20,8 @@ import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
+import fr.iut2.saeprojet.entity.CandidaturesResponse;
+import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
@@ -113,11 +115,41 @@ public class ListOffresActivity extends StageAppActivity {
         APIClient.getOffres(this, new ResultatAppel<OffresResponse>() {
             @Override
             public void traiterResultat(OffresResponse offresResponse) {
-                listeOffres.addAll(offresResponse.offres);
+                //On ajoute à la liste d'offres uniquement les offres auxquelles l'étudiant n'a pas déjà postulé
+                addOffres((ArrayList<Offre>) offresResponse.offres);
+
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+    private void  addOffres(ArrayList<Offre> offres){
+        //on retire les offres qui figurent parmis les candidatures de l'étudiant
+
+       ArrayList<String> offresNonCandidatees = new ArrayList<>();
+        for (Offre offre : offres) {
+           offresNonCandidatees.add(offre._id);
+        }
+        APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
+            @Override
+            public void traiterResultat(CandidaturesResponse response) {
+                for (Candidature candidature : response.candidatures) {
+                    offresNonCandidatees.remove(candidature.offre);
+
+                }
+                System.out.println(offresNonCandidatees.size());
+                for (Offre offre : offres) {
+                    if(offresNonCandidatees.contains(offre._id)){
+                        listeOffres.add(offre);
+                    }
+                }
+                System.out.println(listeOffres.size());
                 offres_disponibles.setText(getResources().getString(R.string.offres_disponibles,listeOffres.size()));
                 nb_pages = listeOffres.size() / 5 + ((listeOffres.size() % 5) > 0 ? 1 : 0);
                 suivant.setEnabled(listeOffres.size() > 5);
-               // setIntituleOffres(0);
                 indic_page.setText(getResources().getString(R.string.NumpageSurnbPage,1,nb_pages));
                 //Mise à jour des 5 offres
                 updateOffres(no_page);
@@ -129,5 +161,12 @@ public class ListOffresActivity extends StageAppActivity {
             }
         });
     }
-
-}
+/**
+ * for (String candidature : response.candidatures) {
+ *
+ *                     offresNonCandidatees.remove(a);
+ *                 }
+ *                 listeOffres.addAll(offresNonCandidatees);
+ *             }
+ */
+    }

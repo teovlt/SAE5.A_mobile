@@ -8,94 +8,125 @@
     android:background="@drawable/bg_list_offres">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
+        android:id="@+id/layout_titre"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:paddingStart="5dp"
+        android:layout_height="wrap_content"
+        >
 
         <ImageButton
             android:id="@+id/retourCandidatures"
-            android:layout_width="48dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="#00000000"
-            android:contentDescription="@string/bouton_retour"
-            android:scaleType="fitCenter"
             android:src="@drawable/left_arrow"
-            android:layout_marginRight="68dp"
-           />
-
-        <TextView
-            android:id="@+id/intitule"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:text="Intitulé candidature"
-            android:textSize="20sp"
-            android:textColor="@color/almost_white"
-            />
-
-    </LinearLayout>
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="État : "
-            android:textSize="20sp"
-            android:layout_gravity="center"/>
-
-        <Spinner
-            android:id="@+id/etatsCandidature"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:entries="@array/etats_candidatures"
-            android:layout_gravity="right"
-           />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="110dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Relancer le : "
-            android:textSize="20sp"
+            android:scaleType="fitCenter"
+            android:background="#00000000"
             android:layout_gravity="center"
-            />
+            android:contentDescription="@string/bouton_retour" />
 
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:layout_gravity="right"
-            />
+        <TextView
+            android:id="@+id/liste_offres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/liste_offres"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/textSize_title"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_item">
+
+            <TextView
+                android:id="@+id/intitule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Titre offre"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize_mid" />
+
+            <ImageButton
+                android:id="@+id/developArrow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:background="#00000000"
+                android:layout_gravity="top"
+                android:contentDescription="@string/bouton_retour" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="État : "
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+
+            <Spinner
+                android:id="@+id/etatsCandidature"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:entries="@array/etats_candidatures"
+                android:layout_gravity="right"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="110dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Relancer le : "
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:layout_gravity="right"
+                />
+        </LinearLayout>
 
         <Button
             android:id="@+id/valider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save_update_offer"
-            android:layout_gravity="center"
-           />
+            android:layout_gravity="center"/>
 
-
-
-
+    </LinearLayout>
 </LinearLayout>

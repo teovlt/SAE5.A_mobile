@@ -21,7 +21,7 @@
     <string name="details">Voir en détails</string>
     <string name="offres_retenues">%1d offre.s retenue.s</string>
     <string name="offres_consultees">%1d offre.s consultée.s</string>
-    <string name="offres">%1d Offres</string>
+    <string name="offres">%1d Offres disponibles</string>
     <string name="derniere_connexion">Dernière connexion le %1s</string>
     <string name="synthese">Synthèse</string>
     <string name="date_placeholder">date_placeholder</string>
