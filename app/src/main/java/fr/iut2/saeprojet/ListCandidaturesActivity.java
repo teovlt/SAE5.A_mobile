@@ -1,5 +1,7 @@
 package fr.iut2.saeprojet;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,7 +59,10 @@ public class ListCandidaturesActivity extends StageAppActivity {
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ListCandidaturesActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

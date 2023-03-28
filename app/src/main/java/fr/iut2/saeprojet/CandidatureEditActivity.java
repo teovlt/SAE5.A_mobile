@@ -1,5 +1,9 @@
 package fr.iut2.saeprojet;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
+import static fr.iut2.saeprojet.OffreActivity.OFFRE_KEY;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,7 +48,7 @@ import retrofit2.Response;
 public class CandidatureEditActivity extends StageAppActivity {
 
     //
-    public static final String CANDIDADURE_KEY = "candidature_key";
+    public static final String CANDIDATURE_KEY = "candidature_key";
 
     // Data
     private Candidature candidature;
@@ -82,8 +86,8 @@ public class CandidatureEditActivity extends StageAppActivity {
 
 
         // Data
-        candidature = getIntent().getParcelableExtra(CANDIDADURE_KEY);
-        offre = getIntent().getParcelableExtra("offre");
+        candidature = getIntent().getParcelableExtra(CANDIDATURE_KEY);
+        offre = getIntent().getParcelableExtra(OFFRE_KEY);
 
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
@@ -103,8 +107,7 @@ public class CandidatureEditActivity extends StageAppActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 updateCandidature();
-                Toast.makeText(CandidatureEditActivity.this,"Changements enregistrés",Toast.LENGTH_SHORT).show();
-                finish();
+
 
             }
         });
@@ -177,10 +180,7 @@ public class CandidatureEditActivity extends StageAppActivity {
         validerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //
                 updateCandidature();
-                finish();
             }
         });
 
@@ -230,7 +230,13 @@ public class CandidatureEditActivity extends StageAppActivity {
         APIClient.updateCandidature(this, APIClient.getCandidatureId(candidature._id), candidatureReq, new ResultatAppel<Candidature>() {
             @Override
             public void traiterResultat(Candidature response) {
-                // Rien à faire
+                Toast.makeText(CandidatureEditActivity.this,"Changements enregistrés",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CandidatureEditActivity.this, CandidatureActivity.class);
+                intent.putExtra(CandidatureEditActivity.CANDIDATURE_KEY, response);
+                intent.putExtra(OFFRE_KEY, offre);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
             }
 

@@ -1,5 +1,7 @@
 package fr.iut2.saeprojet;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -58,7 +60,9 @@ public class ListOffresActivity extends StageAppActivity {
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ListOffresActivity.this, MainActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
@@ -140,7 +144,7 @@ public class ListOffresActivity extends StageAppActivity {
                     offresNonCandidatees.remove(candidature.offre);
 
                 }
-                System.out.println(offresNonCandidatees.size());
+                //System.out.println(offresNonCandidatees.size());
                 for (Offre offre : offres) {
                     if(offresNonCandidatees.contains(offre._id)){
                         listeOffres.add(offre);
@@ -161,12 +165,5 @@ public class ListOffresActivity extends StageAppActivity {
             }
         });
     }
-/**
- * for (String candidature : response.candidatures) {
- *
- *                     offresNonCandidatees.remove(a);
- *                 }
- *                 listeOffres.addAll(offresNonCandidatees);
- *             }
- */
+
     }

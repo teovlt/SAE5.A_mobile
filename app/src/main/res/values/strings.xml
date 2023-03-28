@@ -161,5 +161,6 @@
     <string name="candidater">Candidater</string>
     <string name="etat">État :</string>
     <string name="titre_offre">Titre offre</string>
+    <string name="candidaturestitre">Candidatures</string>
 
 </resources>

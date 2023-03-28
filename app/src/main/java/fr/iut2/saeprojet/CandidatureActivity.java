@@ -1,6 +1,9 @@
 package fr.iut2.saeprojet;
 
 import androidx.appcompat.app.AlertDialog;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static fr.iut2.saeprojet.OffreActivity.OFFRE_KEY;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -91,7 +94,10 @@ public class CandidatureActivity extends StageAppActivity {
         retourCandidaturesView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(CandidatureActivity.this, ListCandidaturesActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
@@ -100,8 +106,8 @@ public class CandidatureActivity extends StageAppActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CandidatureActivity.this, CandidatureEditActivity.class);
-                intent.putExtra("offre", offre);
-                intent.putExtra(CandidatureEditActivity.CANDIDADURE_KEY, candidature);
+                intent.putExtra(OFFRE_KEY, offre);
+                intent.putExtra(CandidatureEditActivity.CANDIDATURE_KEY, candidature);
                 startActivity(intent);
             }
         });
@@ -172,8 +178,9 @@ public class CandidatureActivity extends StageAppActivity {
         APIClient.removeCandidature(this, APIClient.getCandidatureId(candidature._id), new ResultatAppel<Candidature>() {
             @Override
             public void traiterResultat(Candidature response) {
-                Intent intent = new Intent(CandidatureActivity.this, MainActivity.class);
+                Intent intent = new Intent(CandidatureActivity.this, ListCandidaturesActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
             }
