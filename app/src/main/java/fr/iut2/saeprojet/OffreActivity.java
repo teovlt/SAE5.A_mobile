@@ -20,6 +20,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -35,13 +36,15 @@ import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.Offre;
+import fr.iut2.saeprojet.entity.OffreConsultee;
+import fr.iut2.saeprojet.entity.OffreConsulteeRequest;
+import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
 
 public class OffreActivity extends StageAppActivity {
     public static final String OFFRE_KEY = "offre_key";
     private ImageButton retour;
     private Button candidater;
     private TextView intituleOffre;
-
     private ImageButton developArrow;
     private TextView statutOffre;
     private TextView nomEntreprise;
@@ -52,13 +55,10 @@ public class OffreActivity extends StageAppActivity {
     private Offre offre = null;
     private Entreprise entreprise = null;
     private Candidature candidature = null;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offre);
-
         retour = findViewById(R.id.retourDeOffresAListeOffre);
         candidater = findViewById(R.id.buttonCandidature);
         intituleOffre = findViewById(R.id.titreOffre);
@@ -67,8 +67,6 @@ public class OffreActivity extends StageAppActivity {
         nomVille = findViewById(R.id.nomVille);
         url = findViewById(R.id.offreUrl);
         developArrow = findViewById(R.id.developArrow);
-
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             offre = getIntent().getParcelableExtra(OFFRE_KEY);
@@ -101,7 +99,8 @@ public class OffreActivity extends StageAppActivity {
             intituleOffre.setOnClickListener(onClick);
             developArrow.setOnClickListener(onClick);
         }
-
+        //Marque l'offre comme consultee
+        getOffresConsultees();
 
         candidater.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +122,47 @@ public class OffreActivity extends StageAppActivity {
             }
         });
     }
+    private void getOffresConsultees(){
+        APIClient.getOffresConsultees(this, new ResultatAppel<OffresConsulteesResponse>() {
+            @Override
+            public void traiterResultat(OffresConsulteesResponse response) {
+                boolean offrePasConsultee = true;
+                for (OffreConsultee offreConsultee :
+                        response.offresConsultees) {
+                    //Si l'offre est déjà consultée on fait rien, sinon on l'a marque
+                    if(offreConsultee.offre.equals(offre._id)){
+                        offrePasConsultee = false;
+                        break;
+                    }
+                }
+                if(offrePasConsultee){
+                    marquageConsultation();
+                }
+            }
 
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+    private void marquageConsultation(){
+        OffreConsulteeRequest offreConsulteeRequest = new OffreConsulteeRequest();
+        offreConsulteeRequest.offre = offre._id;
+        offreConsulteeRequest.compteEtudiant=getCompte_Id();
+
+        APIClient.createOffreConsultee(this, offreConsulteeRequest, new ResultatAppel<OffreConsultee>() {
+            @Override
+            public void traiterResultat(OffreConsultee response) {
+                System.out.println(response);
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
     private void refreshOffre() {
         intituleOffre.setText(offre.intitule);
         if (offre.urlPieceJointe != null) {

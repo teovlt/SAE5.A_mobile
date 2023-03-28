@@ -16,6 +16,9 @@ import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.Etudiant;
 import fr.iut2.saeprojet.entity.EtudiantRequest;
 import fr.iut2.saeprojet.entity.Offre;
+import fr.iut2.saeprojet.entity.OffreConsultee;
+import fr.iut2.saeprojet.entity.OffreConsulteeRequest;
+import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
 import fr.iut2.saeprojet.entity.OffresResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -76,6 +79,18 @@ public class APIClient {
 
         Call<OffresResponse> call = apiInterface.doGetOffres(getBearer(activity));
         APIClient.<OffresResponse>doCall(call, cllbck);
+    }
+    public static void getOffresConsultees(StageAppActivity activity, ResultatAppel<OffresConsulteesResponse> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<OffresConsulteesResponse> call = apiInterface.doGetOffresConsultees(getBearer(activity));
+        APIClient.<OffresConsulteesResponse>doCall(call, cllbck);
+    }
+    public static void createOffreConsultee(StageAppActivity activity, OffreConsulteeRequest offreConsulteeRequest, ResultatAppel<OffreConsultee> cllbck){
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<OffreConsultee> call = apiInterface.doCreateOffreConsultee(getBearer(activity), offreConsulteeRequest);
+        APIClient.<OffreConsultee>doCall(call, cllbck);
     }
     public static void getCandidatures(StageAppActivity activity, ResultatAppel<CandidaturesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
