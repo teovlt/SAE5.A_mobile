@@ -84,7 +84,6 @@ public class CandidatureActivity extends StageAppActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(CandidatureActivity.this,"Candidature non supprimée",Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
 

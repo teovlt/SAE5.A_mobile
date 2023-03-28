@@ -33,10 +33,14 @@ public class ListCandidaturesActivity extends StageAppActivity {
     private ImageButton retour;
     private ListView candidaturesRefuseesView;
     private ListView candidaturesEnCoursView;
+
+    private ListView candidaturesAccepteesView;
     private TextView nbcandidatures;
     // data
     private CandidatureAdapter adapterCandidatureRefusees;
     private CandidatureAdapter adapterCandidatureEnCours;
+
+    private CandidatureAdapter adapterCandidatureAcceptees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class ListCandidaturesActivity extends StageAppActivity {
         retour = findViewById(R.id.retourDeListeCandidaturesAMain);
         candidaturesRefuseesView = findViewById(R.id.candidatures_refusees_list);
         candidaturesEnCoursView = findViewById(R.id.candidatures_en_cours_list);
+        candidaturesAccepteesView = findViewById(R.id.candidatures_acceptees_list);
+
         nbcandidatures = findViewById(R.id.nbcandidatures_list);
         // Lier les adapter aux listView
         //Candidatures refusées
@@ -55,6 +61,9 @@ public class ListCandidaturesActivity extends StageAppActivity {
         //Candidatures en cours
         adapterCandidatureEnCours = new CandidatureAdapter(this, new ArrayList<Candidature>());
         candidaturesEnCoursView.setAdapter(adapterCandidatureEnCours);
+
+        adapterCandidatureAcceptees = new CandidatureAdapter(this, new ArrayList<Candidature>());
+        candidaturesAccepteesView.setAdapter(adapterCandidatureAcceptees);
         //
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +101,20 @@ public class ListCandidaturesActivity extends StageAppActivity {
                 startActivity(intent);
             }
         });
+
+        candidaturesAccepteesView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // Récupération de la tâche cliquée à l'aide de l'adapter
+                Candidature candidature = adapterCandidatureEnCours.getItem(position);
+
+                //
+                Intent intent = new Intent(ListCandidaturesActivity.this, CandidatureActivity.class);
+                intent.putExtra(CandidatureActivity.CANDIDATURE_KEY, candidature);
+                startActivity(intent);
+            }
+        });
         //
         refreshMesInformations();
     }
@@ -105,19 +128,24 @@ public class ListCandidaturesActivity extends StageAppActivity {
 
                 adapterCandidatureRefusees.clear();
                 adapterCandidatureEnCours.clear();
+                adapterCandidatureAcceptees.clear();
 
                 for (Candidature c:
                 candidatures.candidatures) {
                     if(c.etatCandidature.equals("/api/etat_candidatures/3")){
                         adapterCandidatureRefusees.add(c);
 
-                    }else{
-                        adapterCandidatureEnCours.add(c);
+                    }else if (c.etatCandidature.equals("/api/etat_candidatures/6")){
+                        adapterCandidatureAcceptees.add(c);
 
+                    } else {
+                        adapterCandidatureEnCours.add(c);
                     }
                 }
                 adapterCandidatureRefusees.notifyDataSetChanged();
                 adapterCandidatureEnCours.notifyDataSetChanged();
+                adapterCandidatureAcceptees.notifyDataSetChanged();
+
 
             }
 

@@ -162,5 +162,8 @@
     <string name="etat">État :</string>
     <string name="titre_offre">Titre offre</string>
     <string name="candidaturestitre">Candidatures</string>
+    <string name="candidatures_acceptees_list">Candidatures acceptées</string>
+    <string name="candidatures_refusees_list">Candidatures refusées</string>
+    <string name="candidatures_en_cours_list">Candidatures en cours</string>
 
 </resources>
