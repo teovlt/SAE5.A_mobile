@@ -12,6 +12,9 @@
     <color name="darkgray">#373737</color>
     <color name="almost_white">#ececea</color>
     <color name="red">#990F02</color>
+    <color name="light_red">#FD9691</color>
+    <color name="light_yellow">#F8F792</color>
+    <color name="light_green">#96E196</color>
 
 
 </resources>

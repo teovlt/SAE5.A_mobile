@@ -13,8 +13,10 @@ import java.util.List;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
+import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
+import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.Offre;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,7 +56,8 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
 
         // Récupération des objets graphiques dans le template
         TextView intituleView = (TextView) rowView.findViewById(R.id.intitule);
-        refreshMesInformations(candidature, intituleView);
+        TextView entrepriseView = (TextView) rowView.findViewById(R.id.entreprise);
+        refreshMesInformations(candidature, intituleView, entrepriseView);
         //TextView textViewDesc = (TextView) rowView.findViewById(R.id.textViewDesc);
 
         //
@@ -65,7 +68,7 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
         return rowView;
     }
 
-    private void refreshMesInformations(Candidature candidature, TextView intituleView) {
+    private void refreshMesInformations(Candidature candidature, TextView intituleView, TextView entrepriseView) {
 
         //
         SharedPreferences sharedPref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -76,14 +79,25 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
         call.enqueue(new Callback<Offre>() {
             @Override
             public void onResponse(Call<Offre> call, Response<Offre> response) {
-                String intitule = response.body().intitule;
+                Offre offre = response.body();
+                String intitule = offre.intitule;
 
                 if (intitule.length() >= 34) {
-                    intitule = intitule.substring(0, 34) + " ...";
-
+                    intitule = intitule.substring(0, 31) + " ...";
                 }
-
                 intituleView.setText(intitule);
+
+                APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
+                    @Override
+                    public void traiterResultat(Entreprise response) {
+                        entrepriseView.setText(response.raisonSociale);
+                    }
+
+                    @Override
+                    public void traiterErreur() {
+
+                    }
+                });
             }
 
             @Override
