@@ -116,9 +116,10 @@ public class CandidatureActivity extends StageAppActivity {
         APIClient.removeCandidature(this, APIClient.getCandidatureId(candidature._id), new ResultatAppel<Candidature>() {
             @Override
             public void traiterResultat(Candidature response) {
-                Intent intent = new Intent(CandidatureActivity.this, ListOffresActivity.class);
+                Intent intent = new Intent(CandidatureActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+
             }
 
             @Override
