@@ -11,6 +11,7 @@
     <color name="bgcolor_boxes">#9AE7DCFF</color>
     <color name="darkgray">#373737</color>
     <color name="almost_white">#ececea</color>
+    <color name="red">#990F02</color>
 
 
 </resources>

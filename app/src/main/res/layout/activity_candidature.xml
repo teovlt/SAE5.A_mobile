@@ -126,6 +126,7 @@
         android:layout_width="170dp"
         android:layout_height="60dp"
         android:layout_gravity="end"
-        android:text="@string/abandonner_la_candidature" />
+        android:text="@string/abandonner_la_candidature"
+        android:backgroundTint="@color/red"/>
     </LinearLayout>
 </LinearLayout>

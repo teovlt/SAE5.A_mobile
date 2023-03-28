@@ -156,5 +156,10 @@
     <string name="mettre_jour">Mettre à jour</string>
     <string name="abandonner_la_candidature">Abandonner la candidature</string>
     <string name="etat_de_la_candidature">État de la candidature</string>
+    <string name="entreprise">Entreprise :</string>
+    <string name="ville">Ville :</string>
+    <string name="candidater">Candidater</string>
+    <string name="etat">État :</string>
+    <string name="titre_offre">Titre offre</string>
 
 </resources>

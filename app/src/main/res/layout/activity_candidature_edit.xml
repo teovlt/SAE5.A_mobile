@@ -10,9 +10,7 @@
     <LinearLayout
         android:id="@+id/layout_titre"
         android:layout_width="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
-        android:paddingStart="5dp"
+        android:layout_marginTop="60dp"
         android:layout_height="wrap_content"
         >
 
@@ -41,7 +39,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -54,12 +52,12 @@
 
             <TextView
                 android:id="@+id/intitule"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:text="Titre offre"
+                android:text="@string/titre_offre"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textSize_mid" />
 
@@ -79,12 +77,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="État : "
+                android:text="@string/etat"
                 android:textSize="20sp"
                 android:layout_gravity="center"/>
 
@@ -93,7 +92,7 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:entries="@array/etats_candidatures"
-                android:layout_gravity="right"/>
+                android:layout_gravity="end"/>
         </LinearLayout>
 
 
@@ -101,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="110dp">
+            android:layout_marginBottom="60dp">
 
             <TextView
                 android:layout_width="wrap_content"
