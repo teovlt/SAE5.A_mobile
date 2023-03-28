@@ -58,6 +58,9 @@ public class CandidatureEditActivity extends StageAppActivity {
     private TextView intituleView;
     private Button validerView;
 
+    private TextView intituleOffre;
+
+    private ImageButton developArrow;
 
     private Spinner etatsCandidatureView;
     private DatePicker dateActionView;
@@ -88,6 +91,8 @@ public class CandidatureEditActivity extends StageAppActivity {
         validerView = findViewById(R.id.valider);
         etatsCandidatureView = findViewById(R.id.etatsCandidature);
         dateActionView = findViewById(R.id.datePicker);
+        intituleOffre = findViewById(R.id.intitule);
+        developArrow = findViewById(R.id.developArrow);
         dateActionView.setMinDate(calendar.getTimeInMillis());
         dateActionView.init(year, month, dayOfMonth, null);
         alertDialogBuilder.setTitle("Retour à la candidature");
@@ -103,6 +108,33 @@ public class CandidatureEditActivity extends StageAppActivity {
 
             }
         });
+
+        intituleOffre.setText(offre.intitule);
+        if (intituleOffre.length() >= 50) {
+            String text = intituleOffre.getText().toString().substring(0, 50) + " ...";
+            developArrow.setImageResource(R.drawable.arrow_down_24);
+            intituleOffre.setText(text);
+
+            View.OnClickListener onClick = new View.OnClickListener() {
+                boolean estDeveloppe = false;
+
+                @Override
+                public void onClick(View view) {
+                    if (!estDeveloppe){
+                        intituleOffre.setText(offre.intitule);
+                        estDeveloppe = true;
+                        developArrow.setImageResource(R.drawable.arrow_up_24);
+                    } else {
+                        intituleOffre.setText(text);
+                        estDeveloppe = false;
+                        developArrow.setImageResource(R.drawable.arrow_down_24);
+                    }
+                }
+            };
+
+            intituleOffre.setOnClickListener(onClick);
+            developArrow.setOnClickListener(onClick);
+        }
 
         alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override

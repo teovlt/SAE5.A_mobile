@@ -53,7 +53,6 @@ public class OffreActivity extends StageAppActivity {
     private Entreprise entreprise = null;
     private Candidature candidature = null;
 
-    private int tailleTitre = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +77,9 @@ public class OffreActivity extends StageAppActivity {
 
         intituleOffre.setText(offre.intitule);
         if (intituleOffre.length() >= 50) {
+            String text = intituleOffre.getText().toString().substring(0, 50) + " ...";
             developArrow.setImageResource(R.drawable.arrow_down_24);
-            intituleOffre.setText(intituleOffre.getText().toString().substring(0, 50) + " ...");
+            intituleOffre.setText(text);
 
             View.OnClickListener onClick = new View.OnClickListener() {
                 boolean estDeveloppe = false;
@@ -91,7 +91,7 @@ public class OffreActivity extends StageAppActivity {
                         estDeveloppe = true;
                         developArrow.setImageResource(R.drawable.arrow_up_24);
                     } else {
-                        intituleOffre.setText(intituleOffre.getText().toString().substring(0, 50) + " ...");
+                        intituleOffre.setText(text);
                         estDeveloppe = false;
                         developArrow.setImageResource(R.drawable.arrow_down_24);
                     }
