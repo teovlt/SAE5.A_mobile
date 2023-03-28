@@ -32,7 +32,7 @@ private Button details_candidatures;
 private TextView candidaturesView;
 private TextView candidaturesRefuseesView;
 private TextView candidaturesEnCoursView;
-
+private int nbCandidatures;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +80,8 @@ private TextView candidaturesEnCoursView;
             public void traiterResultat(CompteEtudiant compteEtudiant) {
                 offresConsulteesView.setText(getResources().getString(R.string.offres_consultees,compteEtudiant.offreConsultees.size()));
                 offresRetenuesView.setText(getResources().getString(R.string.offres_retenues,compteEtudiant.offreRetenues.size()));
-                candidaturesView.setText(getResources().getString(R.string.candidatures,compteEtudiant.candidatures.size()));
+                nbCandidatures = compteEtudiant.candidatures.size();
+                candidaturesView.setText(getResources().getString(R.string.candidatures,nbCandidatures));
                 refreshDerniereConnexion(compteEtudiant);
                 refreshPrenom(compteEtudiant);
             }
@@ -127,7 +128,8 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
 
             @Override
             public void traiterResultat(OffresResponse offres) {
-                offresView.setText(getResources().getString(R.string.offres,offres.offres.size()));
+
+                offresView.setText(getResources().getString(R.string.offres,offres.offres.size()-nbCandidatures));
             }
 
             @Override
@@ -146,7 +148,6 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
                     }
                 }
                 candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees,count));
-                //TODO changer la ligne ci dessous par un vrai appel API qui renvoie le nb de candidatures en cours
                 candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours,Integer.parseInt((String) candidaturesView.getText().subSequence(0,1)) - count));
             }
 
