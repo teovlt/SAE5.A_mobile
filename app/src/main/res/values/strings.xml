@@ -35,7 +35,6 @@
         <item>Entretien à réaliser</item>
         <item>Candidature refusée</item>
         <item>Candidature acceptée</item>
-        <item>Choix définitif</item>
     </string-array>
 
     <string name="suivant"><![CDATA[Suivant >]]></string>
@@ -53,7 +52,7 @@
     <string name="candidater">Candidater</string>
     <string name="etat">État :</string>
     <string name="titre_offre">Titre offre</string>
-    <string name="candidaturestitre">Candidature.s</string>
+    <string name="candidaturestitre">Candidatures</string>
     <string name="candidatures_acceptees_list">Candidatures acceptées</string>
     <string name="candidatures_refusees_list">Candidatures refusées</string>
     <string name="candidatures_en_cours_list">Candidatures en cours</string>
@@ -64,5 +63,10 @@
     <string name="url"><u>URL :</u></string>
     <string name="statut">Statut :</string>
     <string name="candidatures_acceptees">%1d candidature.s acceptée.s</string>
+    <string name="retour">Retour</string>
+    <string name="titre_offre_placeholder">Titre offre</string>
+    <string name="date_de_relance">Date de relance</string>
+    <string name="date">date</string>
+    <string name="etat_placeholder">etat_placeholder</string>
 
 </resources>

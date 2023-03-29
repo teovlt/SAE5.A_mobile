@@ -35,7 +35,6 @@ import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
 
 public class CandidatureEditActivity extends StageAppActivity {
 
-    private static TextView intituleView;
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH);
@@ -68,7 +67,6 @@ public class CandidatureEditActivity extends StageAppActivity {
 
         // Init view
         retourCandidaturesView = findViewById(R.id.retourCandidatures);
-        intituleView = findViewById(R.id.intitule);
         validerView = findViewById(R.id.valider);
         etatsCandidatureView = findViewById(R.id.etatsCandidature);
         dateActionView = findViewById(R.id.datePicker);
@@ -115,7 +113,7 @@ public class CandidatureEditActivity extends StageAppActivity {
                 currentYear = dateActionView.getYear();
                 currentMonth = dateActionView.getMonth();
                 currentDay = dateActionView.getDayOfMonth();
-                currentSpinnerValue = etatsCandidatureView.getSelectedItem().toString();
+                currentSpinnerValue = ((EtatCandidatureEnum) etatsCandidatureView.getSelectedItem()).toString();
 
                 if (year == currentYear && month == currentMonth && dayOfMonth == currentDay && initialSpinnerValue.equals(currentSpinnerValue)) {
                     finish();
@@ -169,8 +167,10 @@ public class CandidatureEditActivity extends StageAppActivity {
 
         // Apply the adapter to the spinner
         etatsCandidatureView.setAdapter(adapter);
-        refreshMesInformations(intituleView);
-        initialSpinnerValue = etatsCandidatureView.getSelectedItem().toString();
+        refreshMesInformations(intituleOffre);
+        initialSpinnerValue = ((EtatCandidatureEnum)etatsCandidatureView.getSelectedItem()).toString();
+
+        System.out.println(initialSpinnerValue);
     }
 
     private void refreshMesInformations(TextView intituleView) {
@@ -277,7 +277,7 @@ public class CandidatureEditActivity extends StageAppActivity {
         offreRetenueRequest.offre = offre._id;
         offreRetenueRequest.compteEtudiant = getCompte_Id();
 
-        APIClient.createOffreRetenue((StageAppActivity) intituleView.getContext(), offreRetenueRequest, new ResultatAppel<OffreRetenue>() {
+        APIClient.createOffreRetenue((StageAppActivity) intituleOffre.getContext(), offreRetenueRequest, new ResultatAppel<OffreRetenue>() {
             @Override
             public void traiterResultat(OffreRetenue response) {
             }
