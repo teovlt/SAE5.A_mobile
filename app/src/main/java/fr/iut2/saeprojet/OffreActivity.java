@@ -1,5 +1,7 @@
 package fr.iut2.saeprojet;
 
+import static fr.iut2.saeprojet.CandidatureActivity.CANDIDATURE_KEY;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -38,7 +40,10 @@ import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffreConsultee;
 import fr.iut2.saeprojet.entity.OffreConsulteeRequest;
+import fr.iut2.saeprojet.entity.OffreRetenue;
+import fr.iut2.saeprojet.entity.OffreRetenueRequest;
 import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
+import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
 
 public class OffreActivity extends StageAppActivity {
     public static final String OFFRE_KEY = "offre_key";
@@ -99,17 +104,13 @@ public class OffreActivity extends StageAppActivity {
             intituleOffre.setOnClickListener(onClick);
             developArrow.setOnClickListener(onClick);
         }
-        //Marque l'offre comme consultee
+        //Marque éventuellement l'offre comme consultee si pas déjà fait
         getOffresConsultees();
 
         candidater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (candidature != null) {
-                    executerCandidatureActivity();
-                } else {
-                    creerCandidature();
-                }
+                creerCandidature();
             }
         });
 
@@ -154,7 +155,7 @@ public class OffreActivity extends StageAppActivity {
         APIClient.createOffreConsultee(this, offreConsulteeRequest, new ResultatAppel<OffreConsultee>() {
             @Override
             public void traiterResultat(OffreConsultee response) {
-                System.out.println(response);
+
             }
 
             @Override
@@ -167,7 +168,6 @@ public class OffreActivity extends StageAppActivity {
         intituleOffre.setText(offre.intitule);
         if (offre.urlPieceJointe != null) {
             url.setText("Lien vers l'offre");
-            //url.setText(offre.urlPieceJointe);
         } else {
             url.setText("Pas de descriptif");
         }
@@ -176,7 +176,6 @@ public class OffreActivity extends StageAppActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(offre.urlPieceJointe));
-                PackageManager packageManager = getPackageManager();
                 startActivity(intent);
             }
         });
@@ -187,14 +186,6 @@ public class OffreActivity extends StageAppActivity {
         // Lien vers le PDF
         refreshEntreprise(offre.entreprise);
 
-        // Bouton candidature
-        if (offre.etatOffre.equals("/api/etat_offres/1")) {
-            if (offre.candidatures.size() > 0) {
-                checkCandidature(offre.candidatures);
-            }
-        } else {
-            candidater.setEnabled(false);
-        }
     }
 
     private void refreshEntreprise(String entreprise_id) {
@@ -209,50 +200,12 @@ public class OffreActivity extends StageAppActivity {
                     }
                 }
             }
-
             @Override
             public void traiterErreur() {
 
             }
         });
     }
-
-    private void checkCandidature(List<String> candidatures) {
-        APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
-            @Override
-            public void traiterResultat(CompteEtudiant compte) {
-                for(String id : compte.candidatures) {
-                    if (candidatures.contains(id)) {
-                        refreshCandidature(id);
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void traiterErreur() {
-
-            }
-        });
-    }
-
-    private void refreshCandidature(String _id) {
-        APIClient.getCandidature(this, APIClient.getCandidatureId(_id), new ResultatAppel<Candidature>() {
-            @Override
-            public void traiterResultat(Candidature candid) {
-                candidature = candid;
-                if (candid != null) {
-                    candidater.setText("Voir la candidature");
-                }
-            }
-
-            @Override
-            public void traiterErreur() {
-
-            }
-        });
-    }
-
     private void creerCandidature() {
         CandidatureRequest candidatureReq = new CandidatureRequest();
         candidatureReq.compteEtudiant = getCompte_Id();
@@ -263,8 +216,36 @@ public class OffreActivity extends StageAppActivity {
         APIClient.createCandidature(this, candidatureReq, new ResultatAppel<Candidature>() {
             @Override
             public void traiterResultat(Candidature candid) {
-                candidature = candid;
-                executerCandidatureActivity();
+                getOffresRetenues();
+
+                //On redirige l'utilisateur sur sa candidature nouvellement créée
+                Intent intent = new Intent(OffreActivity.this, CandidatureActivity.class);
+                intent.putExtra(OFFRE_KEY, offre);
+                intent.putExtra(CANDIDATURE_KEY, candid);
+                startActivity(intent);
+            }
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+    private void getOffresRetenues() {
+        APIClient.getOffresRetenues(this, new ResultatAppel<OffresRetenuesResponse>() {
+            @Override
+            public void traiterResultat(OffresRetenuesResponse response) {
+                boolean offrePasRetenue = true;
+                for (OffreRetenue offreRetenue :
+                        response.offresRetenues) {
+                    //Si l'offre est déjà retenue on fait rien, sinon on l'a marque
+                    if (offreRetenue.offre.equals(offre._id)) {
+                        offrePasRetenue = false;
+                        break;
+                    }
+                }
+                if (offrePasRetenue) {
+                    marquageRetenue();
+                }
             }
 
             @Override
@@ -274,11 +255,21 @@ public class OffreActivity extends StageAppActivity {
         });
     }
 
-    private void executerCandidatureActivity() {
-        Intent intent = new Intent(OffreActivity.this, CandidatureActivity.class);
+    private void marquageRetenue () {
+        OffreRetenueRequest offreRetenueRequest = new OffreRetenueRequest();
+        offreRetenueRequest.offre = offre._id;
+        offreRetenueRequest.compteEtudiant = getCompte_Id();
 
-        intent.putExtra("offre", offre);
-        intent.putExtra("candidature_key", candidature);
-        startActivity(intent);
+        APIClient.createOffreRetenue(this, offreRetenueRequest, new ResultatAppel<OffreRetenue>() {
+            @Override
+            public void traiterResultat(OffreRetenue response) {
+                System.out.println(response.offre);
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
     }
 }

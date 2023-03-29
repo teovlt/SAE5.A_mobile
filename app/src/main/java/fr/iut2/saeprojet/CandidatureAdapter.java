@@ -29,7 +29,7 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
     private APIService apiInterface;
 
     public CandidatureAdapter(Context mCtx, List<Candidature> candidatures) {
-        super(mCtx, R.layout.template_candidature, candidatures);
+        super(mCtx, R.layout.template_offre_et_candidature, candidatures);
 
         // Chargement de l'API
         apiInterface = APIClient.getAPIService();
@@ -52,7 +52,7 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
         // Charge le template XML
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View rowView = inflater.inflate(R.layout.template_candidature, parent, false);
+        final View rowView = inflater.inflate(R.layout.template_offre_et_candidature, parent, false);
 
         // Récupération des objets graphiques dans le template
         TextView intituleView = (TextView) rowView.findViewById(R.id.intitule);
