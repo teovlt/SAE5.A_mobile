@@ -18,8 +18,11 @@ import fr.iut2.saeprojet.entity.EtudiantRequest;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffreConsultee;
 import fr.iut2.saeprojet.entity.OffreConsulteeRequest;
+import fr.iut2.saeprojet.entity.OffreRetenue;
+import fr.iut2.saeprojet.entity.OffreRetenueRequest;
 import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
 import fr.iut2.saeprojet.entity.OffresResponse;
+import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -98,6 +101,24 @@ public class APIClient {
         APIClient.<OffreConsultee>doCall(call, cllbck);
     }
 
+    public static void getOffresRetenues(StageAppActivity activity, ResultatAppel<OffresRetenuesResponse> cllbck) {
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<OffresRetenuesResponse> call = apiInterface.doGetOffresRetenues(getBearer(activity));
+        APIClient.<OffresRetenuesResponse>doCall(call, cllbck);
+    }
+    public static void createOffreRetenue(StageAppActivity activity, OffreRetenueRequest offreRetenueRequest, ResultatAppel<OffreRetenue> cllbck){
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<OffreRetenue> call = apiInterface.doCreateOffreRetenue(getBearer(activity), offreRetenueRequest);
+        APIClient.<OffreRetenue>doCall(call, cllbck);
+    }
+    public static void removeOffreRetenue(StageAppActivity activity, long id, ResultatAppel<OffreRetenue> cllbck){
+        APIService apiInterface = activity.getApiInterface();
+
+        Call<OffreRetenue> call = apiInterface.doRemoveOffreRetenue(getBearer(activity), id);
+        APIClient.<OffreRetenue>doCall(call, cllbck);
+    }
     public static void getCandidatures(StageAppActivity activity, ResultatAppel<CandidaturesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 

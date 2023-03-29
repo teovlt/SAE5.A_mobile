@@ -1,7 +1,9 @@
 package fr.iut2.saeprojet;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
+import static fr.iut2.saeprojet.CandidatureActivity.CANDIDATURE_KEY;
 import static fr.iut2.saeprojet.OffreActivity.OFFRE_KEY;
 
 import androidx.appcompat.app.AlertDialog;
@@ -41,6 +43,11 @@ import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.EtatsCandidatures;
 import fr.iut2.saeprojet.entity.Offre;
+import fr.iut2.saeprojet.entity.OffreRetenue;
+import fr.iut2.saeprojet.entity.OffreRetenueRequest;
+import fr.iut2.saeprojet.entity.OffreRetenue;
+import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
+import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,8 +55,6 @@ import retrofit2.Response;
 public class CandidatureEditActivity extends StageAppActivity {
 
     //
-    public static final String CANDIDATURE_KEY = "candidature_key";
-
     // Data
     private Candidature candidature;
 
@@ -59,7 +64,7 @@ public class CandidatureEditActivity extends StageAppActivity {
 
     // View
     private ImageButton retourCandidaturesView;
-    private TextView intituleView;
+    private static TextView intituleView;
     private Button validerView;
 
     private TextView intituleOffre;
@@ -229,11 +234,18 @@ public class CandidatureEditActivity extends StageAppActivity {
         APIClient.updateCandidature(this, APIClient.getCandidatureId(candidature._id), candidatureReq, new ResultatAppel<Candidature>() {
             @Override
             public void traiterResultat(Candidature response) {
-                Toast.makeText(CandidatureEditActivity.this, "Changements enregistrés", Toast.LENGTH_SHORT).show();
+                //Si l'état de l'offre mise à jour est retenue on l'ajoute éventuellement en base si elle n'y était pas déjà
+                if(response.etatCandidature.equals("/api/etat_candidatures/1")){
+                    getOffresRetenues(false);
+                }else{
+                    //Sinon on supprime éventuellement l'offre retenue
+                    getOffresRetenues(true);
+                }
+                Toast.makeText(CandidatureEditActivity.this,"Changements enregistrés",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CandidatureEditActivity.this, CandidatureActivity.class);
-                intent.putExtra(CandidatureEditActivity.CANDIDATURE_KEY, response);
+                intent.putExtra(CANDIDATURE_KEY, response);
                 intent.putExtra(OFFRE_KEY, offre);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
@@ -245,6 +257,66 @@ public class CandidatureEditActivity extends StageAppActivity {
             }
         });
     }
+    private void getOffresRetenues(boolean supprimer) {
+        APIClient.getOffresRetenues(this, new ResultatAppel<OffresRetenuesResponse>() {
+            @Override
+            public void traiterResultat(OffresRetenuesResponse response) {
+                boolean offrePasRetenue = true;
+                boolean offreASupprimer = false;
+               long offer = -1;
+                for (OffreRetenue offreRetenue : response.offresRetenues) {
+                    //Si l'offre est déjà retenue on fait rien, sinon on l'a marque
+                    if (offreRetenue.offre.equals(offre._id) && supprimer) {
+                        //On supprime l'offre des offre retenues
+                        offreASupprimer = true;
+                        offer = offreRetenue.id;
+
+                    } else if (offreRetenue.offre.equals(offre._id)) {
+                        offrePasRetenue = false;
+                        break;
+                    }
+                }
+                if(offreASupprimer){
+                    deleteOffreRetenue(offer);
+                }else if (offrePasRetenue) {
+                    marquageRetenue();
+                }
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+    private void deleteOffreRetenue(long id){
+        APIClient.removeOffreRetenue(this, id, new ResultatAppel<OffreRetenue>() {
+            @Override
+            public void traiterResultat(OffreRetenue response) {
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
+    }
+
+  private void marquageRetenue () {
+        OffreRetenueRequest offreRetenueRequest = new OffreRetenueRequest();
+        offreRetenueRequest.offre = offre._id;
+        offreRetenueRequest.compteEtudiant = getCompte_Id();
+
+        APIClient.createOffreRetenue((StageAppActivity) intituleView.getContext(), offreRetenueRequest, new ResultatAppel<OffreRetenue>() {
+            @Override
+            public void traiterResultat(OffreRetenue response) {
+            }
+
+            @Override
+            public void traiterErreur() {
 
 
+            }
+        });
+    }
 }

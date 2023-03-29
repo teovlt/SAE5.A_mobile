@@ -28,7 +28,7 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
     private APIService apiInterface;
 
     public OffreAdapter(Context mCtx, List<Offre> offres) {
-        super(mCtx, R.layout.template_offre, offres);
+        super(mCtx, R.layout.template_offre_et_candidature, offres);
 
         // Chargement de l'API
         apiInterface = APIClient.getAPIService();
@@ -51,7 +51,7 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
         // Charge le template XML
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View rowView = inflater.inflate(R.layout.template_offre, parent, false);
+        final View rowView = inflater.inflate(R.layout.template_offre_et_candidature, parent, false);
 
         // Récupération des objets graphiques dans le template
         TextView intituleView = (TextView) rowView.findViewById(R.id.intitule);
