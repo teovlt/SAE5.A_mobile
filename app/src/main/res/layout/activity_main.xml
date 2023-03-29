@@ -110,6 +110,15 @@
                 android:textSize="@dimen/textSize_title" />
 
             <TextView
+                android:id="@+id/candidatures_acceptees"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="@dimen/textSize_normal"
+                android:textColor="@color/black"
+                android:text="@string/candidatures_acceptees" />
+
+            <TextView
                 android:id="@+id/candidatures_en_cours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
