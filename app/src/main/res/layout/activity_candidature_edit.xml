@@ -89,7 +89,7 @@
             <Spinner
                 android:id="@+id/etatsCandidature"
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:entries="@array/etats_candidatures"
                 android:layout_gravity="end" />
         </LinearLayout>

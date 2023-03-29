@@ -57,5 +57,8 @@
     <string name="candidatures_acceptees_list">Candidatures acceptées</string>
     <string name="candidatures_refusees_list">Candidatures refusées</string>
     <string name="candidatures_en_cours_list">Candidatures en cours</string>
+    <string name="aucune_candidature_acceptee">Aucune candidature acceptée</string>
+    <string name="aucune_candidature_en_cours">Aucune candidature en cours</string>
+    <string name="aucune_candidature_refusee">Aucune candidature refusée</string>
 
 </resources>
