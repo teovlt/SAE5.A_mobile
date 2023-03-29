@@ -7,10 +7,19 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.jetbrains.annotations.Nullable;
-
 public class Candidature implements Parcelable {
 
+    public static final Creator<Candidature> CREATOR = new Creator<Candidature>() {
+        @Override
+        public Candidature createFromParcel(Parcel in) {
+            return new Candidature(in);
+        }
+
+        @Override
+        public Candidature[] newArray(int size) {
+            return new Candidature[size];
+        }
+    };
     @SerializedName("@id")
     public String _id;
     @SerializedName("@type")
@@ -41,18 +50,6 @@ public class Candidature implements Parcelable {
         dateAction = in.readString();
         etatCandidature = in.readString();
     }
-
-    public static final Creator<Candidature> CREATOR = new Creator<Candidature>() {
-        @Override
-        public Candidature createFromParcel(Parcel in) {
-            return new Candidature(in);
-        }
-
-        @Override
-        public Candidature[] newArray(int size) {
-            return new Candidature[size];
-        }
-    };
 
     public long getOffreId() {
         return Long.valueOf(offre.replace("/api/offres/", ""));

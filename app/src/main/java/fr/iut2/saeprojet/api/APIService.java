@@ -7,6 +7,7 @@ import fr.iut2.saeprojet.entity.CandidatureRequest;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.CompteEtudiantRequest;
+import fr.iut2.saeprojet.entity.ComptesEtudiantsResponse;
 import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.EtatCandidature;
@@ -16,24 +17,21 @@ import fr.iut2.saeprojet.entity.EtatOffresResponse;
 import fr.iut2.saeprojet.entity.EtatRecherche;
 import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.Etudiant;
-import fr.iut2.saeprojet.entity.EtudiantRequest;
 import fr.iut2.saeprojet.entity.EtudiantsResponse;
 import fr.iut2.saeprojet.entity.LoginResponse;
 import fr.iut2.saeprojet.entity.Offre;
+import fr.iut2.saeprojet.entity.OffreConsultee;
 import fr.iut2.saeprojet.entity.OffreConsulteeRequest;
 import fr.iut2.saeprojet.entity.OffreRetenue;
 import fr.iut2.saeprojet.entity.OffreRetenueRequest;
-import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
-import fr.iut2.saeprojet.entity.OffreConsultee;
 import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
 import fr.iut2.saeprojet.entity.OffresResponse;
-import fr.iut2.saeprojet.entity.ComptesEtudiantsResponse;
+import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -97,16 +95,20 @@ public interface APIService {
 
     @POST("/api/offre_consultees")
     Call<OffreConsultee> doCreateOffreConsultee(@Header("Authorization") String token, @Body OffreConsulteeRequest offreConsulteeRequest);
+
     @POST("/api/offre_retenues")
     Call<OffreRetenue> doCreateOffreRetenue(@Header("Authorization") String token, @Body OffreRetenueRequest offreRetenueRequest);
+
     // Offres retenues
     @GET("/api/offre_retenues")
     Call<OffresRetenuesResponse> doGetOffresRetenues(@Header("Authorization") String token);
 
     @GET("/api/offre_retenues/{id}")
     Call<OffreRetenue> doGetOffreRetenue(@Header("Authorization") String token, @Path("id") long i);
+
     @DELETE("/api/offre_retenues/{id}")
     Call<OffreRetenue> doRemoveOffreRetenue(@Header("Authorization") String token, @Path("id") long id);
+
     // Candidatures
     @GET("/api/candidatures")
     Call<CandidaturesResponse> doGetCandidatures(@Header("Authorization") String token);
@@ -119,6 +121,7 @@ public interface APIService {
 
     @PUT("/api/candidatures/{id}")
     Call<Candidature> doUpdateCandidature(@Header("Authorization") String token, @Path("id") long id, @Body CandidatureRequest candidature);
+
     @DELETE("/api/candidatures/{id}")
     Call<Candidature> doRemoveCandidature(@Header("Authorization") String token, @Path("id") long id);
 

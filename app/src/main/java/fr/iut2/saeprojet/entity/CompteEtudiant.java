@@ -12,6 +12,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class CompteEtudiant implements Parcelable {
+    public static final Creator<CompteEtudiant> CREATOR = new Creator<CompteEtudiant>() {
+        @Override
+        public CompteEtudiant createFromParcel(Parcel in) {
+            return new CompteEtudiant(in);
+        }
+
+        @Override
+        public CompteEtudiant[] newArray(int size) {
+            return new CompteEtudiant[size];
+        }
+    };
     @SerializedName("@id")
     public String _id;
     @SerializedName("@type")
@@ -61,18 +72,6 @@ public class CompteEtudiant implements Parcelable {
         userIdentifier = in.readString();
         username = in.readString();
     }
-
-    public static final Creator<CompteEtudiant> CREATOR = new Creator<CompteEtudiant>() {
-        @Override
-        public CompteEtudiant createFromParcel(Parcel in) {
-            return new CompteEtudiant(in);
-        }
-
-        @Override
-        public CompteEtudiant[] newArray(int size) {
-            return new CompteEtudiant[size];
-        }
-    };
 
     @Override
     public int describeContents() {

@@ -13,6 +13,17 @@ import java.util.List;
 
 public class Offre implements Parcelable {
 
+    public static final Creator<Offre> CREATOR = new Creator<Offre>() {
+        @Override
+        public Offre createFromParcel(Parcel in) {
+            return new Offre(in);
+        }
+
+        @Override
+        public Offre[] newArray(int size) {
+            return new Offre[size];
+        }
+    };
     @SerializedName("@id")
     public String _id;
     @SerializedName("@type")
@@ -62,18 +73,6 @@ public class Offre implements Parcelable {
         offreRetenues = in.createStringArrayList();
         candidatures = in.createStringArrayList();
     }
-
-    public static final Creator<Offre> CREATOR = new Creator<Offre>() {
-        @Override
-        public Offre createFromParcel(Parcel in) {
-            return new Offre(in);
-        }
-
-        @Override
-        public Offre[] newArray(int size) {
-            return new Offre[size];
-        }
-    };
 
     @Override
     public int describeContents() {

@@ -2,39 +2,21 @@ package fr.iut2.saeprojet;
 
 import static fr.iut2.saeprojet.CandidatureActivity.CANDIDATURE_KEY;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import fr.iut2.saeprojet.api.APIClient;
-import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.EtatCandidatureEnum;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidatureRequest;
-import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.EntreprisesResponse;
 import fr.iut2.saeprojet.entity.Offre;
@@ -56,10 +38,10 @@ public class OffreActivity extends StageAppActivity {
     private TextView nomVille;
     private TextView url;
 
-    private long offre_id = -1;
+    private final long offre_id = -1;
     private Offre offre = null;
     private Entreprise entreprise = null;
-    private Candidature candidature = null;
+    private final Candidature candidature = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,12 +186,14 @@ public class OffreActivity extends StageAppActivity {
                     }
                 }
             }
+
             @Override
             public void traiterErreur() {
 
             }
         });
     }
+
     private void creerCandidature() {
         CandidatureRequest candidatureReq = new CandidatureRequest();
         candidatureReq.compteEtudiant = getCompte_Id();
@@ -228,12 +212,14 @@ public class OffreActivity extends StageAppActivity {
                 intent.putExtra(CANDIDATURE_KEY, candid);
                 startActivity(intent);
             }
+
             @Override
             public void traiterErreur() {
 
             }
         });
     }
+
     private void getOffresRetenues() {
         APIClient.getOffresRetenues(this, new ResultatAppel<OffresRetenuesResponse>() {
             @Override
@@ -259,7 +245,7 @@ public class OffreActivity extends StageAppActivity {
         });
     }
 
-    private void marquageRetenue () {
+    private void marquageRetenue() {
         OffreRetenueRequest offreRetenueRequest = new OffreRetenueRequest();
         offreRetenueRequest.offre = offre._id;
         offreRetenueRequest.compteEtudiant = getCompte_Id();

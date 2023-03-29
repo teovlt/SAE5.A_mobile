@@ -1,7 +1,5 @@
 package fr.iut2.saeprojet;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Objects;
 
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.ResultatAppel;

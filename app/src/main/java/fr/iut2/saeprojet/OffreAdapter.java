@@ -3,7 +3,6 @@ package fr.iut2.saeprojet;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ import retrofit2.Response;
 public class OffreAdapter extends ArrayAdapter<Offre> {
 
     // API
-    private APIService apiInterface;
+    private final APIService apiInterface;
 
     public OffreAdapter(Context mCtx, List<Offre> offres) {
         super(mCtx, R.layout.template_offre_et_candidature, offres);
@@ -54,8 +53,8 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
         final View rowView = inflater.inflate(R.layout.template_offre_et_candidature, parent, false);
 
         // Récupération des objets graphiques dans le template
-        TextView intituleView = (TextView) rowView.findViewById(R.id.intitule);
-        TextView entrepriseView = (TextView) rowView.findViewById(R.id.entreprise);
+        TextView intituleView = rowView.findViewById(R.id.intitule);
+        TextView entrepriseView = rowView.findViewById(R.id.entreprise);
         refreshMesInformations(offre, intituleView, entrepriseView);
 
         return rowView;
@@ -96,7 +95,6 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
 
             }
 
-            ;
         });
 
 

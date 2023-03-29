@@ -1,36 +1,26 @@
 package fr.iut2.saeprojet;
 
-import androidx.appcompat.app.AlertDialog;
-
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static fr.iut2.saeprojet.OffreActivity.OFFRE_KEY;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import fr.iut2.saeprojet.api.APIClient;
-import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.EtatsCandidatures;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffreRetenue;
 import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CandidatureActivity extends StageAppActivity {
 
@@ -200,14 +190,14 @@ public class CandidatureActivity extends StageAppActivity {
                 boolean offreASupprimer = false;
                 long offer = -1;
                 for (OffreRetenue offreRetenue : response.offresRetenues) {
-                    if (offreRetenue.offre.equals(offre._id) ) {
+                    if (offreRetenue.offre.equals(offre._id)) {
                         //On supprime l'offre des offre retenues
                         offreASupprimer = true;
                         offer = offreRetenue.id;
 
                     }
                 }
-                if(offreASupprimer){
+                if (offreASupprimer) {
                     deleteOffreRetenue(offer);
                 }
             }
@@ -218,7 +208,8 @@ public class CandidatureActivity extends StageAppActivity {
             }
         });
     }
-    private void deleteOffreRetenue(long id){
+
+    private void deleteOffreRetenue(long id) {
         APIClient.removeOffreRetenue(this, id, new ResultatAppel<OffreRetenue>() {
             @Override
             public void traiterResultat(OffreRetenue response) {

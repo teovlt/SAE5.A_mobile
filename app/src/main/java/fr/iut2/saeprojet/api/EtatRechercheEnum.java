@@ -6,9 +6,9 @@ public enum EtatRechercheEnum {
     CANDIDATURE("/api/etat_recherches/3"),
     TERMINE("/api/etat_recherches/4");
 
-    private String _id;
+    private final String _id;
 
-    private EtatRechercheEnum(String _id) {
+    EtatRechercheEnum(String _id) {
         this._id = _id;
     }
 

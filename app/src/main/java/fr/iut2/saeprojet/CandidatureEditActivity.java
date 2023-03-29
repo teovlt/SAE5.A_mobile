@@ -2,84 +2,56 @@ package fr.iut2.saeprojet;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
 import static fr.iut2.saeprojet.CandidatureActivity.CANDIDATURE_KEY;
 import static fr.iut2.saeprojet.OffreActivity.OFFRE_KEY;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import androidx.appcompat.app.AlertDialog;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import fr.iut2.saeprojet.api.APIClient;
-import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.EtatCandidatureEnum;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidatureRequest;
-import fr.iut2.saeprojet.entity.EtatsCandidatures;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffreRetenue;
 import fr.iut2.saeprojet.entity.OffreRetenueRequest;
-import fr.iut2.saeprojet.entity.OffreRetenue;
-import fr.iut2.saeprojet.entity.OffresConsulteesResponse;
 import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CandidatureEditActivity extends StageAppActivity {
 
-    //
-    // Data
-    private Candidature candidature;
-
-    private Offre offre;
-
-    private ArrayAdapter<EtatCandidatureEnum> adapter;
-
-    // View
-    private ImageButton retourCandidaturesView;
     private static TextView intituleView;
-    private Button validerView;
-
-    private TextView intituleOffre;
-
-    private ImageButton developArrow;
-
-    private Spinner etatsCandidatureView;
-    private DatePicker dateActionView;
-
-
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH);
     int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-
+    //
+    // Data
+    private Candidature candidature;
+    private Offre offre;
+    private ArrayAdapter<EtatCandidatureEnum> adapter;
+    // View
+    private ImageButton retourCandidaturesView;
+    private Button validerView;
+    private TextView intituleOffre;
+    private ImageButton developArrow;
+    private Spinner etatsCandidatureView;
+    private DatePicker dateActionView;
     private int currentYear, currentMonth, currentDay;
     private String initialSpinnerValue, currentSpinnerValue;
 
@@ -235,13 +207,9 @@ public class CandidatureEditActivity extends StageAppActivity {
             @Override
             public void traiterResultat(Candidature response) {
                 //Si l'état de l'offre mise à jour est retenue on l'ajoute éventuellement en base si elle n'y était pas déjà
-                if(response.etatCandidature.equals("/api/etat_candidatures/1")){
-                    getOffresRetenues(false);
-                }else{
-                    //Sinon on supprime éventuellement l'offre retenue
-                    getOffresRetenues(true);
-                }
-                Toast.makeText(CandidatureEditActivity.this,"Changements enregistrés",Toast.LENGTH_SHORT).show();
+                //Sinon on supprime éventuellement l'offre retenue
+                getOffresRetenues(!response.etatCandidature.equals("/api/etat_candidatures/1"));
+                Toast.makeText(CandidatureEditActivity.this, "Changements enregistrés", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CandidatureEditActivity.this, CandidatureActivity.class);
                 intent.putExtra(CANDIDATURE_KEY, response);
                 intent.putExtra(OFFRE_KEY, offre);
@@ -257,13 +225,14 @@ public class CandidatureEditActivity extends StageAppActivity {
             }
         });
     }
+
     private void getOffresRetenues(boolean supprimer) {
         APIClient.getOffresRetenues(this, new ResultatAppel<OffresRetenuesResponse>() {
             @Override
             public void traiterResultat(OffresRetenuesResponse response) {
                 boolean offrePasRetenue = true;
                 boolean offreASupprimer = false;
-               long offer = -1;
+                long offer = -1;
                 for (OffreRetenue offreRetenue : response.offresRetenues) {
                     //Si l'offre est déjà retenue on fait rien, sinon on l'a marque
                     if (offreRetenue.offre.equals(offre._id) && supprimer) {
@@ -276,9 +245,9 @@ public class CandidatureEditActivity extends StageAppActivity {
                         break;
                     }
                 }
-                if(offreASupprimer){
+                if (offreASupprimer) {
                     deleteOffreRetenue(offer);
-                }else if (offrePasRetenue) {
+                } else if (offrePasRetenue) {
                     marquageRetenue();
                 }
             }
@@ -289,7 +258,8 @@ public class CandidatureEditActivity extends StageAppActivity {
             }
         });
     }
-    private void deleteOffreRetenue(long id){
+
+    private void deleteOffreRetenue(long id) {
         APIClient.removeOffreRetenue(this, id, new ResultatAppel<OffreRetenue>() {
             @Override
             public void traiterResultat(OffreRetenue response) {
@@ -302,7 +272,7 @@ public class CandidatureEditActivity extends StageAppActivity {
         });
     }
 
-  private void marquageRetenue () {
+    private void marquageRetenue() {
         OffreRetenueRequest offreRetenueRequest = new OffreRetenueRequest();
         offreRetenueRequest.offre = offre._id;
         offreRetenueRequest.compteEtudiant = getCompte_Id();

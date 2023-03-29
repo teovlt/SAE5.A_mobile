@@ -14,7 +14,6 @@ import fr.iut2.saeprojet.entity.EtatCandidaturesResponse;
 import fr.iut2.saeprojet.entity.EtatOffresResponse;
 import fr.iut2.saeprojet.entity.EtatRecherchesResponse;
 import fr.iut2.saeprojet.entity.Etudiant;
-import fr.iut2.saeprojet.entity.EtudiantRequest;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffreConsultee;
 import fr.iut2.saeprojet.entity.OffreConsulteeRequest;
@@ -39,11 +38,11 @@ public class APIClient {
 
 
     //
-    private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-    private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+    private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+    private static final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
     // Instance retrofit
-    private static Retrofit retrofit = new Retrofit.Builder()
+    private static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -56,137 +55,140 @@ public class APIClient {
         APIService apiInterface = activity.getApiInterface();
 
         Call<CompteEtudiant> call = apiInterface.doGetCompteEtudiant(getBearer(activity), id);
-        APIClient.<CompteEtudiant>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getEtudiant(StageAppActivity activity, long id, ResultatAppel<Etudiant> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Etudiant> call = apiInterface.doGetEtudiant(getBearer(activity), id);
-        APIClient.<Etudiant>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void updateCompteEtudiant(StageAppActivity activity, long id, CompteEtudiantRequest compteEtudiantRequest, ResultatAppel<CompteEtudiant> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<CompteEtudiant> call = apiInterface.doUpdateCompteEtudiant(getBearer(activity), id, compteEtudiantRequest);
-        APIClient.<CompteEtudiant>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getOffre(StageAppActivity activity, long id, ResultatAppel<Offre> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Offre> call = apiInterface.doGetOffre(getBearer(activity), id);
-        APIClient.<Offre>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getOffres(StageAppActivity activity, ResultatAppel<OffresResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffresResponse> call = apiInterface.doGetOffres(getBearer(activity));
-        APIClient.<OffresResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getOffresConsultees(StageAppActivity activity, ResultatAppel<OffresConsulteesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffresConsulteesResponse> call = apiInterface.doGetOffresConsultees(getBearer(activity));
-        APIClient.<OffresConsulteesResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void createOffreConsultee(StageAppActivity activity, OffreConsulteeRequest offreConsulteeRequest, ResultatAppel<OffreConsultee> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffreConsultee> call = apiInterface.doCreateOffreConsultee(getBearer(activity), offreConsulteeRequest);
-        APIClient.<OffreConsultee>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getOffresRetenues(StageAppActivity activity, ResultatAppel<OffresRetenuesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffresRetenuesResponse> call = apiInterface.doGetOffresRetenues(getBearer(activity));
-        APIClient.<OffresRetenuesResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
-    public static void createOffreRetenue(StageAppActivity activity, OffreRetenueRequest offreRetenueRequest, ResultatAppel<OffreRetenue> cllbck){
+
+    public static void createOffreRetenue(StageAppActivity activity, OffreRetenueRequest offreRetenueRequest, ResultatAppel<OffreRetenue> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffreRetenue> call = apiInterface.doCreateOffreRetenue(getBearer(activity), offreRetenueRequest);
-        APIClient.<OffreRetenue>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
-    public static void removeOffreRetenue(StageAppActivity activity, long id, ResultatAppel<OffreRetenue> cllbck){
+
+    public static void removeOffreRetenue(StageAppActivity activity, long id, ResultatAppel<OffreRetenue> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffreRetenue> call = apiInterface.doRemoveOffreRetenue(getBearer(activity), id);
-        APIClient.<OffreRetenue>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
+
     public static void getCandidatures(StageAppActivity activity, ResultatAppel<CandidaturesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<CandidaturesResponse> call = apiInterface.doGetCandidatures(getBearer(activity));
-        APIClient.<CandidaturesResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getCandidature(StageAppActivity activity, long id, ResultatAppel<Candidature> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Candidature> call = apiInterface.doGetCandidature(getBearer(activity), id);
-        APIClient.<Candidature>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void createCandidature(StageAppActivity activity, CandidatureRequest candidature, ResultatAppel<Candidature> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Candidature> call = apiInterface.doCreateCandidature(getBearer(activity), candidature);
-        APIClient.<Candidature>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void updateCandidature(StageAppActivity activity, long id, CandidatureRequest candidature, ResultatAppel<Candidature> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Candidature> call = apiInterface.doUpdateCandidature(getBearer(activity), id, candidature);
-        APIClient.<Candidature>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void removeCandidature(StageAppActivity activity, long id, ResultatAppel<Candidature> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Candidature> call = apiInterface.doRemoveCandidature(getBearer(activity), id);
-        APIClient.<Candidature>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getEntreprise(StageAppActivity activity, long id, ResultatAppel<Entreprise> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<Entreprise> call = apiInterface.doGetEntreprise(getBearer(activity), id);
-        APIClient.<Entreprise>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getEntreprises(StageAppActivity activity, ResultatAppel<EntreprisesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<EntreprisesResponse> call = apiInterface.doGetEntreprises(getBearer(activity));
-        APIClient.<EntreprisesResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getEtatRecherches(StageAppActivity activity, ResultatAppel<EtatRecherchesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<EtatRecherchesResponse> call = apiInterface.doGetEtatRecherches(getBearer(activity));
-        APIClient.<EtatRecherchesResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getEtatOffres(StageAppActivity activity, ResultatAppel<EtatOffresResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<EtatOffresResponse> call = apiInterface.doGetEtatsOffres(getBearer(activity));
-        APIClient.<EtatOffresResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static void getEtatCandidatures(StageAppActivity activity, ResultatAppel<EtatCandidaturesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<EtatCandidaturesResponse> call = apiInterface.doGetEtatCandidatures(getBearer(activity));
-        APIClient.<EtatCandidaturesResponse>doCall(call, cllbck);
+        APIClient.doCall(call, cllbck);
     }
 
     public static long getCandidatureId(String _id) {

@@ -15,7 +15,6 @@ import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
-import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.Offre;
 import retrofit2.Call;
@@ -26,7 +25,7 @@ import retrofit2.Response;
 public class CandidatureAdapter extends ArrayAdapter<Candidature> {
 
     // API
-    private APIService apiInterface;
+    private final APIService apiInterface;
 
     public CandidatureAdapter(Context mCtx, List<Candidature> candidatures) {
         super(mCtx, R.layout.template_offre_et_candidature, candidatures);
@@ -55,8 +54,8 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
         final View rowView = inflater.inflate(R.layout.template_offre_et_candidature, parent, false);
 
         // Récupération des objets graphiques dans le template
-        TextView intituleView = (TextView) rowView.findViewById(R.id.intitule);
-        TextView entrepriseView = (TextView) rowView.findViewById(R.id.entreprise);
+        TextView intituleView = rowView.findViewById(R.id.intitule);
+        TextView entrepriseView = rowView.findViewById(R.id.entreprise);
         refreshMesInformations(candidature, intituleView, entrepriseView);
         //TextView textViewDesc = (TextView) rowView.findViewById(R.id.textViewDesc);
 

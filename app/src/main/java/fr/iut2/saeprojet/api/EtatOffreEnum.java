@@ -5,9 +5,9 @@ public enum EtatOffreEnum {
     INDISPO("/api/etat_offres/2"),
     EXPIREE("/api/etat_offres/3");
 
-    private String _id;
+    private final String _id;
 
-    private EtatOffreEnum(String _id) {
+    EtatOffreEnum(String _id) {
         this._id = _id;
     }
 

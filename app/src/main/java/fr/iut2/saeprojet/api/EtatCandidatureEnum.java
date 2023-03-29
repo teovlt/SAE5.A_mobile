@@ -8,9 +8,9 @@ public enum EtatCandidatureEnum {
     ATTENTE_ENTRETIEN("/api/etat_candidatures/5"),
     ACCEPTEE("/api/etat_candidatures/6");
 
-    private String _id;
+    private final String _id;
 
-    private EtatCandidatureEnum(String _id) {
+    EtatCandidatureEnum(String _id) {
         this._id = _id;
     }
 

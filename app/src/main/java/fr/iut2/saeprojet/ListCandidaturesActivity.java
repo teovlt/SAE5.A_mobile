@@ -2,33 +2,22 @@ package fr.iut2.saeprojet;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 import fr.iut2.saeprojet.api.APIClient;
-import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ListCandidaturesActivity extends StageAppActivity {
     // View

@@ -2,13 +2,8 @@ package fr.iut2.saeprojet;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -19,20 +14,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import fr.iut2.saeprojet.api.APIClient;
-import fr.iut2.saeprojet.api.APIService;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
-import fr.iut2.saeprojet.entity.CompteEtudiant;
-import fr.iut2.saeprojet.entity.Entreprise;
 import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ListOffresActivity extends StageAppActivity {
-    private ArrayList<Offre> listeOffres = new ArrayList<>();
+    private final ArrayList<Offre> listeOffres = new ArrayList<>();
     private int no_page = 0, nb_pages = 0;
     private Button precedent;
     private Button suivant;
