@@ -57,11 +57,6 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
         TextView intituleView = rowView.findViewById(R.id.intitule);
         TextView entrepriseView = rowView.findViewById(R.id.entreprise);
         refreshMesInformations(candidature, intituleView, entrepriseView);
-        //TextView textViewDesc = (TextView) rowView.findViewById(R.id.textViewDesc);
-
-        //
-        intituleView.setText(candidature.etatCandidature);
-        //textViewDesc.setText(task.getDescription());
 
         //
         return rowView;

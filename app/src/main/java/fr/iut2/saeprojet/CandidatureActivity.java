@@ -136,7 +136,6 @@ public class CandidatureActivity extends StageAppActivity {
     private void refreshMesInformations(Candidature candidature, TextView intituleView) throws ParseException {
         //
         etatView.setText(EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId()));
-        System.out.println(candidature.dateAction);
         dateActionView.setText(convertDateToProperFormat(candidature.dateAction));
 
         APIClient.getOffre(this, candidature.getOffreId(), new ResultatAppel<Offre>() {
