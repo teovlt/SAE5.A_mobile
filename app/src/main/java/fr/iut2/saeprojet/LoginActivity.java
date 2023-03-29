@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -90,8 +91,7 @@ public class LoginActivity extends StageAppActivity {
     private void refreshDateConnexion(CompteEtudiant compteEtudiant) {
         CompteEtudiantRequest req = new CompteEtudiantRequest();
         Date date = Calendar.getInstance().getTime();
-        String dateFormatee = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(date);
-
+        String dateFormatee = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
         req.derniereConnexion = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", date);
         req.login = compteEtudiant.login;
         req.roles = compteEtudiant.roles;

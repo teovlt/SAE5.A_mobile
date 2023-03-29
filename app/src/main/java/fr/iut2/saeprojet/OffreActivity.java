@@ -37,11 +37,8 @@ public class OffreActivity extends StageAppActivity {
     private TextView nomEntreprise;
     private TextView nomVille;
     private TextView url;
-
-    private final long offre_id = -1;
     private Offre offre = null;
     private Entreprise entreprise = null;
-    private final Candidature candidature = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,6 +14,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Optional;
+
 import fr.iut2.saeprojet.api.APIClient;
 import fr.iut2.saeprojet.api.ResultatAppel;
 import fr.iut2.saeprojet.entity.Candidature;
@@ -105,7 +117,11 @@ public class CandidatureActivity extends StageAppActivity {
         });
 
         //
-        refreshMesInformations(candidature, intituleView);
+        try {
+            refreshMesInformations(candidature, intituleView);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
 
         abandonView.setOnClickListener(new View.OnClickListener() {
@@ -117,10 +133,11 @@ public class CandidatureActivity extends StageAppActivity {
     }
 
 
-    private void refreshMesInformations(Candidature candidature, TextView intituleView) {
+    private void refreshMesInformations(Candidature candidature, TextView intituleView) throws ParseException {
         //
         etatView.setText(EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId()));
-        dateActionView.setText(candidature.dateAction);
+        System.out.println(candidature.dateAction);
+        dateActionView.setText(convertDateToProperFormat(candidature.dateAction));
 
         APIClient.getOffre(this, candidature.getOffreId(), new ResultatAppel<Offre>() {
             @Override
@@ -162,7 +179,19 @@ public class CandidatureActivity extends StageAppActivity {
         });
     }
 
-
+    /**
+     * format de sortie: dd/mm/yyyy hh:mm
+     * @param date
+     * @return
+     */
+    private String convertDateToProperFormat(String date){
+        String dateFormatee ="";
+        dateFormatee += date.substring(8,10)+"/";
+        dateFormatee +=date.substring(5,7)+"/";
+        dateFormatee +=date.substring(0,4)+" ";
+        dateFormatee +=date.substring(11,16);
+        return dateFormatee;
+    }
     private void deleteCandidature() {
         APIClient.removeCandidature(this, APIClient.getCandidatureId(candidature._id), new ResultatAppel<Candidature>() {
             @Override
