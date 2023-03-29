@@ -113,7 +113,7 @@ public class ListCandidaturesActivity extends StageAppActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // Récupération de la tâche cliquée à l'aide de l'adapter
-                Candidature candidature = adapterCandidatureEnCours.getItem(position);
+                Candidature candidature = adapterCandidatureAcceptees.getItem(position);
 
                 //
                 Intent intent = new Intent(ListCandidaturesActivity.this, CandidatureActivity.class);
