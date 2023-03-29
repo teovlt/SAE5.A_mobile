@@ -187,8 +187,7 @@ public class CandidatureActivity extends StageAppActivity {
         String dateFormatee ="";
         dateFormatee += date.substring(8,10)+"/";
         dateFormatee +=date.substring(5,7)+"/";
-        dateFormatee +=date.substring(0,4)+" ";
-        dateFormatee +=date.substring(11,16);
+        dateFormatee +=date.substring(0,4);
         return dateFormatee;
     }
     private void deleteCandidature() {

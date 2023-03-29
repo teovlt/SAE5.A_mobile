@@ -21,6 +21,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import fr.iut2.saeprojet.api.APIClient;
@@ -35,10 +37,6 @@ import fr.iut2.saeprojet.entity.OffresRetenuesResponse;
 
 public class CandidatureEditActivity extends StageAppActivity {
 
-    Calendar calendar = Calendar.getInstance();
-    int year = calendar.get(Calendar.YEAR);
-    int month = calendar.get(Calendar.MONTH);
-    int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
     //
     // Data
     private Candidature candidature;
@@ -52,6 +50,7 @@ public class CandidatureEditActivity extends StageAppActivity {
     private Spinner etatsCandidatureView;
     private DatePicker dateActionView;
     private int currentYear, currentMonth, currentDay;
+
     private String initialSpinnerValue, currentSpinnerValue;
 
     @Override
@@ -72,8 +71,17 @@ public class CandidatureEditActivity extends StageAppActivity {
         dateActionView = findViewById(R.id.datePicker);
         intituleOffre = findViewById(R.id.intitule);
         developArrow = findViewById(R.id.developArrow);
+
+
+
+        //Initialisation du datePicker
+        Calendar calendar = Calendar.getInstance();
         dateActionView.setMinDate(calendar.getTimeInMillis());
-        dateActionView.init(year, month, dayOfMonth, null);
+        int day = Integer.parseInt(candidature.dateAction.substring(8,10));
+        int month = Integer.parseInt(candidature.dateAction.substring(5,7));
+        int year = Integer.parseInt(candidature.dateAction.substring(0,4));
+
+        dateActionView.init(year, month-1, day, null);
         alertDialogBuilder.setTitle("Retour à la candidature");
         alertDialogBuilder.setMessage("Voulez vous sauvegarder vos changements ?");
         alertDialogBuilder.setCancelable(false);
@@ -115,7 +123,7 @@ public class CandidatureEditActivity extends StageAppActivity {
                 currentDay = dateActionView.getDayOfMonth();
                 currentSpinnerValue = ((EtatCandidatureEnum) etatsCandidatureView.getSelectedItem()).toString();
 
-                if (year == currentYear && month == currentMonth && dayOfMonth == currentDay && initialSpinnerValue.equals(currentSpinnerValue)) {
+                if (year == currentYear && month == currentMonth+1 && day == currentDay && initialSpinnerValue.equals(currentSpinnerValue)) {
                     finish();
                 } else {
                     alertDialog.show();
@@ -169,8 +177,6 @@ public class CandidatureEditActivity extends StageAppActivity {
         etatsCandidatureView.setAdapter(adapter);
         refreshMesInformations(intituleOffre);
         initialSpinnerValue = ((EtatCandidatureEnum)etatsCandidatureView.getSelectedItem()).toString();
-
-        System.out.println(initialSpinnerValue);
     }
 
     private void refreshMesInformations(TextView intituleView) {
@@ -196,10 +202,16 @@ public class CandidatureEditActivity extends StageAppActivity {
     }
 
     private void updateCandidature() {
+        currentYear = dateActionView.getYear();
+        currentMonth = dateActionView.getMonth();
+        currentDay = dateActionView.getDayOfMonth();
+        Date currentDate = new GregorianCalendar(currentYear, currentMonth, currentDay).getTime();
+
+
         CandidatureRequest candidatureReq = new CandidatureRequest();
         candidatureReq.compteEtudiant = getCompte_Id();
         candidatureReq.offre = candidature.offre;
-        candidatureReq.dateAction = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", Calendar.getInstance().getTime());
+        candidatureReq.dateAction = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", currentDate);
         candidatureReq.typeAction = "Candidature à confirmer par envoi CV+lettre";
         candidatureReq.etatCandidature = ((EtatCandidatureEnum) etatsCandidatureView.getSelectedItem()).get_id();
 
