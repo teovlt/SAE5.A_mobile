@@ -17,7 +17,7 @@
     <string name="titrelogin">Mon carnet de suivi de recherche de stage</string>
     <string name="candidatures_refusees">%1d candidature.s refusée.s</string>
     <string name="candidatures_en_cours">%1d candidature.s en cours</string>
-    <string name="candidatures">%1d Candidatures</string>
+    <string name="candidatures">%1d Candidature.s</string>
     <string name="details">Voir en détails</string>
     <string name="offres_retenues">%1d offre.s retenue.s</string>
     <string name="offres_consultees">%1d offre.s consultée.s</string>
@@ -161,7 +161,7 @@
     <string name="candidater">Candidater</string>
     <string name="etat">État :</string>
     <string name="titre_offre">Titre offre</string>
-    <string name="candidaturestitre">Candidatures</string>
+    <string name="candidaturestitre">Candidature.s</string>
     <string name="candidatures_acceptees_list">Candidatures acceptées</string>
     <string name="candidatures_refusees_list">Candidatures refusées</string>
     <string name="candidatures_en_cours_list">Candidatures en cours</string>

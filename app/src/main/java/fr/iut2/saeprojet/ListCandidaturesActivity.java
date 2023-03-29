@@ -8,9 +8,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,8 +41,12 @@ public class ListCandidaturesActivity extends StageAppActivity {
     // data
     private CandidatureAdapter adapterCandidatureRefusees;
     private CandidatureAdapter adapterCandidatureEnCours;
-
     private CandidatureAdapter adapterCandidatureAcceptees;
+
+    private TextView textCandidatureRefusees;
+    private TextView textCandidatureEnCours;
+
+    private TextView textCandidatureAcceptees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +152,24 @@ public class ListCandidaturesActivity extends StageAppActivity {
                 adapterCandidatureEnCours.notifyDataSetChanged();
                 adapterCandidatureAcceptees.notifyDataSetChanged();
 
+                ajustListHeight(candidaturesRefuseesView);
+                ajustListHeight(candidaturesAccepteesView);
+                ajustListHeight(candidaturesEnCoursView);
 
+                textCandidatureAcceptees = findViewById(R.id.candidatures_acceptees_none);
+                textCandidatureEnCours = findViewById(R.id.candidatures_en_cours_none);
+                textCandidatureRefusees = findViewById(R.id.candidatures_refusees_none);
+
+
+                if (checkIfListEmpty(candidaturesAccepteesView)){
+                    textCandidatureAcceptees.setVisibility(View.VISIBLE);
+                }
+                if (checkIfListEmpty(candidaturesEnCoursView)){
+                    textCandidatureEnCours.setVisibility(View.VISIBLE);
+                }
+                if (checkIfListEmpty(candidaturesRefuseesView)){
+                    textCandidatureRefusees.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -154,5 +177,32 @@ public class ListCandidaturesActivity extends StageAppActivity {
 
             }
         });
+    }
+
+    private void ajustListHeight (ListView listView) {
+
+        ListAdapter adapter = listView.getAdapter();
+
+        if (adapter == null) {
+            return;
+        }
+        ViewGroup vg = listView;
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, vg);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams par = listView.getLayoutParams();
+        par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1) + listView.getPaddingTop() + listView.getPaddingTop());
+        listView.setLayoutParams(par);
+        listView.requestLayout();
+    }
+
+    private boolean checkIfListEmpty(ListView listView){
+        ListAdapter adapter = listView.getAdapter();
+
+        return adapter.getCount() == 0;
     }
 }
