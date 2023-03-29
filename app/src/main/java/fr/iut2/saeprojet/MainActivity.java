@@ -31,6 +31,8 @@ public class MainActivity extends StageAppActivity {
     private TextView candidaturesView;
     private TextView candidaturesRefuseesView;
     private TextView candidaturesEnCoursView;
+
+    private TextView candidaturesAccepteesView;
     private int nbCandidatures;
 
     @Override
@@ -49,6 +51,7 @@ public class MainActivity extends StageAppActivity {
         candidaturesView = findViewById(R.id.candidatures);
         candidaturesRefuseesView = findViewById(R.id.candidatures_refusees);
         candidaturesEnCoursView = findViewById(R.id.candidatures_en_cours);
+        candidaturesAccepteesView = findViewById(R.id.candidatures_acceptees);
         details_candidatures = findViewById(R.id.details_candidatures);
 
 
@@ -144,14 +147,18 @@ public class MainActivity extends StageAppActivity {
         APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
             public void traiterResultat(CandidaturesResponse candidatures) {
-                int count = 0;
+                int countR = 0;
+                int countA = 0;
                 for (Candidature c : candidatures.candidatures) {
                     if (c.etatCandidature.equals("/api/etat_candidatures/3")) {
-                        count++;
+                        countR++;
+                    } else if (c.etatCandidature.equals("/api/etat_candidatures/6")) {
+                        countA++;
                     }
                 }
-                candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees, count));
-                candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours, candidatures.candidatures.size() - count));
+                candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees, countR));
+                candidaturesAccepteesView.setText(getResources().getString(R.string.candidatures_acceptees, countA));
+                candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours, candidatures.candidatures.size() - countR - countA));
                 refreshOffres();
 
             }

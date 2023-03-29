@@ -77,9 +77,9 @@
             android:id="@+id/statutOffre"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Statut : "
+            android:text="@string/statut"
             android:textColor="@color/black"
-            android:textSize="@dimen/textSize_normal"
+            android:textSize="18sp"
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
 
@@ -104,8 +104,9 @@
                 android:id="@+id/nomEntreprise"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Non renseigné"
+                android:text="@string/non_renseigne"
                 android:textColor="@color/black"
+                android:layout_marginStart="5dp"
                 android:textSize="22sp" />
 
         </LinearLayout>
@@ -129,7 +130,8 @@
                 android:id="@+id/nomVille"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Non renseigné"
+                android:text="@string/non_renseigne"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
 
@@ -145,7 +147,7 @@
                 android:id="@+id/textView19"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:text="URL : "
+                android:text="@string/url"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/black"
                 android:textSize="22sp" />

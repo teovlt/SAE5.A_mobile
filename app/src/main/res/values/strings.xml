@@ -48,8 +48,8 @@
     <string name="mettre_jour">Mettre à jour</string>
     <string name="abandonner_la_candidature">Abandonner la candidature</string>
     <string name="etat_de_la_candidature">État de la candidature</string>
-    <string name="entreprise">Entreprise :</string>
-    <string name="ville">Ville :</string>
+    <string name="entreprise"><u>Entreprise :</u></string>
+    <string name="ville"><u>Ville :</u></string>
     <string name="candidater">Candidater</string>
     <string name="etat">État :</string>
     <string name="titre_offre">Titre offre</string>
@@ -57,5 +57,12 @@
     <string name="candidatures_acceptees_list">Candidatures acceptées</string>
     <string name="candidatures_refusees_list">Candidatures refusées</string>
     <string name="candidatures_en_cours_list">Candidatures en cours</string>
+    <string name="aucune_candidature_acceptee">Aucune candidature acceptée</string>
+    <string name="aucune_candidature_en_cours">Aucune candidature en cours</string>
+    <string name="aucune_candidature_refusee">Aucune candidature refusée</string>
+    <string name="non_renseigne">Non renseigné</string>
+    <string name="url"><u>URL :</u></string>
+    <string name="statut">Statut :</string>
+    <string name="candidatures_acceptees">%1d candidature.s acceptée.s</string>
 
 </resources>
