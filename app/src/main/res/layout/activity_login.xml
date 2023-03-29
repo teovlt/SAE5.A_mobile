@@ -86,5 +86,13 @@
         />
 
 
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"
+            android:padding="10dp"
+            android:background="@drawable/bg_logo">
+        </ImageView>
     </LinearLayout>
 </LinearLayout>

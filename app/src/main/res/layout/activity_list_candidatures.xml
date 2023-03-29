@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list_offres"
+    android:background="@drawable/bg_list_offres">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
@@ -45,6 +49,20 @@
         android:textColor="@color/black"
         android:textSize="22sp" />
 
+    <TextView
+        android:id="@+id/candidatures_acceptees_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Vous n'avez aucune candidature acceptée pour l'instant"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+
     <ListView
         android:id="@+id/candidatures_acceptees_list"
         android:layout_width="match_parent"
@@ -68,6 +86,19 @@
         android:text="@string/candidatures_en_cours_list"
         android:textColor="@color/black"
         android:textSize="22sp" />
+    <TextView
+        android:id="@+id/candidatures_en_cours_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Vous n'avez aucune candidature en cours pour l'instant"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"/>
 
     <ListView
         android:id="@+id/candidatures_en_cours_list"
@@ -92,6 +123,19 @@
         android:text="@string/candidatures_refusees_list"
         android:textColor="@color/black"
         android:textSize="22sp" />
+    <TextView
+        android:id="@+id/candidatures_refusees_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Vous n'avez aucune candidature refusée pour l'instant"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"/>
 
     <ListView
         android:id="@+id/candidatures_refusees_list"
@@ -105,3 +149,4 @@
         android:paddingTop="10dp" />
 
 </LinearLayout>
+</ScrollView>
