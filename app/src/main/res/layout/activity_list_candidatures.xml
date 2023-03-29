@@ -1,152 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_list_offres">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/layout_titre"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp">
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/retourDeListeCandidaturesAMain"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="#00000000"
-            android:contentDescription="@string/bouton_retour"
-            android:scaleType="fitCenter"
-            android:src="@drawable/left_arrow" />
-
-        <TextView
-            android:id="@+id/nbcandidatures_list"
+        <LinearLayout
+            android:id="@+id/layout_titre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
+
+            <ImageButton
+                android:id="@+id/retourDeListeCandidaturesAMain"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="#00000000"
+                android:contentDescription="@string/bouton_retour"
+                android:scaleType="fitCenter"
+                android:src="@drawable/left_arrow" />
+
+            <TextView
+                android:id="@+id/nbcandidatures_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/candidatures"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_title"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/candidatures_acceptees_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:text="@string/candidatures"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_title"
-            android:textStyle="bold" />
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_small_box"
+            android:padding="5dp"
+            android:text="@string/candidatures_acceptees_list"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/candidatures_acceptees_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Vous n'avez aucune candidature acceptée pour l'instant"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/candidatures_acceptees_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:divider="@null"
+            android:dividerHeight="15dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:id="@+id/candidatures_en_cours_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_small_box"
+            android:padding="5dp"
+            android:text="@string/candidatures_en_cours_list"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/candidatures_en_cours_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Vous n'avez aucune candidature en cours pour l'instant"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/candidatures_en_cours_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:divider="@null"
+            android:dividerHeight="15dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:id="@+id/candidatures_refusees_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_small_box"
+            android:padding="5dp"
+            android:text="@string/candidatures_refusees_list"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/candidatures_refusees_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Vous n'avez aucune candidature refusée pour l'instant"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/candidatures_refusees_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:divider="@null"
+            android:dividerHeight="15dp"
+            android:paddingTop="10dp" />
+
     </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/candidatures_acceptees_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/bg_small_box"
-        android:padding="5dp"
-        android:text="@string/candidatures_acceptees_list"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
-
-    <TextView
-        android:id="@+id/candidatures_acceptees_none"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Vous n'avez aucune candidature acceptée pour l'instant"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:visibility="gone"/>
-
-    <ListView
-        android:id="@+id/candidatures_acceptees_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:divider="@null"
-        android:dividerHeight="15dp"
-        android:paddingTop="10dp" />
-
-    <TextView
-        android:id="@+id/candidatures_en_cours_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/bg_small_box"
-        android:padding="5dp"
-        android:text="@string/candidatures_en_cours_list"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
-    <TextView
-        android:id="@+id/candidatures_en_cours_none"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Vous n'avez aucune candidature en cours pour l'instant"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:visibility="gone"/>
-
-    <ListView
-        android:id="@+id/candidatures_en_cours_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:divider="@null"
-        android:dividerHeight="15dp"
-        android:paddingTop="10dp" />
-
-    <TextView
-        android:id="@+id/candidatures_refusees_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/bg_small_box"
-        android:padding="5dp"
-        android:text="@string/candidatures_refusees_list"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
-    <TextView
-        android:id="@+id/candidatures_refusees_none"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Vous n'avez aucune candidature refusée pour l'instant"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:visibility="gone"/>
-
-    <ListView
-        android:id="@+id/candidatures_refusees_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:divider="@null"
-        android:dividerHeight="15dp"
-        android:paddingTop="10dp" />
-
-</LinearLayout>
 </ScrollView>

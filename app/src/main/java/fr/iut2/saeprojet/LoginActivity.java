@@ -83,18 +83,19 @@ public class LoginActivity extends StageAppActivity {
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Impossible de se connecter au serveur", Toast.LENGTH_SHORT).show();
                 call.cancel();
-                Log.e("TAG",t.getMessage());
+                Log.e("TAG", t.getMessage());
             }
         });
     }
-    private void refreshDateConnexion(CompteEtudiant compteEtudiant){
+
+    private void refreshDateConnexion(CompteEtudiant compteEtudiant) {
         CompteEtudiantRequest req = new CompteEtudiantRequest();
         Date date = Calendar.getInstance().getTime();
         String dateFormatee = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(date);
 
-        req.derniereConnexion =String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", date);
+        req.derniereConnexion = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", date);
         req.login = compteEtudiant.login;
-        req.roles =compteEtudiant.roles;
+        req.roles = compteEtudiant.roles;
         req.password = compteEtudiant.password;
         req.parcours = compteEtudiant.parcours;
         req.etatRecherche = compteEtudiant.etatRecherche;
@@ -103,11 +104,11 @@ public class LoginActivity extends StageAppActivity {
         req.offreRetenues = compteEtudiant.offreRetenues;
         req.candidatures = compteEtudiant.candidatures;
 
-        APIClient.updateCompteEtudiant(this,compteEtudiant.id, req, new ResultatAppel<CompteEtudiant>(){
+        APIClient.updateCompteEtudiant(this, compteEtudiant.id, req, new ResultatAppel<CompteEtudiant>() {
 
             @Override
             public void traiterResultat(CompteEtudiant compteEtudiant1) {
-                setCompteDerniereConnexion(dateFormatee,1,compteEtudiant._id);
+                setCompteDerniereConnexion(dateFormatee, 1, compteEtudiant._id);
             }
 
             @Override
@@ -116,6 +117,7 @@ public class LoginActivity extends StageAppActivity {
             }
         });
     }
+
     private void getInformationEtudiant(String login) {
         String token = getToken();
 
@@ -132,15 +134,13 @@ public class LoginActivity extends StageAppActivity {
                         if (compteEtudiant.login.equals(login)) {
                             setCompteId(compteEtudiant.id, compteEtudiant._id);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("derniere_connexion",getDerniereConnexion(1,compteEtudiant
+                            intent.putExtra("derniere_connexion", getDerniereConnexion(1, compteEtudiant
                                     ._id));
                             refreshDateConnexion(compteEtudiant);
                             startActivity(intent);
                             break;
                         }
                     }
-
-
 
 
                 } else {
@@ -152,7 +152,7 @@ public class LoginActivity extends StageAppActivity {
             public void onFailure(Call<ComptesEtudiantsResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Impossible de se connecter au serveur", Toast.LENGTH_SHORT).show();
                 call.cancel();
-                Log.e("TAG",t.getMessage());
+                Log.e("TAG", t.getMessage());
 
             }
         });
@@ -161,7 +161,7 @@ public class LoginActivity extends StageAppActivity {
             @Override
             public void traiterResultat(EtatRecherchesResponse liste) {
                 HashMap<String, String> entries = new HashMap<>();
-                for(EtatRecherche etat : liste.etatRecherches) {
+                for (EtatRecherche etat : liste.etatRecherches) {
                     entries.put(etat._id, etat.descriptif);
                 }
                 LoginActivity.this.setEnumValues(entries);
@@ -177,7 +177,7 @@ public class LoginActivity extends StageAppActivity {
             @Override
             public void traiterResultat(EtatOffresResponse liste) {
                 HashMap<String, String> entries = new HashMap<>();
-                for(EtatOffre etat : liste.etatOffres) {
+                for (EtatOffre etat : liste.etatOffres) {
                     entries.put(etat._id, etat.descriptif);
                 }
                 LoginActivity.this.setEnumValues(entries);
@@ -193,7 +193,7 @@ public class LoginActivity extends StageAppActivity {
             @Override
             public void traiterResultat(EtatCandidaturesResponse liste) {
                 HashMap<String, String> entries = new HashMap<>();
-                for(EtatCandidature etat : liste.etatCandidatures) {
+                for (EtatCandidature etat : liste.etatCandidatures) {
                     entries.put(etat._id, etat.descriptif);
                 }
                 LoginActivity.this.setEnumValues(entries);

@@ -30,6 +30,7 @@ public class Candidature implements Parcelable {
 
     public Candidature() {
     }
+
     protected Candidature(Parcel in) {
         _id = in.readString();
         _type = in.readString();

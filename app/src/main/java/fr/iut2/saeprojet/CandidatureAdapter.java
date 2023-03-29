@@ -103,7 +103,7 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
             @Override
             public void onFailure(Call<Offre> call, Throwable t) {
                 call.cancel();
-                Log.e("TAG",t.getMessage());
+                Log.e("TAG", t.getMessage());
 
             }
         });

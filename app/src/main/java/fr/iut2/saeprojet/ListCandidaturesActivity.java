@@ -130,18 +130,18 @@ public class ListCandidaturesActivity extends StageAppActivity {
             @Override
             public void traiterResultat(CandidaturesResponse candidatures) {
                 // Mettre à jour les adapter avec la liste des candidatures
-                nbcandidatures.setText(getResources().getString(R.string.candidatures,candidatures.candidatures.size()));
+                nbcandidatures.setText(getResources().getString(R.string.candidatures, candidatures.candidatures.size()));
 
                 adapterCandidatureRefusees.clear();
                 adapterCandidatureEnCours.clear();
                 adapterCandidatureAcceptees.clear();
 
-                for (Candidature c:
-                candidatures.candidatures) {
-                    if(c.etatCandidature.equals("/api/etat_candidatures/3")){
+                for (Candidature c :
+                        candidatures.candidatures) {
+                    if (c.etatCandidature.equals("/api/etat_candidatures/3")) {
                         adapterCandidatureRefusees.add(c);
 
-                    }else if (c.etatCandidature.equals("/api/etat_candidatures/6")){
+                    } else if (c.etatCandidature.equals("/api/etat_candidatures/6")) {
                         adapterCandidatureAcceptees.add(c);
 
                     } else {
@@ -161,13 +161,13 @@ public class ListCandidaturesActivity extends StageAppActivity {
                 textCandidatureRefusees = findViewById(R.id.candidatures_refusees_none);
 
 
-                if (checkIfListEmpty(candidaturesAccepteesView)){
+                if (checkIfListEmpty(candidaturesAccepteesView)) {
                     textCandidatureAcceptees.setVisibility(View.VISIBLE);
                 }
-                if (checkIfListEmpty(candidaturesEnCoursView)){
+                if (checkIfListEmpty(candidaturesEnCoursView)) {
                     textCandidatureEnCours.setVisibility(View.VISIBLE);
                 }
-                if (checkIfListEmpty(candidaturesRefuseesView)){
+                if (checkIfListEmpty(candidaturesRefuseesView)) {
                     textCandidatureRefusees.setVisibility(View.VISIBLE);
                 }
             }
@@ -179,7 +179,7 @@ public class ListCandidaturesActivity extends StageAppActivity {
         });
     }
 
-    private void ajustListHeight (ListView listView) {
+    private void ajustListHeight(ListView listView) {
 
         ListAdapter adapter = listView.getAdapter();
 
@@ -200,7 +200,7 @@ public class ListCandidaturesActivity extends StageAppActivity {
         listView.requestLayout();
     }
 
-    private boolean checkIfListEmpty(ListView listView){
+    private boolean checkIfListEmpty(ListView listView) {
         ListAdapter adapter = listView.getAdapter();
 
         return adapter.getCount() == 0;

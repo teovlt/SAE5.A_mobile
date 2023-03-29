@@ -1,6 +1,7 @@
 package fr.iut2.saeprojet;
 
 import androidx.appcompat.app.AlertDialog;
+
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static fr.iut2.saeprojet.OffreActivity.OFFRE_KEY;
 
@@ -74,7 +75,7 @@ public class CandidatureActivity extends StageAppActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 deleteCandidature();
-                Toast.makeText(CandidatureActivity.this,"Candidature supprimée",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CandidatureActivity.this, "Candidature supprimée", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
@@ -83,7 +84,7 @@ public class CandidatureActivity extends StageAppActivity {
         alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(CandidatureActivity.this,"Candidature non supprimée",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CandidatureActivity.this, "Candidature non supprimée", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,9 +125,6 @@ public class CandidatureActivity extends StageAppActivity {
     }
 
 
-
-
-
     private void refreshMesInformations(Candidature candidature, TextView intituleView) {
         //
         etatView.setText(EtatsCandidatures.etatsCandidatureInverse.get(candidature.getEtatCandidatureId()));
@@ -148,7 +146,7 @@ public class CandidatureActivity extends StageAppActivity {
 
                         @Override
                         public void onClick(View view) {
-                            if (!estDeveloppe){
+                            if (!estDeveloppe) {
                                 intituleView.setText(offre.intitule);
                                 estDeveloppe = true;
                                 developArrow.setImageResource(R.drawable.arrow_up_24);

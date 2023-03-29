@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class EtatsCandidatures {
 
-    public static final Map<String, Long> etatsCandidature = new HashMap<String, Long>(){
+    public static final Map<String, Long> etatsCandidature = new HashMap<String, Long>() {
         {
             put("A Envoyer", 1L);
             put("Attente Réponse", 2L);
@@ -16,7 +16,7 @@ public class EtatsCandidatures {
         }
     };
 
-    public static final Map<Long, String> etatsCandidatureInverse = new HashMap<Long, String>(){
+    public static final Map<Long, String> etatsCandidatureInverse = new HashMap<Long, String>() {
         {
             put(1L, "A Envoyer");
             put(2L, "Attente Réponse");

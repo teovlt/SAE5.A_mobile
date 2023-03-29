@@ -55,6 +55,7 @@ public class OffreActivity extends StageAppActivity {
     private Offre offre = null;
     private Entreprise entreprise = null;
     private Candidature candidature = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,7 @@ public class OffreActivity extends StageAppActivity {
 
                 @Override
                 public void onClick(View view) {
-                    if (!estDeveloppe){
+                    if (!estDeveloppe) {
                         intituleOffre.setText(offre.intitule);
                         estDeveloppe = true;
                         developArrow.setImageResource(R.drawable.arrow_up_24);
@@ -122,7 +123,8 @@ public class OffreActivity extends StageAppActivity {
             }
         });
     }
-    private void getOffresConsultees(){
+
+    private void getOffresConsultees() {
         APIClient.getOffresConsultees(this, new ResultatAppel<OffresConsulteesResponse>() {
             @Override
             public void traiterResultat(OffresConsulteesResponse response) {
@@ -130,12 +132,12 @@ public class OffreActivity extends StageAppActivity {
                 for (OffreConsultee offreConsultee :
                         response.offresConsultees) {
                     //Si l'offre est déjà consultée on fait rien, sinon on l'a marque
-                    if(offreConsultee.offre.equals(offre._id)){
+                    if (offreConsultee.offre.equals(offre._id)) {
                         offrePasConsultee = false;
                         break;
                     }
                 }
-                if(offrePasConsultee){
+                if (offrePasConsultee) {
                     marquageConsultation();
                 }
             }
@@ -146,10 +148,11 @@ public class OffreActivity extends StageAppActivity {
             }
         });
     }
-    private void marquageConsultation(){
+
+    private void marquageConsultation() {
         OffreConsulteeRequest offreConsulteeRequest = new OffreConsulteeRequest();
         offreConsulteeRequest.offre = offre._id;
-        offreConsulteeRequest.compteEtudiant=getCompte_Id();
+        offreConsulteeRequest.compteEtudiant = getCompte_Id();
 
         APIClient.createOffreConsultee(this, offreConsulteeRequest, new ResultatAppel<OffreConsultee>() {
             @Override
@@ -163,6 +166,7 @@ public class OffreActivity extends StageAppActivity {
             }
         });
     }
+
     private void refreshOffre() {
         intituleOffre.setText(offre.intitule);
         if (offre.urlPieceJointe != null) {
@@ -201,7 +205,7 @@ public class OffreActivity extends StageAppActivity {
         APIClient.getEntreprises(this, new ResultatAppel<EntreprisesResponse>() {
             @Override
             public void traiterResultat(EntreprisesResponse liste) {
-                for(Entreprise e : liste.entreprises) {
+                for (Entreprise e : liste.entreprises) {
                     if (e._id.equals(entreprise_id)) {
                         OffreActivity.this.entreprise = e;
                         nomEntreprise.setText(entreprise.raisonSociale);
@@ -221,7 +225,7 @@ public class OffreActivity extends StageAppActivity {
         APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
             @Override
             public void traiterResultat(CompteEtudiant compte) {
-                for(String id : compte.candidatures) {
+                for (String id : compte.candidatures) {
                     if (candidatures.contains(id)) {
                         refreshCandidature(id);
                         break;
@@ -257,7 +261,7 @@ public class OffreActivity extends StageAppActivity {
         CandidatureRequest candidatureReq = new CandidatureRequest();
         candidatureReq.compteEtudiant = getCompte_Id();
         candidatureReq.offre = offre._id;
-        candidatureReq.dateAction = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z",Calendar.getInstance().getTime());
+        candidatureReq.dateAction = String.format("%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:00.000Z", Calendar.getInstance().getTime());
         candidatureReq.typeAction = "Candidature à confirmer par envoi CV+lettre";
         candidatureReq.etatCandidature = EtatCandidatureEnum.OFFRE_RETENUE.get_id();
         APIClient.createCandidature(this, candidatureReq, new ResultatAppel<Candidature>() {

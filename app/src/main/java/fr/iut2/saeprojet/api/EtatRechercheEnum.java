@@ -7,6 +7,7 @@ public enum EtatRechercheEnum {
     TERMINE("/api/etat_recherches/4");
 
     private String _id;
+
     private EtatRechercheEnum(String _id) {
         this._id = _id;
     }

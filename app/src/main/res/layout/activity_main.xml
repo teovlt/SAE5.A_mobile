@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -11,15 +10,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@drawable/bg_main"
-    tools:context=".MainActivity"
-    >
-        <TextView
-            android:id="@+id/derniere_connexion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="40dp"
-            android:text="@string/derniere_connexion" />
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/derniere_connexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:text="@string/derniere_connexion" />
+
     <TextView
         android:id="@+id/prenom"
         android:layout_below="@+id/derniere_connexion"
@@ -30,115 +30,114 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/textSize_bigTitle"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_below="@+id/prenom"
-             android:layout_marginTop="100dp"
-             android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/prenom"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
 
-<!--OFFRES-->
-             <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:background="@drawable/bg_box"
-                 android:orientation="vertical"
-                 android:padding="10dp"
-                 android:textColor="@color/black"
-                 >
-
-
-                 <TextView
-                     android:id="@+id/offres"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginStart="10dp"
-                     android:text="@string/offres"
-                     android:textColor="@color/black"
-                     android:textSize="@dimen/textSize_title" />
+        <!--OFFRES-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_box"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:textColor="@color/black">
 
 
-                 <TextView
-                     android:id="@+id/offres_consultees"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginStart="20dp"
-                     android:textSize="@dimen/textSize_normal"
-                     android:textColor="@color/black"
-                     android:text="@string/offres_consultees" />
+            <TextView
+                android:id="@+id/offres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/offres"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize_title" />
 
 
-                 <TextView
-                     android:id="@+id/offres_retenues"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginStart="20dp"
-                     android:textSize="@dimen/textSize_normal"
-                     android:textColor="@color/black"
-                     android:text="@string/offres_retenues" />
-
-                 <Button
-                     android:id="@+id/details_offres"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center"
-                     app:cornerRadius="10dp"
-                     android:textColor="@color/almost_white"
-                     android:layout_marginTop="10dp"
-                     android:text="@string/details" />
-
-         </LinearLayout>
-<!--CANDIDATURES-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/bg_box"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+            <TextView
+                android:id="@+id/offres_consultees"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="@dimen/textSize_normal"
+                android:textColor="@color/black"
+                android:text="@string/offres_consultees" />
 
 
-                        <TextView
-                            android:id="@+id/candidatures"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="@string/candidatures"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize_title" />
+            <TextView
+                android:id="@+id/offres_retenues"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="@dimen/textSize_normal"
+                android:textColor="@color/black"
+                android:text="@string/offres_retenues" />
 
-                        <TextView
-                            android:id="@+id/candidatures_en_cours"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:textSize="@dimen/textSize_normal"
-                            android:textColor="@color/black"
-                            android:text="@string/candidatures_en_cours" />
+            <Button
+                android:id="@+id/details_offres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cornerRadius="10dp"
+                android:textColor="@color/almost_white"
+                android:layout_marginTop="10dp"
+                android:text="@string/details" />
+
+        </LinearLayout>
+        <!--CANDIDATURES-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_box"
+            android:orientation="vertical"
+            android:padding="10dp">
 
 
-                        <TextView
-                            android:id="@+id/candidatures_refusees"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/textSize_normal"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/black"
-                            android:text="@string/candidatures_refusees" />
+            <TextView
+                android:id="@+id/candidatures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/candidatures"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize_title" />
 
-                    <Button
-                        android:id="@+id/details_candidatures"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        app:cornerRadius="10dp"
-                        android:textColor="@color/almost_white"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/details" />
+            <TextView
+                android:id="@+id/candidatures_en_cours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="@dimen/textSize_normal"
+                android:textColor="@color/black"
+                android:text="@string/candidatures_en_cours" />
 
-            </LinearLayout>
-         </LinearLayout>
-    </RelativeLayout>
+
+            <TextView
+                android:id="@+id/candidatures_refusees"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_normal"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/black"
+                android:text="@string/candidatures_refusees" />
+
+            <Button
+                android:id="@+id/details_candidatures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cornerRadius="10dp"
+                android:textColor="@color/almost_white"
+                android:layout_marginTop="10dp"
+                android:text="@string/details" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

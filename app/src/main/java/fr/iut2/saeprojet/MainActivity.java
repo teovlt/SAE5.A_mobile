@@ -21,20 +21,21 @@ import fr.iut2.saeprojet.entity.Etudiant;
 import fr.iut2.saeprojet.entity.OffresResponse;
 
 public class MainActivity extends StageAppActivity {
-private TextView prenomView;
-private TextView derniereConnexionView;
+    private TextView prenomView;
+    private TextView derniereConnexionView;
 
-//OFFRES VIEWS
-private Button details_offres;
-private TextView offresView;
-private TextView offresConsulteesView;
-private TextView offresRetenuesView;
-//CANDIDATURES VIEWS
-private Button details_candidatures;
-private TextView candidaturesView;
-private TextView candidaturesRefuseesView;
-private TextView candidaturesEnCoursView;
-private int nbCandidatures;
+    //OFFRES VIEWS
+    private Button details_offres;
+    private TextView offresView;
+    private TextView offresConsulteesView;
+    private TextView offresRetenuesView;
+    //CANDIDATURES VIEWS
+    private Button details_candidatures;
+    private TextView candidaturesView;
+    private TextView candidaturesRefuseesView;
+    private TextView candidaturesEnCoursView;
+    private int nbCandidatures;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,10 +80,10 @@ private int nbCandidatures;
         APIClient.getCompteEtudiant(this, getCompteId(), new ResultatAppel<CompteEtudiant>() {
             @Override
             public void traiterResultat(CompteEtudiant compteEtudiant) {
-                offresConsulteesView.setText(getResources().getString(R.string.offres_consultees,compteEtudiant.offreConsultees.size()));
-                offresRetenuesView.setText(getResources().getString(R.string.offres_retenues,compteEtudiant.offreRetenues.size()));
+                offresConsulteesView.setText(getResources().getString(R.string.offres_consultees, compteEtudiant.offreConsultees.size()));
+                offresRetenuesView.setText(getResources().getString(R.string.offres_retenues, compteEtudiant.offreRetenues.size()));
                 nbCandidatures = compteEtudiant.candidatures.size();
-                candidaturesView.setText(getResources().getString(R.string.candidatures,nbCandidatures));
+                candidaturesView.setText(getResources().getString(R.string.candidatures, nbCandidatures));
                 refreshDerniereConnexion(compteEtudiant);
                 refreshPrenom(compteEtudiant);
                 refreshCandidatures();
@@ -94,44 +95,46 @@ private int nbCandidatures;
         });
 
 
+    }
+
+    private void refreshDerniereConnexion(CompteEtudiant compteEtudiant) {
+        Bundle extras = getIntent().getExtras();
+        //Si l'utilisateur vient de la page login on récupère la derniere connexion de là bas
+        if (extras != null) {
+            String extraDerniereConnexion = getIntent().getStringExtra("derniere_connexion");
+            //si c'est la premiere connexion mettre la date à now
+            if (extraDerniereConnexion.equals("")) {
+                extraDerniereConnexion = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Calendar.getInstance().getTime());
+            }
+            setCompteDerniereConnexion(extraDerniereConnexion, 2, compteEtudiant._id);
+            derniereConnexionView.setText(getResources().getString(R.string.derniere_connexion, extraDerniereConnexion));
+        } else {
+            //Sinon l'utilisateur vient des activités suivantes, on récupère la derniere connexion dans un shared preferences
+            derniereConnexionView.setText(getResources().getString(R.string.derniere_connexion, getDerniereConnexion(2, compteEtudiant._id)));
+        }
+    }
+
+    private void refreshPrenom(CompteEtudiant compteEtudiant) {
+        APIClient.getEtudiant(this, Long.parseLong(compteEtudiant.etudiant.substring(compteEtudiant.etudiant.length() - 1)), new ResultatAppel<Etudiant>() {
+            @Override
+            public void traiterResultat(Etudiant response) {
+                prenomView.setText(getResources().getString(R.string.prenom, response.prenom));
+            }
+
+            @Override
+            public void traiterErreur() {
+
+            }
+        });
 
     }
-private void refreshDerniereConnexion(CompteEtudiant compteEtudiant){
-    Bundle extras = getIntent().getExtras();
-    //Si l'utilisateur vient de la page login on récupère la derniere connexion de là bas
-    if (extras != null ) {
-        String extraDerniereConnexion =getIntent().getStringExtra("derniere_connexion");
-        //si c'est la premiere connexion mettre la date à now
-        if(extraDerniereConnexion.equals("")){
-            extraDerniereConnexion = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Calendar.getInstance().getTime());
-        }
-        setCompteDerniereConnexion(extraDerniereConnexion,2, compteEtudiant._id);
-        derniereConnexionView.setText(getResources().getString(R.string.derniere_connexion,extraDerniereConnexion));
-    }else {
-        //Sinon l'utilisateur vient des activités suivantes, on récupère la derniere connexion dans un shared preferences
-        derniereConnexionView.setText(getResources().getString(R.string.derniere_connexion,getDerniereConnexion(2, compteEtudiant._id)));
-    }
-}
-private void refreshPrenom(CompteEtudiant compteEtudiant){
-    APIClient.getEtudiant(this, Long.parseLong(compteEtudiant.etudiant.substring(compteEtudiant.etudiant.length() - 1)), new ResultatAppel<Etudiant>() {
-        @Override
-        public void traiterResultat(Etudiant response) {
-            prenomView.setText(getResources().getString(R.string.prenom,response.prenom));
-        }
 
-        @Override
-        public void traiterErreur() {
-
-        }
-    });
-
-}
     private void refreshOffres() {
         APIClient.getOffres(this, new ResultatAppel<OffresResponse>() {
 
             @Override
             public void traiterResultat(OffresResponse offres) {
-                offresView.setText(getResources().getString(R.string.offres,offres.offres.size()-nbCandidatures));
+                offresView.setText(getResources().getString(R.string.offres, offres.offres.size() - nbCandidatures));
             }
 
             @Override
@@ -139,18 +142,19 @@ private void refreshPrenom(CompteEtudiant compteEtudiant){
             }
         });
     }
+
     private void refreshCandidatures() {
         APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
             public void traiterResultat(CandidaturesResponse candidatures) {
                 int count = 0;
-                for(Candidature c : candidatures.candidatures) {
+                for (Candidature c : candidatures.candidatures) {
                     if (c.etatCandidature.equals("/api/etat_candidatures/3")) {
-                        count ++;
+                        count++;
                     }
                 }
-                candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees,count));
-                candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours,candidatures.candidatures.size() - count));
+                candidaturesRefuseesView.setText(getResources().getString(R.string.candidatures_refusees, count));
+                candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours, candidatures.candidatures.size() - count));
                 refreshOffres();
 
             }

@@ -6,6 +6,7 @@ public enum EtatOffreEnum {
     EXPIREE("/api/etat_offres/3");
 
     private String _id;
+
     private EtatOffreEnum(String _id) {
         this._id = _id;
     }

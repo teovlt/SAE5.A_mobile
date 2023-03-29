@@ -11,8 +11,7 @@
         android:id="@+id/layout_titre"
         android:layout_width="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/retourCandidatures"
@@ -33,7 +32,7 @@
             android:layout_marginStart="5dp"
             android:textSize="@dimen/textSize_title"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -85,14 +84,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/etat"
                 android:textSize="20sp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
             <Spinner
                 android:id="@+id/etatsCandidature"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:entries="@array/etats_candidatures"
-                android:layout_gravity="end"/>
+                android:layout_gravity="end" />
         </LinearLayout>
 
 
@@ -107,8 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="Relancer le : "
                 android:textSize="20sp"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
 
             <DatePicker
                 android:id="@+id/datePicker"
@@ -116,8 +114,7 @@
                 android:layout_height="125dp"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
-                android:layout_gravity="right"
-                />
+                android:layout_gravity="right" />
         </LinearLayout>
 
         <Button
@@ -125,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save_update_offer"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
     </LinearLayout>
 </LinearLayout>

@@ -71,10 +71,10 @@ public class ListOffresActivity extends StageAppActivity {
             public void onClick(View view) {
                 if (no_page < nb_pages) {
                     no_page += 1;
-                    suivant.setEnabled(no_page < nb_pages-1);
+                    suivant.setEnabled(no_page < nb_pages - 1);
                     precedent.setEnabled((no_page > 0) && (nb_pages > 0));
                     updateOffres(no_page);
-                    indic_page.setText(getResources().getString(R.string.NumpageSurnbPage,no_page+1,nb_pages));
+                    indic_page.setText(getResources().getString(R.string.NumpageSurnbPage, no_page + 1, nb_pages));
                 }
             }
         });
@@ -82,12 +82,12 @@ public class ListOffresActivity extends StageAppActivity {
         precedent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (no_page>0) {
+                if (no_page > 0) {
                     no_page -= 1;
                     suivant.setEnabled(no_page < nb_pages);
                     precedent.setEnabled((no_page > 0) && (nb_pages > 0));
                     updateOffres(no_page);
-                    indic_page.setText(getResources().getString(R.string.NumpageSurnbPage,no_page+1,nb_pages));
+                    indic_page.setText(getResources().getString(R.string.NumpageSurnbPage, no_page + 1, nb_pages));
                 }
             }
         });
@@ -107,13 +107,13 @@ public class ListOffresActivity extends StageAppActivity {
         doGetOffreList();
     }
 
-   private void updateOffres(int no_page){
-       adapterOffre.clear();
-       for (int i = (no_page*5) ; i< listeOffres.size() && i <(no_page*5)+5 ; i++) {
-               adapterOffre.add(listeOffres.get(i));
-       }
-       adapterOffre.notifyDataSetChanged();
-   }
+    private void updateOffres(int no_page) {
+        adapterOffre.clear();
+        for (int i = (no_page * 5); i < listeOffres.size() && i < (no_page * 5) + 5; i++) {
+            adapterOffre.add(listeOffres.get(i));
+        }
+        adapterOffre.notifyDataSetChanged();
+    }
 
     private void doGetOffreList() {
         APIClient.getOffres(this, new ResultatAppel<OffresResponse>() {
@@ -130,12 +130,13 @@ public class ListOffresActivity extends StageAppActivity {
             }
         });
     }
-    private void  addOffres(ArrayList<Offre> offres){
+
+    private void addOffres(ArrayList<Offre> offres) {
         //on retire les offres qui figurent parmis les candidatures de l'étudiant
 
-       ArrayList<String> offresNonCandidatees = new ArrayList<>();
+        ArrayList<String> offresNonCandidatees = new ArrayList<>();
         for (Offre offre : offres) {
-           offresNonCandidatees.add(offre._id);
+            offresNonCandidatees.add(offre._id);
         }
         APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override
@@ -146,15 +147,15 @@ public class ListOffresActivity extends StageAppActivity {
                 }
                 //System.out.println(offresNonCandidatees.size());
                 for (Offre offre : offres) {
-                    if(offresNonCandidatees.contains(offre._id)){
+                    if (offresNonCandidatees.contains(offre._id)) {
                         listeOffres.add(offre);
                     }
                 }
                 //System.out.println(listeOffres.size());
-                offres_disponibles.setText(getResources().getString(R.string.offres_disponibles,listeOffres.size()));
+                offres_disponibles.setText(getResources().getString(R.string.offres_disponibles, listeOffres.size()));
                 nb_pages = listeOffres.size() / 5 + ((listeOffres.size() % 5) > 0 ? 1 : 0);
                 suivant.setEnabled(listeOffres.size() > 5);
-                indic_page.setText(getResources().getString(R.string.NumpageSurnbPage,1,nb_pages));
+                indic_page.setText(getResources().getString(R.string.NumpageSurnbPage, 1, nb_pages));
                 //Mise à jour des 5 offres
                 updateOffres(no_page);
             }
@@ -166,4 +167,4 @@ public class ListOffresActivity extends StageAppActivity {
         });
     }
 
-    }
+}

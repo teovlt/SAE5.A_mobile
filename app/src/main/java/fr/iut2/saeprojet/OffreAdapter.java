@@ -56,12 +56,12 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
         // Récupération des objets graphiques dans le template
         TextView intituleView = (TextView) rowView.findViewById(R.id.intitule);
         TextView entrepriseView = (TextView) rowView.findViewById(R.id.entreprise);
-        refreshMesInformations(offre, intituleView,entrepriseView);
+        refreshMesInformations(offre, intituleView, entrepriseView);
 
         return rowView;
     }
 
-    private void refreshMesInformations(Offre offre, TextView intituleView,TextView entrepriseView) {
+    private void refreshMesInformations(Offre offre, TextView intituleView, TextView entrepriseView) {
 
         //
         SharedPreferences sharedPref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -78,23 +78,25 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
                     intitule = intitule.substring(0, 35) + " ...";
                 }
                 intituleView.setText(intitule);
-                    APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
-                        @Override
-                        public void traiterResultat(Entreprise response) {
-                            entrepriseView.setText(response.raisonSociale);
-                        }
+                APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
+                    @Override
+                    public void traiterResultat(Entreprise response) {
+                        entrepriseView.setText(response.raisonSociale);
+                    }
 
-                        @Override
-                        public void traiterErreur() {
+                    @Override
+                    public void traiterErreur() {
 
-                        }
-                    });
-                }
+                    }
+                });
+            }
 
             @Override
             public void onFailure(Call<Offre> call, Throwable t) {
 
-            };
+            }
+
+            ;
         });
 
 

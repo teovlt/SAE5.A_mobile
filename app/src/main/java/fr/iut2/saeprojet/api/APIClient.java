@@ -32,7 +32,7 @@ public class APIClient {
     //https://square.github.io/retrofit/?utm_source=developer.android.com&utm_medium=referral
     //https://www.digitalocean.com/community/tutorials/retrofit-android-example-tutorial
 
-    private static final String BASE_URL = "http://192.168.141.192:8000/";
+    private static final String BASE_URL = "http://192.168.141.191:8000/";
 
 
     //
@@ -44,6 +44,7 @@ public class APIClient {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
     public static APIService getAPIService() {
         return retrofit.create(APIService.class);
     }
@@ -54,6 +55,7 @@ public class APIClient {
         Call<CompteEtudiant> call = apiInterface.doGetCompteEtudiant(getBearer(activity), id);
         APIClient.<CompteEtudiant>doCall(call, cllbck);
     }
+
     public static void getEtudiant(StageAppActivity activity, long id, ResultatAppel<Etudiant> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
@@ -61,10 +63,10 @@ public class APIClient {
         APIClient.<Etudiant>doCall(call, cllbck);
     }
 
-    public static void updateCompteEtudiant(StageAppActivity activity, long id, CompteEtudiantRequest compteEtudiantRequest, ResultatAppel<CompteEtudiant> cllbck){
+    public static void updateCompteEtudiant(StageAppActivity activity, long id, CompteEtudiantRequest compteEtudiantRequest, ResultatAppel<CompteEtudiant> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
-        Call<CompteEtudiant> call = apiInterface.doUpdateCompteEtudiant(getBearer(activity),id, compteEtudiantRequest);
+        Call<CompteEtudiant> call = apiInterface.doUpdateCompteEtudiant(getBearer(activity), id, compteEtudiantRequest);
         APIClient.<CompteEtudiant>doCall(call, cllbck);
     }
 
@@ -74,30 +76,35 @@ public class APIClient {
         Call<Offre> call = apiInterface.doGetOffre(getBearer(activity), id);
         APIClient.<Offre>doCall(call, cllbck);
     }
+
     public static void getOffres(StageAppActivity activity, ResultatAppel<OffresResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffresResponse> call = apiInterface.doGetOffres(getBearer(activity));
         APIClient.<OffresResponse>doCall(call, cllbck);
     }
+
     public static void getOffresConsultees(StageAppActivity activity, ResultatAppel<OffresConsulteesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffresConsulteesResponse> call = apiInterface.doGetOffresConsultees(getBearer(activity));
         APIClient.<OffresConsulteesResponse>doCall(call, cllbck);
     }
-    public static void createOffreConsultee(StageAppActivity activity, OffreConsulteeRequest offreConsulteeRequest, ResultatAppel<OffreConsultee> cllbck){
+
+    public static void createOffreConsultee(StageAppActivity activity, OffreConsulteeRequest offreConsulteeRequest, ResultatAppel<OffreConsultee> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<OffreConsultee> call = apiInterface.doCreateOffreConsultee(getBearer(activity), offreConsulteeRequest);
         APIClient.<OffreConsultee>doCall(call, cllbck);
     }
+
     public static void getCandidatures(StageAppActivity activity, ResultatAppel<CandidaturesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
         Call<CandidaturesResponse> call = apiInterface.doGetCandidatures(getBearer(activity));
         APIClient.<CandidaturesResponse>doCall(call, cllbck);
     }
+
     public static void getCandidature(StageAppActivity activity, long id, ResultatAppel<Candidature> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
@@ -125,12 +132,14 @@ public class APIClient {
         Call<Candidature> call = apiInterface.doRemoveCandidature(getBearer(activity), id);
         APIClient.<Candidature>doCall(call, cllbck);
     }
+
     public static void getEntreprise(StageAppActivity activity, long id, ResultatAppel<Entreprise> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
-        Call<Entreprise> call = apiInterface.doGetEntreprise(getBearer(activity),id);
+        Call<Entreprise> call = apiInterface.doGetEntreprise(getBearer(activity), id);
         APIClient.<Entreprise>doCall(call, cllbck);
     }
+
     public static void getEntreprises(StageAppActivity activity, ResultatAppel<EntreprisesResponse> cllbck) {
         APIService apiInterface = activity.getApiInterface();
 
@@ -162,9 +171,11 @@ public class APIClient {
     public static long getCandidatureId(String _id) {
         return Long.parseLong(_id.replaceFirst("^/api/candidatures/", ""));
     }
+
     public static long getEntrepriseId(String _id) {
         return Long.parseLong(_id.replaceFirst("^/api/entreprises/", ""));
     }
+
     private static String getBearer(StageAppActivity activity) {
         return "Bearer " + activity.getToken();
     }
@@ -173,7 +184,7 @@ public class APIClient {
         call.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
-                if(callback != null) {
+                if (callback != null) {
                     callback.traiterResultat(response.body());
                 }
             }
@@ -181,8 +192,8 @@ public class APIClient {
             @Override
             public void onFailure(Call<T> call, Throwable t) {
                 call.cancel();
-                Log.e("TAG",t.getMessage());
-                if(callback != null) {
+                Log.e("TAG", t.getMessage());
+                if (callback != null) {
                     callback.traiterErreur();
                 }
             }

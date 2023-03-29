@@ -115,7 +115,7 @@ public class CandidatureEditActivity extends StageAppActivity {
         alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(CandidatureEditActivity.this,"Changements non enregistrés",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CandidatureEditActivity.this, "Changements non enregistrés", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -161,7 +161,7 @@ public class CandidatureEditActivity extends StageAppActivity {
 
                 @Override
                 public void onClick(View view) {
-                    if (!estDeveloppe){
+                    if (!estDeveloppe) {
                         intituleOffre.setText(offre.intitule);
                         estDeveloppe = true;
                         developArrow.setImageResource(R.drawable.arrow_up_24);
@@ -185,7 +185,6 @@ public class CandidatureEditActivity extends StageAppActivity {
         });
 
 
-
         // Create an ArrayAdapter using the string array and a default spinner layout
         List<EtatCandidatureEnum> etats = Arrays.asList(EtatCandidatureEnum.values());
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, etats);
@@ -203,7 +202,7 @@ public class CandidatureEditActivity extends StageAppActivity {
             public void traiterResultat(Offre offre) {
                 String intitule = offre.intitule;
                 intituleView.setText(intitule);
-                for(EtatCandidatureEnum e : EtatCandidatureEnum.values()) {
+                for (EtatCandidatureEnum e : EtatCandidatureEnum.values()) {
                     if (e.get_id().equals(candidature.etatCandidature)) {
                         etatsCandidatureView.setSelection(e.ordinal());
                         break;
@@ -217,7 +216,7 @@ public class CandidatureEditActivity extends StageAppActivity {
 
             }
         });
-     }
+    }
 
     private void updateCandidature() {
         CandidatureRequest candidatureReq = new CandidatureRequest();
@@ -230,7 +229,7 @@ public class CandidatureEditActivity extends StageAppActivity {
         APIClient.updateCandidature(this, APIClient.getCandidatureId(candidature._id), candidatureReq, new ResultatAppel<Candidature>() {
             @Override
             public void traiterResultat(Candidature response) {
-                Toast.makeText(CandidatureEditActivity.this,"Changements enregistrés",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CandidatureEditActivity.this, "Changements enregistrés", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CandidatureEditActivity.this, CandidatureActivity.class);
                 intent.putExtra(CandidatureEditActivity.CANDIDATURE_KEY, response);
                 intent.putExtra(OFFRE_KEY, offre);
@@ -246,9 +245,6 @@ public class CandidatureEditActivity extends StageAppActivity {
             }
         });
     }
-
-
-
 
 
 }
