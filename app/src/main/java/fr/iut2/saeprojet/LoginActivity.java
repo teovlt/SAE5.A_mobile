@@ -75,7 +75,7 @@ public class LoginActivity extends StageAppActivity {
                     setAuthData(login, response.body().token);
                     getInformationEtudiant(login);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Nom incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Identifiants incorrects", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -143,7 +143,7 @@ public class LoginActivity extends StageAppActivity {
 
 
                 } else {
-                    Toast.makeText(LoginActivity.this, "Nom incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Erreur connexion", Toast.LENGTH_SHORT).show();
                 }
             }
 
