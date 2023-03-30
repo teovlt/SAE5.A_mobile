@@ -120,7 +120,11 @@ public class ListOffresActivity extends StageAppActivity {
 
         ArrayList<String> offresNonCandidatees = new ArrayList<>();
         for (Offre offre : offres) {
-            offresNonCandidatees.add(offre._id);
+            //Si l'offre est disponible on l'ajoute
+            if(offre.etatOffre.equals("/api/etat_offres/1")){
+                offresNonCandidatees.add(offre._id);
+
+            }
         }
         APIClient.getCandidatures(this, new ResultatAppel<CandidaturesResponse>() {
             @Override

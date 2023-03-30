@@ -71,18 +71,20 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
         call.enqueue(new Callback<Offre>() {
             @Override
             public void onResponse(Call<Offre> call, Response<Offre> response) {
-                Offre offre = response.body();
-                String intitule = offre.intitule;
-                if (intitule.length() >= 38) {
-                    intitule = intitule.substring(0, 35) + " ...";
-                }
-                intituleView.setText(intitule);
-                APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
-                    @Override
-                    public void traiterResultat(Entreprise response) {
-                        entrepriseView.setText(response.raisonSociale);
+                if(response.isSuccessful()) {
+                    Offre offre = response.body();
+                    String intitule = offre.intitule;
+                    if (intitule.length() >= 38) {
+                        intitule = intitule.substring(0, 35) + " ...";
                     }
-                });
+                    intituleView.setText(intitule);
+                    APIClient.getEntreprise((StageAppActivity) intituleView.getContext(), APIClient.getEntrepriseId(offre.entreprise), new ResultatAppel<Entreprise>() {
+                        @Override
+                        public void traiterResultat(Entreprise response) {
+                            entrepriseView.setText(response.raisonSociale);
+                        }
+                    });
+                }
             }
 
             @Override

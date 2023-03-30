@@ -12,6 +12,5 @@ public abstract class ResultatAppel<T> {
 
     public void traiterErreur() {
         Toast.makeText(getContext(), "Impossible de se connecter au serveur", Toast.LENGTH_SHORT).show();
-
     }
 }

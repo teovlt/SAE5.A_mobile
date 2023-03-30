@@ -15,6 +15,7 @@ import fr.iut2.saeprojet.entity.Candidature;
 import fr.iut2.saeprojet.entity.CandidaturesResponse;
 import fr.iut2.saeprojet.entity.CompteEtudiant;
 import fr.iut2.saeprojet.entity.Etudiant;
+import fr.iut2.saeprojet.entity.Offre;
 import fr.iut2.saeprojet.entity.OffresResponse;
 
 public class MainActivity extends StageAppActivity {
@@ -125,7 +126,14 @@ public class MainActivity extends StageAppActivity {
 
             @Override
             public void traiterResultat(OffresResponse offres) {
-                offresView.setText(getResources().getString(R.string.offres, offres.offres.size() - nbCandidatures));
+                int count = offres.offres.size();
+                for (Offre offre:offres.offres) {
+                    if(!offre.etatOffre.equals("/api/etat_offres/1")){
+                        count--;
+                    }
+                }
+                count-=nbCandidatures;
+                offresView.setText(getResources().getString(R.string.offres, count));
             }
         });
     }
