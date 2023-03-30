@@ -112,11 +112,6 @@ public class ListOffresActivity extends StageAppActivity {
                 addOffres((ArrayList<Offre>) offresResponse.offres);
 
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -147,11 +142,6 @@ public class ListOffresActivity extends StageAppActivity {
                 indic_page.setText(getResources().getString(R.string.NumpageSurnbPage, 1, Math.max(nb_pages, 1)));
                 //Mise à jour des 5 offres
                 updateOffres(no_page);
-            }
-
-            @Override
-            public void traiterErreur() {
-
             }
         });
     }

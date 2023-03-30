@@ -87,10 +87,6 @@ public class CandidatureAdapter extends ArrayAdapter<Candidature> {
                         entrepriseView.setText(response.raisonSociale);
                     }
 
-                    @Override
-                    public void traiterErreur() {
-
-                    }
                 });
             }
 

@@ -88,10 +88,6 @@ public class MainActivity extends StageAppActivity {
                 refreshPrenom(compteEtudiant);
                 refreshCandidatures();
             }
-
-            @Override
-            public void traiterErreur() {
-            }
         });
 
 
@@ -120,11 +116,6 @@ public class MainActivity extends StageAppActivity {
             public void traiterResultat(Etudiant response) {
                 prenomView.setText(getResources().getString(R.string.prenom, response.prenom));
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
 
     }
@@ -135,10 +126,6 @@ public class MainActivity extends StageAppActivity {
             @Override
             public void traiterResultat(OffresResponse offres) {
                 offresView.setText(getResources().getString(R.string.offres, offres.offres.size() - nbCandidatures));
-            }
-
-            @Override
-            public void traiterErreur() {
             }
         });
     }
@@ -160,11 +147,6 @@ public class MainActivity extends StageAppActivity {
                 candidaturesAccepteesView.setText(getResources().getString(R.string.candidatures_acceptees, countA));
                 candidaturesEnCoursView.setText(getResources().getString(R.string.candidatures_en_cours, candidatures.candidatures.size() - countR - countA));
                 refreshOffres();
-
-            }
-
-            @Override
-            public void traiterErreur() {
 
             }
         });

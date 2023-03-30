@@ -193,11 +193,6 @@ public class CandidatureEditActivity extends StageAppActivity {
                 }
 
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -231,10 +226,6 @@ public class CandidatureEditActivity extends StageAppActivity {
 
             }
 
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -264,10 +255,6 @@ public class CandidatureEditActivity extends StageAppActivity {
                 }
             }
 
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -275,11 +262,6 @@ public class CandidatureEditActivity extends StageAppActivity {
         APIClient.removeOffreRetenue(this, id, new ResultatAppel<OffreRetenue>() {
             @Override
             public void traiterResultat(OffreRetenue response) {
-            }
-
-            @Override
-            public void traiterErreur() {
-
             }
         });
     }
@@ -292,12 +274,6 @@ public class CandidatureEditActivity extends StageAppActivity {
         APIClient.createOffreRetenue((StageAppActivity) intituleOffre.getContext(), offreRetenueRequest, new ResultatAppel<OffreRetenue>() {
             @Override
             public void traiterResultat(OffreRetenue response) {
-            }
-
-            @Override
-            public void traiterErreur() {
-
-
             }
         });
     }

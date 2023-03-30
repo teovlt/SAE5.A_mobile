@@ -171,10 +171,7 @@ public class CandidatureActivity extends StageAppActivity {
                 }
             }
 
-            @Override
-            public void traiterErreur() {
 
-            }
         });
     }
 
@@ -202,10 +199,7 @@ public class CandidatureActivity extends StageAppActivity {
 
             }
 
-            @Override
-            public void traiterErreur() {
 
-            }
         });
 
     }
@@ -229,10 +223,7 @@ public class CandidatureActivity extends StageAppActivity {
                 }
             }
 
-            @Override
-            public void traiterErreur() {
 
-            }
         });
     }
 
@@ -240,11 +231,6 @@ public class CandidatureActivity extends StageAppActivity {
         APIClient.removeOffreRetenue(this, id, new ResultatAppel<OffreRetenue>() {
             @Override
             public void traiterResultat(OffreRetenue response) {
-            }
-
-            @Override
-            public void traiterErreur() {
-
             }
         });
     }

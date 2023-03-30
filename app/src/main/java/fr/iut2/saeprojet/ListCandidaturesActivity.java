@@ -161,10 +161,6 @@ public class ListCandidaturesActivity extends StageAppActivity {
                 }
             }
 
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 

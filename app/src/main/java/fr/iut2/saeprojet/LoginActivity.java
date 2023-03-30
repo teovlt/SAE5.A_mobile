@@ -109,11 +109,6 @@ public class LoginActivity extends StageAppActivity {
             public void traiterResultat(CompteEtudiant compteEtudiant1) {
                 setCompteDerniereConnexion(dateFormatee, 1, compteEtudiant._id);
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -166,10 +161,6 @@ public class LoginActivity extends StageAppActivity {
                 LoginActivity.this.setEnumValues(entries);
             }
 
-            @Override
-            public void traiterErreur() {
-
-            }
         });
 
         APIClient.getEtatOffres(this, new ResultatAppel<EtatOffresResponse>() {
@@ -181,11 +172,6 @@ public class LoginActivity extends StageAppActivity {
                 }
                 LoginActivity.this.setEnumValues(entries);
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
 
         APIClient.getEtatCandidatures(this, new ResultatAppel<EtatCandidaturesResponse>() {
@@ -196,11 +182,6 @@ public class LoginActivity extends StageAppActivity {
                     entries.put(etat._id, etat.descriptif);
                 }
                 LoginActivity.this.setEnumValues(entries);
-            }
-
-            @Override
-            public void traiterErreur() {
-
             }
         });
     }

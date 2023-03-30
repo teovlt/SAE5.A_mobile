@@ -82,11 +82,6 @@ public class OffreAdapter extends ArrayAdapter<Offre> {
                     public void traiterResultat(Entreprise response) {
                         entrepriseView.setText(response.raisonSociale);
                     }
-
-                    @Override
-                    public void traiterErreur() {
-
-                    }
                 });
             }
 

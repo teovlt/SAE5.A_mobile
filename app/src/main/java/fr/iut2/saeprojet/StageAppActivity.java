@@ -17,7 +17,15 @@ public class StageAppActivity extends AppCompatActivity {
     public APIService getApiInterface() {
         return apiInterface;
     }
+    private static StageAppActivity instance;
 
+    public StageAppActivity() {
+        instance = this;
+    }
+
+    public static Context getContext() {
+        return instance;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +40,6 @@ public class StageAppActivity extends AppCompatActivity {
 
     public String getToken() {
         return getSharedPreferences().getString(getString(R.string.token_key), "no token");
-    }
-
-    public String getLogin() {
-        return getSharedPreferences().getString(getString(R.string.login_key), "no login");
     }
 
     public long getCompteId() {

@@ -121,11 +121,6 @@ public class OffreActivity extends StageAppActivity {
                     marquageConsultation();
                 }
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -137,11 +132,6 @@ public class OffreActivity extends StageAppActivity {
         APIClient.createOffreConsultee(this, offreConsulteeRequest, new ResultatAppel<OffreConsultee>() {
             @Override
             public void traiterResultat(OffreConsultee response) {
-
-            }
-
-            @Override
-            public void traiterErreur() {
 
             }
         });
@@ -183,11 +173,6 @@ public class OffreActivity extends StageAppActivity {
                     }
                 }
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -209,11 +194,6 @@ public class OffreActivity extends StageAppActivity {
                 intent.putExtra(CANDIDATURE_KEY, candid);
                 startActivity(intent);
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -234,11 +214,6 @@ public class OffreActivity extends StageAppActivity {
                     marquageRetenue();
                 }
             }
-
-            @Override
-            public void traiterErreur() {
-
-            }
         });
     }
 
@@ -251,11 +226,6 @@ public class OffreActivity extends StageAppActivity {
             @Override
             public void traiterResultat(OffreRetenue response) {
                 System.out.println(response.offre);
-            }
-
-            @Override
-            public void traiterErreur() {
-
             }
         });
     }
