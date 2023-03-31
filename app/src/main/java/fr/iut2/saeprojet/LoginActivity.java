@@ -61,9 +61,12 @@ public class LoginActivity extends StageAppActivity {
 
     private void login() {
 
-        String login = usernameView.getText().toString();
+        String login = usernameView.getText().toString().toLowerCase();
         String password = passwordView.getText().toString();
-
+        if(login.equals("fontenae")){
+            Toast.makeText(LoginActivity.this, "Impossible de se connecter avec ce compte", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Auth auth = new Auth(login, password);
 
         Call<LoginResponse> call = apiInterface.login(auth);
